@@ -2,8 +2,9 @@
 from flask import Flask, request
 from flask_login import LoginManager
 from .models import load_users, save_users
+import os
 
-app = Flask(__name__, template_folder='C:\\Users\\Georg\\OneDrive\\Рабочий стол\\informaticks\\mysite\\templates')
+app = Flask(__name__, template_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
 app.secret_key = "supersecretkey"
 
 # Настройка Flask-Login
