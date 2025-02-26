@@ -1,0 +1,10 @@
+<!-- login.html -->
+{% extends "base.html" %}
+{% block content %}
+<h1>Вход</h1>
+<form method="POST">
+    <p>Email: <input type="email" name="email" required></p>
+    <p>Пароль: <input type="password" name="password" required></p>
+    <p><input type="submit" value="Войти"></p>
+</form>
+{% endblock %}

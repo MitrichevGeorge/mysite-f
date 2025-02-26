@@ -1,0 +1,7 @@
+{
+  "title": "\u0421\u0443\u043c\u043c\u0430 \u0434\u0432\u0443\u0445 \u0447\u0438\u0441\u0435\u043b",
+  "visible_tests": [1, 2],
+  "hidden_tests": [3, 4, 5],
+  "time_limit": 2000,
+  "memory_limit": 1024
+}

@@ -1,0 +1,87 @@
+<!-- profile.html -->
+{% extends "base.html" %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile_styles.css') }}">
+    <script src="{{ url_for('static', filename='profile_scripts.js') }}"></script>
+    <script>
+        const dailyRequests = {{ daily_requests|tojson }};
+        const yearStartOffset = 2;
+    </script>
+    <style>
+        :root {
+            --is-dark-theme: true;
+        }
+    </style>
+    <div class="container">
+        <div class="profile-card">
+            <h1 class="profile-title">Профиль пользователя</h1>
+            <div class="profile-info">
+                <div class="info-item">
+                    <span class="info-label">Имя пользователя:</span>
+                    <span class="info-value">{{ current_user.username }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value">{{ current_user.email }}</span>
+                </div>
+            </div>
+
+            <div class="activity-section">
+                <h2 class="activity-title">Активность</h2>
+                <div class="theme-switch">
+                    <label for="theme-toggle">Тёмная тема:</label>
+                    <input type="checkbox" id="theme-toggle">
+                </div>
+                <div class="calendar">
+                    <div class="months">
+                        <span>Янв</span>
+                        <span>Фев</span>
+                        <span>Мар</span>
+                        <span>Апр</span>
+                        <span>Май</span>
+                        <span>Июн</span>
+                        <span>Июл</span>
+                        <span>Авг</span>
+                        <span>Сен</span>
+                        <span>Окт</span>
+                        <span>Ноя</span>
+                        <span>Дек</span>
+                    </div>
+                    <div class="heatmap-container">
+                        <div class="days">
+                            <span class="dupr">Пн</span>
+                            <!--<span>Чт</span>-->
+                            <span class="ddwn">Вс</span>
+                        </div>
+                        <div class="grid" id="heatmap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabsq">
+            <div class="tab-list">
+                <button class="tab-button active" onclick="showTab('history')">История заходов</button>
+                <button class="tab-button" onclick="showTab('submissions')">Посылки</button>
+            </div>
+
+            <div id="history-tab" class="tab-content">
+                {% for entry in current_user.login_history %}
+                <div class="login-entry">
+                    <span class="login-timestamp">{{ entry.timestamp }}</span>
+                    <a href="{{ entry.url }}" class="login-url" target="_blank" rel="noopener noreferrer">
+                        {{ entry.url }}
+                    </a>
+                </div>
+                {% endfor %}
+                <p class="ps">Тут написано только 100 последних заходов так что не пугайтесь если старые заходы будут исчезать. Всё таки диск сервера не бесконечен.</p>
+            </div>
+
+            <div id="submissions-tab" class="tab-content" style="display: none;">
+                <div id="submissions-list">
+                    <!-- JS generated go here -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

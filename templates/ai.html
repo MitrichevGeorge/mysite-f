@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат с Нейросетью</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        #chat {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 400px;
+            overflow-y: scroll;
+            background: white;
+        }
+        .message {
+            margin: 10px 0;
+        }
+        .user {
+            color: blue;
+        }
+        .bot {
+            color: green;
+        }
+        #input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Чат с Нейросетью</h1>
+<div id="chat"></div>
+<input type="text" id="input" placeholder="Введите ваше сообщение..." />
+<button id="send">Отправить</button>
+
+<script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('input');
+    const sendButton = document.getElementById('send');
+
+    sendButton.addEventListener('click', async () => {
+        const userMessage = input.value;
+        if (!userMessage) return;
+
+        // Отображаем сообщение пользователя
+        displayMessage(userMessage, 'user');
+        input.value = '';
+
+        // Отправляем сообщение на сервер
+        const botResponse = await getBotResponse(userMessage);
+        displayMessage(botResponse, 'bot');
+    });
+
+    function displayMessage(message, sender) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message', sender);
+        messageElement.textContent = message;
+        chat.appendChild(messageElement);
+        chat.scrollTop = chat.scrollHeight; // Прокручиваем вниз
+    }
+
+    async function getBotResponse(message) {
+        const apiKey = 'b1gqmrc2b0rkp56t48lm'; // Замените на ваш API-ключ
+        const response = await fetch('https://api.yandex.com/gpt', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                prompt: message,
+                max_tokens: 150
+            })
+        });
+
+        const data = await response.json();
+        return data.response; // Измените в зависимости от структуры ответа
+    }
+</script>
+
+</body>
+</html>
