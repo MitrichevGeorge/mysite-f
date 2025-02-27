@@ -4,7 +4,10 @@ from flask_login import LoginManager
 from .models import load_users, save_users
 import os
 
-app = Flask(__name__, template_folder="D:\\Егор\\Егоркины рисунки\\programming\\html\\mysite\\templates")  #os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
+print("D:\\Егор\\Егоркины рисунки\\programming\\html\\mysite\\templates")
+print(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
+
+app = Flask(__name__, template_folder="D:\\Егор\\Егоркины рисунки\\programming\\html\\mysite\\templates")
 app.secret_key = "supersecretkey"
 
 # Настройка Flask-Login
