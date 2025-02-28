@@ -1,10 +1,20 @@
 <!-- index.html -->
 {% extends "base.html" %}
 {% block content %}
-<h1>Список задач</h1>
-<ul>
-    {% for task in tasks %}
-        <li><a href="{{ url_for('tasks.task', task_name=task) }}">{{ task }}</a></li>
-    {% endfor %}
-</ul>
+<style>
+    h1{
+        color: #fdf5e6;
+    }
+    .container{
+        padding: 30px;
+    }
+</style>
+<div class="container">
+    <h1>Список задач</h1>
+    <ul>
+        {% for task in tasks %}
+            <li><a href="{{ url_for('tasks.task', task_name=task) }}">{{ task }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
