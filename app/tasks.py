@@ -46,17 +46,12 @@ def calculate_score(results):
 def task(task_name):
     try:
         task_path = os.path.join(TASKS_DIR, task_name)
-        description_path = os.path.join(task_path, "description.txt")
+        description_path = os.path.join(task_path, "description.md")
         config_path = os.path.join(task_path, "config.json")
         tests_dir = os.path.join(task_path, "tests")
 
-        # with open(description_path, 'r', encoding='utf-8') as f:
-        #     description = f.read()
-
-        url = 'https://github.com/MitrichevGeorge/contest/blob/main/task1.md'
-        div_id = 'Box-sc-g0xbh4-0 eoaCFS js-snippet-clipboard-copy-unpositioned undefined'
-        description = get_div_by_id(url, div_id) # этот description
-        print(description)
+        with open(description_path, 'r', encoding='utf-8') as f:
+            description = f.read()
 
         with open(config_path, 'r') as f:
             config = json.load(f)
