@@ -9,9 +9,22 @@
     </script>
     <style>
         :root {
-            --is-dark-theme: true;
+            --is-dark-theme: {{ 'true' if current_user.theme == 'dark' else 'false' }};
         }
     </style>
+    <script>
+        function saveThemePreference() {
+            const isDarkTheme = document.getElementById('theme-toggle').checked;
+            fetch('/update-theme', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ theme: isDarkTheme }),
+            });
+        }
+    </script>
+
     <div class="container">
         <div class="profile-card">
             <h1 class="profile-title">Профиль пользователя</h1>
@@ -30,31 +43,44 @@
                 <h2 class="activity-title">Активность</h2>
                 <div class="theme-switch">
                     <label for="theme-toggle">Тёмная тема:</label>
-                    <input type="checkbox" id="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" {% if current_user.theme == 'dark' %}checked{% endif %}>
                 </div>
+                <button id="save-theme" onclick="saveThemePreference()">Сохранить тему</button>
+
                 <div class="calendar">
-                    <div class="months">
-                        <span>Янв</span>
-                        <span>Фев</span>
-                        <span>Мар</span>
-                        <span>Апр</span>
-                        <span>Май</span>
-                        <span>Июн</span>
-                        <span>Июл</span>
-                        <span>Авг</span>
-                        <span>Сен</span>
-                        <span>Окт</span>
-                        <span>Ноя</span>
-                        <span>Дек</span>
-                    </div>
-                    <div class="heatmap-container">
-                        <div class="days">
-                            <span class="dupr">Пн</span>
-                            <!--<span>Чт</span>-->
-                            <span class="ddwn">Вс</span>
-                        </div>
-                        <div class="grid" id="heatmap"></div>
-                    </div>
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="months">
+                                    <span>Янв</span>
+                                    <span>Фев</span>
+                                    <span>Мар</span>
+                                    <span>Апр</span>
+                                    <span>Май</span>
+                                    <span>Июн</span>
+                                    <span>Июл</span>
+                                    <span>Авг</span>
+                                    <span>Сен</span>
+                                    <span>Окт</span>
+                                    <span>Ноя</span>
+                                    <span>Дек</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="days">
+                                    <span class="dupr">Пн</span>
+                                    <!--<span>Чт</span>-->
+                                    <span class="ddwn">Вс</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid" id="heatmap"></div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

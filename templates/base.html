@@ -10,8 +10,6 @@
             const header = document.getElementById("header");
             const childElements = header.querySelectorAll('*');
 
-            const userDropdown = document.getElementById('user-dropdown');
-
             if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
                 header.classList.add("scrolled");
                 childElements.forEach(child => {
@@ -24,10 +22,27 @@
                 });
             }
 
-            document.getElementById('user-name').addEventListener('click', function() {
+            const userName = document.getElementById('user-name');
             const userDropdown = document.getElementById('user-dropdown');
-            userDropdown.style.display = userDropdown.style.display === 'none' ? 'block' : 'none';
-        });
+
+            userName.addEventListener('click', function() {
+                userDropdown.style.display = userDropdown.style.display === 'none' ? 'block' : 'none';
+                userDropdown.style.left = `${userName.offsetLeft-100}px`; // Позиционируем по горизонтали
+                userDropdown.style.top = `${userName.offsetTop + userName.offsetHeight}px`; // Позиционируем по вертикали
+            });
+
+            // Скрываем выпадающий список при уходе курсора с шапки или списка
+            userName.addEventListener('mouseleave', function() {
+                setTimeout(() => {
+                    if (!userDropdown.matches(':hover')) {
+                        userDropdown.style.display = 'none';
+                    }
+                }, 100); // Задержка для предотвращения мгновенного исчезновения
+            });
+
+            userDropdown.addEventListener('mouseleave', function() {
+                userDropdown.style.display = 'none';
+            });
         };
     </script>
 </head>

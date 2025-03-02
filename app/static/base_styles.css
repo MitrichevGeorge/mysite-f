@@ -129,6 +129,7 @@ header a {
 header .auth-links {
     display: flex;
     align-items: center;
+    margin-right: 14px;
 }
 
 .submission {
@@ -211,4 +212,28 @@ header .user-name {
     display: none;
     margin-right: 12px;
     margin-left: 10px;
+}
+
+.dropdown {
+    display: none; /* Скрываем по умолчанию */
+    position: absolute; /* Позволяет позиционировать относительно родителя */
+    background-color: #ffffff; /* Цвет фона */
+    border: 1px solid #ccc; /* Цвет границы */
+    border-radius: 8px; /* Скругление углов */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень для эффекта */
+    z-index: 1000; /* Убедитесь, что он выше других элементов */
+    margin-top: 5px; /* Отступ сверху */
+    top: 40px;
+    right: 0px;
+}
+
+.dropdown a {
+    display: block; /* Каждая ссылка занимает всю ширину */
+    padding: 10px; /* Отступы внутри */
+    color: #333; /* Цвет текста */
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+.dropdown a:hover {
+    background-color: #f0f0f0; /* Цвет при наведении */
 }

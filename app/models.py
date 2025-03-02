@@ -28,7 +28,7 @@ def getTabName(url):
     return "Contest"
 
 class User(UserMixin):
-    def __init__(self, id, email, username, password_hash, submissions=None, login_history=None, daily_requests=None, tabs=None):
+    def __init__(self, id, email, username, password_hash, submissions=None, login_history=None, daily_requests=None, tabs=None, theme='light'):
         self.id = id
         self.email = email
         self.username = username
@@ -37,6 +37,7 @@ class User(UserMixin):
         self.login_history = login_history if login_history else []
         self.daily_requests = daily_requests if daily_requests else [0] * 366
         self.tabs = tabs if tabs else []  # Список вкладок
+        self.theme = theme  # Тема пользователя
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -94,7 +95,8 @@ def load_users():
                     submissions=user_data.get('submissions', []),
                     login_history=user_data.get('login_history', []),
                     daily_requests=decode_daily_requests(user_data.get('daily_requests', base64.b64encode(struct.pack('0i')).decode('utf-8'))),
-                    tabs=user_data.get('tabs', [])  # Загружаем вкладки
+                    tabs=user_data.get('tabs', []),  # Загружаем вкладки
+                    theme=user_data.get('theme', 'light')  # Загружаем тему пользователя
                 )
             return users
     return {}
@@ -115,8 +117,9 @@ def save_users(users):
             "submissions": user.submissions,
             "login_history": user.login_history,
             "daily_requests": daily_requests_encoded,  # Сохраняем закодированные данные
-            "tabs": user.tabs  # Сохраняем вкладки
+            "tabs": user.tabs,  # Сохраняем вкладки
+            "theme": user.theme  # Сохраняем тему пользователя
         })
-    
+
     with open(USERS_FILE, 'w') as f:
         json.dump(users_data, f, ensure_ascii=True, indent=4)

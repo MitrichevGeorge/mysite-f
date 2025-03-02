@@ -55,7 +55,7 @@ def task(task_name):
 
         url = 'https://github.com/MitrichevGeorge/contest/blob/main/task1.md'
         div_id = 'Box-sc-g0xbh4-0 eoaCFS js-snippet-clipboard-copy-unpositioned undefined'
-        description = get_div_by_id(url, div_id)
+        description = get_div_by_id(url, div_id) # этот description
         print(description)
 
         with open(config_path, 'r') as f:
