@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Определяем CSS-переменные для тем */
+        :root {
+            /* Светлая тема по умолчанию */
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --header-bg: #f0f0f0;
+            --link-color: #0066cc;
+        }
+
+        /* Темная тема */
+        body[data-theme="dark"] {
+            --bg-color: #222222;
+            --text-color: #ffffff;
+            --header-bg: #333333;
+            --link-color: #66b3ff;
+        }
+
+        /* Используем переменные для всех элементов */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            color: var(--link-color);
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .content {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        button {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+            background-color: var(--link-color);
+        }
+    </style>
+</head>
+<body data-theme="{{ theme | default('light') }}">
+    <div class="content">
+        <h1>Пример динамической темы</h1>
+        <p>Текущая тема: {{ theme | default('светлая') }}</p>
+        
+        <!-- Пример условного рендеринга -->
+        {% if theme == 'dark' %}
+            <p>Активна тёмная тема</p>
+        {% else %}
+            <p>Активна светлая тема</p>
+        {% endif %}
+
+        <!-- Переключатель темы -->
+        <button onclick="toggleTheme()">Переключить тему</button>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Обновляем атрибут data-theme
+            body.setAttribute('data-theme', newTheme);
+            
+            // В реальном приложении здесь бы был AJAX-запрос для сохранения выбранной темы
+            console.log(`Тема изменена на ${newTheme}`);
+        }
+    </script>
+</body>
+</html>
