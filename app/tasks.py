@@ -90,9 +90,9 @@ def task(task_name):
             users[current_user.id].submissions = current_user.submissions
             save_users(users)
 
-            return render_template('task.html', description=description, result=result, visible_tests=visible_tests, time_limit=time_limit, memory_limit=memory_limit, submissions=current_user.submissions, task_name=task_name, current_user=current_user)
+            return render_template('task.html', description=description, result=result, visible_tests=visible_tests, time_limit=time_limit, memory_limit=memory_limit, submissions=current_user.submissions, task_name=task_name, current_user=current_user, tabs=current_user.tabs, taskn=task_name)
 
-        return render_template('task.html', description=description, visible_tests=visible_tests, time_limit=time_limit, memory_limit=memory_limit, submissions=current_user.submissions, task_name=task_name, current_user=current_user, tabs=current_user.tabs)
+        return render_template('task.html', description=description, visible_tests=visible_tests, time_limit=time_limit, memory_limit=memory_limit, submissions=current_user.submissions, task_name=task_name, current_user=current_user, tabs=current_user.tabs, taskn=task_name)
 
     except Exception as e:
         error_message = f"Ошибка сервера: {str(e)}"
