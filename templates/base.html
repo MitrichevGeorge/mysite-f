@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Контест{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='base_styles_light.css') }}">
+    
     <script>
         window.onscroll = function() {
             const header = document.getElementById("header");
@@ -21,28 +22,6 @@
                     child.classList.remove("scrolled");
                 });
             }
-
-            const userName = document.getElementById('user-name');
-            const userDropdown = document.getElementById('user-dropdown');
-
-            userName.addEventListener('click', function() {
-                userDropdown.style.display = userDropdown.style.display === 'none' ? 'block' : 'none';
-                userDropdown.style.left = `${userName.offsetLeft-100}px`; // Позиционируем по горизонтали
-                userDropdown.style.top = `${userName.offsetTop + userName.offsetHeight}px`; // Позиционируем по вертикали
-            });
-
-            // Скрываем выпадающий список при уходе курсора с шапки или списка
-            userName.addEventListener('mouseleave', function() {
-                setTimeout(() => {
-                    if (!userDropdown.matches(':hover')) {
-                        userDropdown.style.display = 'none';
-                    }
-                }, 100); // Задержка для предотвращения мгновенного исчезновения
-            });
-
-            userDropdown.addEventListener('mouseleave', function() {
-                userDropdown.style.display = 'none';
-            });
         };
     </script>
 </head>
@@ -120,5 +99,28 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+    <script>
+        const userName = document.getElementById('user-name');
+        const userDropdown = document.getElementById('user-dropdown');
+
+        userName.addEventListener('click', function() {
+            userDropdown.style.display = userDropdown.style.display === 'none' ? 'block' : 'none';
+            userDropdown.style.left = `${userName.offsetLeft-100}px`; // Позиционируем по горизонтали
+            userDropdown.style.top = `${userName.offsetTop + userName.offsetHeight}px`; // Позиционируем по вертикали
+        });
+
+        // Скрываем выпадающий список при уходе курсора с шапки или списка
+        userName.addEventListener('mouseleave', function() {
+            setTimeout(() => {
+                if (!userDropdown.matches(':hover')) {
+                    userDropdown.style.display = 'none';
+                }
+            }, 100); // Задержка для предотвращения мгновенного исчезновения
+        });
+
+        userDropdown.addEventListener('mouseleave', function() {
+            userDropdown.style.display = 'none';
+        });
+    </script>
 </body>
 </html>

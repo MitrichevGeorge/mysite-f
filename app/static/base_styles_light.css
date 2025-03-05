@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #ffffff; /* Белый фон для шапки */
+    background-color: #cba4b3; /* Белый фон для шапки */
     color: #333; /* Темный текст */
     padding: 15px 20px; /* Увеличенные отступы */
     margin: 0;
@@ -19,12 +19,13 @@ header {
     top: 0;
     z-index: 1000;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    box-shadow: 0 2px 10px rgba(27, 42, 100, 0.3); /* Легкая тень */
 }
 
 header.scrolled {
     padding: 10px; /* Уменьшаем отступ при прокрутке */
     font-size: 14px; /* Увеличиваем размер шрифта */
+    box-shadow: 0 2px 80px rgba(29, 42, 97, 0.893); /* Легкая тень */
 }
 
 /* Стили для скроллбара в WebKit-браузерах */
