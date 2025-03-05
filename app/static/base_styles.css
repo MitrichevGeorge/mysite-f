@@ -1,129 +1,77 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Используем более современный шрифт */
     margin: 0;
     padding: 0;
-    background-color: #151615;
 }
 
 header {
-    background-color: #252726;
-    color: white;
-    padding: 10px 10px;
+    padding: 15px 20px; /* Увеличенные отступы */
     margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    width: 100%; /* Ширина на всю страницу */
-    top: 0; /* Прикрепляем к верхней части */
+    width: 100%;
+    top: 0;
     z-index: 1000;
     transition: all 0.3s ease;
 }
-Стили для header при прокрутке */
+
 header.scrolled {
-    padding: 5px; /* Уменьшаем отступ при прокрутке */
-    font-size: 11px;
-    box-shadow: 0 4px 80px rgba(0, 0, 0, 0.9); /* Тень под шапкой */
+    padding: 10px; /* Уменьшаем отступ при прокрутке */
+    font-size: 14px; /* Увеличиваем размер шрифта */
 }
 
 /* Стили для скроллбара в WebKit-браузерах */
 .tabs::-webkit-scrollbar {
-    height: 8px; /* Высота скроллбара */
+    height: 8px;
 }
 
 .tabs.scrolled::-webkit-scrollbar {
-    height: 4px; /* Высота скроллбара */
+    height: 4px;
 }
 
 .tabs::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.5); /* Цвет скроллбара */
-    border-radius: 10px; /* Закругление углов */
-}
-
-.tabs::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.8); /* Цвет скроллбара при наведении */
+    border-radius: 10px;
 }
 
 /* Стили для скроллбара в Firefox */
 .tabs {
-    scrollbar-width: thin; /* Узкий скроллбар */
-    scrollbar-color: rgba(0, 0, 0, 0.5) transparent; /* Цвет скроллбара и фона */
-}
-
-.tabs:hover {
-    scrollbar-color: rgba(0, 0, 0, 0.8) transparent; /* Цвет скроллбара при наведении */
+    scrollbar-width: thin;
 }
 
 .tabs {
     display: flex;
-    overflow-x: auto; /* Позволяет прокручивать вкладки */
-    white-space: nowrap; /* Запрещает перенос строк */
-    margin-right: 10px; /* Отступ справа для вкладок */
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-right: 10px;
 }
 
 .tab {
-    background-color: #434443;
-    color: white;
-    padding: 3px 15px;
-    padding-right: 3px;
+    padding: 5px 15px;
     border-radius: 5px;
     margin-right: 5px;
     display: flex;
     align-items: center;
     cursor: pointer;
     transition: background-color 0.3s;
-
 }
 
 .tab.scrolled {
-    padding: 2px 10px;
-    padding-right: 3px;
-    border-radius: 5px;
-}
-
-.tab:hover {
-    background-color: #777;
+    padding: 4px 12px;
 }
 
 .tab .close {
     margin-left: 5px;
     cursor: pointer;
-    color: #ff4d4d; /* Цвет крестика */
-    background-color: #3330;
-    border-radius: 5px;
-    padding: 3px;
-    transition: 0.5s ease;
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
 
-.tab .close.scrolled{
-    padding: 5px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-}
-
-.tab .scrolled{
-    height: 20px;
-}
-
-.tab .close:hover{
-    background-color: #333;
-}
-
 header a {
-    color: white;
     text-decoration: none;
     margin: 0 10px;
-    white-space: nowrap;
 }
 
 header .auth-links {
@@ -133,15 +81,12 @@ header .auth-links {
 }
 
 .submission {
-    border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
-    background-color: #f9f9f9;
 }
 
 .submission-header {
     padding: 10px;
-    background-color: #e9e9e9;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -159,13 +104,8 @@ header .auth-links {
 }
 
 .test-table th, .test-table td {
-    border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-}
-
-.test-table th {
-    background-color: #f2f2f2;
 }
 
 .test-row {
@@ -185,12 +125,8 @@ header .auth-links {
     margin-right: 10px;
 }
 
-.logo.scrolled {
-    margin-left: 12px;
-}
-
-main{
-    padding-top: 84px;
+main {
+    padding-top: 60px; /* Увеличиваем отступ для шапки */
 }
 
 .header .auth-links {
@@ -208,7 +144,7 @@ header.scrolled .user-name {
 }
 
 header .user-name {
-    cursor: pointer; /* Указываем, что имя пользователя кликабельно */
+    cursor: pointer;
     display: none;
     margin-right: 12px;
     margin-left: 10px;
@@ -217,10 +153,7 @@ header .user-name {
 .dropdown {
     display: none; /* Скрываем по умолчанию */
     position: absolute; /* Позволяет позиционировать относительно родителя */
-    background-color: #292a47; /* Цвет фона */
-    border: 1px solid #13131f; /* Цвет границы */
     border-radius: 8px; /* Скругление углов */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень для эффекта */
     z-index: 1000; /* Убедитесь, что он выше других элементов */
     margin-top: 5px; /* Отступ сверху */
     top: 40px;
@@ -230,10 +163,11 @@ header .user-name {
 .dropdown a {
     display: block; /* Каждая ссылка занимает всю ширину */
     padding: 10px; /* Отступы внутри */
-    color: #333; /* Цвет текста */
     text-decoration: none; /* Убираем подчеркивание */
 }
 
-.dropdown a:hover {
-    background-color: #f0f0f0; /* Цвет при наведении */
+header a {
+    text-decoration: none;
+    margin: 0 10px;
+    white-space: nowrap; /* Prevents text from wrapping */
 }

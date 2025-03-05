@@ -1,0 +1,66 @@
+body {
+        background-color: #151615;
+}
+
+header {
+        background-color: #252726;
+        color: white;
+}
+
+header a{
+        color: #9391db;
+}
+
+header.scrolled {
+        box-shadow: 0 4px 80px rgba(0, 0, 0, 0.9);
+}
+
+.tabs::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.5);
+}
+
+.tab {
+        background-color: #434443;
+        color: white;
+}
+
+.submission {
+        background-color: #f9f9f9;
+}
+
+.test-table th {
+        background-color: #f2f2f2;
+}
+
+.dropdown {
+        background-color: #292a47;
+        border: 1px solid #13131f;
+}
+
+/* Стили для скроллбара в WebKit-браузерах */
+.tabs::-webkit-scrollbar {
+        height: 8px;
+    }
+    
+    .tabs.scrolled::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .tabs::-webkit-scrollbar-thumb {
+        background: #ccc; /* Светлый цвет скроллбара */
+        border-radius: 10px;
+    }
+    
+    .tabs::-webkit-scrollbar-thumb:hover {
+        background: #aaa; /* Цвет скроллбара при наведении */
+    }
+    
+    /* Стили для скроллбара в Firefox */
+    .tabs {
+        scrollbar-width: thin;
+        scrollbar-color: #ccc transparent;
+    }
+    
+    .tabs:hover {
+        scrollbar-color: #aaa transparent;
+    }
