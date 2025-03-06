@@ -22,29 +22,10 @@ header.scrolled {
     font-size: 14px; /* Увеличиваем размер шрифта */
 }
 
-/* Стили для скроллбара в WebKit-браузерах */
-.tabs::-webkit-scrollbar {
-    height: 8px;
-}
-
-.tabs.scrolled::-webkit-scrollbar {
-    height: 4px;
-}
-
-.tabs::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-}
-
-/* Стили для скроллбара в Firefox */
-.tabs {
-    scrollbar-width: thin;
-}
-
 .tabs {
     display: flex;
     overflow-x: auto;
     white-space: nowrap;
-    margin-right: 10px;
 }
 
 .tab {
@@ -67,6 +48,9 @@ header.scrolled {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    transition: all 0.5s ease;
+    padding: 3px 8px;
+    border-radius: 5px;
 }
 
 header a {
@@ -178,4 +162,29 @@ header a {
     padding: 10px;
     border-radius: 5px;
     transition: background-color 0.2s;
+}
+
+.tbtt{
+    margin-right: 0;
+}
+
+.tabs::-webkit-scrollbar {
+    height: 10px;
+}
+
+.tabs.scrolled::-webkit-scrollbar{
+    height: 5px;
+    transform: translateY(-5px);
+}
+
+.tabs::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+}
+
+.tabs.scrolled::-webkit-scrollbar-thumb{
+    border-radius: 2.5px;
+}
+
+.tabs::-webkit-scrollbar-thumb:hover{
+    box-shadow: 0 0 10px #000;
 }

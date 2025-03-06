@@ -4,7 +4,7 @@ body {
 }
 
 header {
-    background-color: #cba4b3;
+    background-color: #e7bacb;
     color: #333;
 }
 
@@ -16,20 +16,12 @@ header a{
     color: #111b2e;
 }
 
-.tabs::-webkit-scrollbar {
-    background-color: #cba4b3;
-}
-
 header.scrolled {
     box-shadow: 0 2px 80px rgba(29, 42, 97, 0.893);
 }
 
-.tabs::-webkit-scrollbar-thumb {
-    background: #ccc;
-}
-
 .tab {
-    background-color: #e0e0e0;
+    background-color: #f0e5df;
     color: #333;
 }
 
@@ -57,5 +49,23 @@ header .user-name:hover{
 }
 
 .tabs::-webkit-scrollbar-track {
-    background: #200fde; /* Цвет фона полосы прокрутки */
+    background-color: #e7bacb;
+}
+
+.tabs::-webkit-scrollbar-thumb {
+    background: #a87c8d;
+    transition: all 0.5s ease;
+}
+
+.tabs::-webkit-scrollbar-thumb:hover{
+    background: #d1b2c4;
+}
+
+.tab .close {
+    color: #402831;
+}
+
+.tab .close:hover {
+    color: #bf7491;
+    background-color: #33333381;
 }
