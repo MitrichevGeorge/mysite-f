@@ -72,6 +72,8 @@ header.scrolled {
 header a {
     text-decoration: none;
     margin: 0 10px;
+    display: inline-block;
+    height: 100%;
 }
 
 header .auth-links {
@@ -148,6 +150,9 @@ header .user-name {
     display: none;
     margin-right: 12px;
     margin-left: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
 }
 
 .dropdown {
@@ -170,4 +175,7 @@ header a {
     text-decoration: none;
     margin: 0 10px;
     white-space: nowrap; /* Prevents text from wrapping */
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
 }

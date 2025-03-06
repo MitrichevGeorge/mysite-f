@@ -8,6 +8,18 @@ header {
     color: #333;
 }
 
+header a{
+    color: #111b2e;
+}
+
+.user-name {
+    color: #111b2e;
+}
+
+.tabs::-webkit-scrollbar {
+    background-color: #cba4b3;
+}
+
 header.scrolled {
     box-shadow: 0 2px 80px rgba(29, 42, 97, 0.893);
 }
@@ -32,4 +44,18 @@ header.scrolled {
 .dropdown {
     background-color: #ffffff;
     border: 1px solid #ccc;
+}
+
+header a:hover{
+    background-color: rgba(242, 242, 242, 0.608);
+    box-shadow: 0 0 3px 5px rgba(46, 46, 46, 0.223);
+}
+
+header .user-name:hover{
+    background-color: rgba(242, 242, 242, 0.608);
+    box-shadow: 0 0 3px 5px rgba(46, 46, 46, 0.223);
+}
+
+.tabs::-webkit-scrollbar-track {
+    background: #200fde; /* Цвет фона полосы прокрутки */
 }

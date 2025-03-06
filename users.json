@@ -353,130 +353,6 @@
         ],
         "login_history": [
             {
-                "timestamp": "2025-03-02 09:57:19",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:02:58",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:03:55",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:47:02",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:47:09",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:48:32",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:48:58",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:50:30",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:51:11",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:51:33",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:51:42",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-02 10:51:46",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-03-02 10:51:55",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 11:33:08",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 11:33:32",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 11:37:36",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 15:45:20",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-03 21:24:23",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-03-03 21:24:32",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-03-03 21:24:33",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 21:35:07",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 21:35:14",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 21:35:15",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 21:35:37",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 21:36:15",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 21:36:57",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 21:37:06",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 21:40:15",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 21:40:32",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-03 21:40:43",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-03-04 08:16:10",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
                 "timestamp": "2025-03-04 08:16:16",
                 "url": "http://127.0.0.1:5000/"
             },
@@ -751,9 +627,133 @@
             {
                 "timestamp": "2025-03-05 14:56:24",
                 "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:00:51",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-03-05 21:00:56",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:01:13",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:04:18",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:04:33",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:05:25",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:05:46",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:06:12",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:07:06",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:08:24",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:09:03",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:10:23",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:10:54",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:11:08",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:11:33",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:11:43",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:11:57",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:13:10",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:13:31",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:13:40",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:13:53",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:14:08",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:14:20",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:14:28",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:14:57",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:15:26",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:17:08",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:17:16",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:21:46",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:22:04",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-03-05 21:22:38",
+                "url": "http://127.0.0.1:5000/task/task1"
             }
         ],
-        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAAAlQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAtAAAAAQAAAACAAAAIQAAAAoAAAAaAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABsAAAAIAAAAGQAAAAUAAAARAAAAMgAAABEAAAA5AAAADQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAAAlQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAtAAAAAQAAAACAAAAIQAAAAoAAAAaAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABsAAAAIAAAAGQAAAAUAAAARAAAAMgAAABEAAAA5AAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "tabs": [
             {
                 "url": "http://127.0.0.1:5000/task/task1",
