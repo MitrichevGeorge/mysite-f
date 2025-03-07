@@ -193,34 +193,30 @@ header a {
     border-radius: 2.5px;
 }
 
-.tabs::before,
-.tabs::after {
+.tabs {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    position: relative;
+    border-radius: 5px;
+}
+
+.shdw-left,
+.shdw-right {
     content: "";
     position: absolute;
     top: 0;
-    left: -10px; /* Смещение влево на 10px */
-    width: 10px; /* Ширина тени */
     height: 100%; /* Высота совпадает с высотой контейнера */
-    background-color: black;
-    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.5); /* Тень вправо */
-  transition: opacity 0.3s ease-in-out;
-  opacity: 0;
+    background-color: transparent; /* Убираем фоновый цвет */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    z-index: 1; /* Убедитесь, что тени находятся выше вкладок */
 }
 
-.tabs::before {
-  left: 0;
-  box-shadow: 5px 0 5px 5px rgba(0, 0, 0, 0.3);
+.tabs.show-left-shadow .shdw-left {
+    opacity: 1; /* Показываем тень слева */
 }
 
-.tabs::after {
-  right: 0;
-  box-shadow: 5px 0 5px 5px rgba(0, 0, 0, 0.3);
-}
-
-.tabs.show-left-shadow::before {
-    opacity: 1;
-}
-
-.tabs.show-right-shadow::after {
-    opacity: 1; 
+.tabs.show-right-shadow .shdw-right {
+    opacity: 1; /* Показываем тень справа */
 }

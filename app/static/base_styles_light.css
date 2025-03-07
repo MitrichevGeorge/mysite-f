@@ -69,3 +69,16 @@ header .user-name:hover{
     color: #ee87af;
     background-color: #33333381;
 }
+
+
+.shdw-left {
+    left: 0; /* Сдвигаем тень влево */
+    width: 20px; /* Ширина тени */
+    background: linear-gradient(to right, rgba(82, 61, 61, 0.8), transparent);
+}
+
+.shdw-right {
+    right: 0; /* Сдвигаем тень вправо */
+    width: 20px; /* Ширина тени */
+    background: linear-gradient(to left, rgba(82, 61, 61, 0.8), transparent);
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Контест{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='base_styles_light.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base_styles_dark.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='base_styles.css') }}">
     
     <script>
@@ -30,11 +30,13 @@
     <header id="header">
         <a href="/" class="logo">Главная</a>
         <div class="tabs" id="tabs">
+            <div class="shdw-left" id="noscroll"></div>
             {% for tab in tabs %}
                 <div class="tab" onclick="window.location.href='{{ tab.url }}'">
                     {{ tab.name }} <span class="close" onclick="removeTab('{{ tab.name }}')">✖</span>
                 </div>
             {% endfor %}
+            <div class="shdw-right" id="noscroll"></div>
         </div>
         <div class="auth-links">
             {% if current_user.is_authenticated %}
@@ -99,6 +101,8 @@
     </script>
     <script>
         const scrollContainer = document.getElementById('tabs');
+        const noScrollElements = document.querySelectorAll('#noscroll');
+        console.log(noScrollElements);
         scrollContainer.addEventListener('scroll', () => {
             const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
             const isAtStart = scrollLeft === 0;
@@ -115,6 +119,13 @@
             } else {
                 scrollContainer.classList.add('show-right-shadow');
             }
+            noScrollElements.forEach((element) => {
+                const rect = element.getBoundingClientRect();
+                const containerRect = scrollContainer.getBoundingClientRect();
+                
+                element.style.transform = `translateX(${scrollContainer.scrollLeft}px)`;
+                element.style.top = `${rect.top - containerRect.top}px`;
+            });
         });
     </script>
 
