@@ -97,6 +97,27 @@
             }
         }
     </script>
+    <script>
+        const scrollContainer = document.getElementById('tabs');
+        scrollContainer.addEventListener('scroll', () => {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
+            const isAtStart = scrollLeft === 0;
+            const isAtEnd = Math.ceil(scrollLeft + clientWidth) >= scrollWidth;
+
+            if (isAtStart) {
+                scrollContainer.classList.remove('show-left-shadow');
+            } else {
+                scrollContainer.classList.add('show-left-shadow');
+            }
+
+            if (isAtEnd) {
+                scrollContainer.classList.remove('show-right-shadow');
+            } else {
+                scrollContainer.classList.add('show-right-shadow');
+            }
+        });
+    </script>
+
     <main>
         {% block content %}{% endblock %}
     </main>

@@ -58,7 +58,7 @@ header .user-name:hover{
 }
 
 .tabs::-webkit-scrollbar-thumb:hover{
-    background: #d1b2c4;
+    background: rgb(177, 165, 172);
 }
 
 .tab .close {
@@ -66,6 +66,6 @@ header .user-name:hover{
 }
 
 .tab .close:hover {
-    color: #bf7491;
+    color: #ee87af;
     background-color: #33333381;
 }
