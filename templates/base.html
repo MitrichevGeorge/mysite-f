@@ -25,6 +25,11 @@
             }
         };
     </script>
+    <style>
+        :root {
+            --is-dark-theme: {{ 'true' if is_dark_theme else 'false' }};
+        }
+    </style>
 </head>
 <body>
     <header id="header">

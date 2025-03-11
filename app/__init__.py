@@ -1,10 +1,8 @@
 # app/__init__.py
-from flask import Flask, request
-from flask_login import LoginManager
-from .models import load_users, save_users
-import os
+from flask import Flask, request, g
+from flask_login import LoginManager, current_user
 
-app = Flask(__name__, template_folder=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'templates'))
+app = Flask(__name__)
 app.secret_key = "supersecretkey"
 
 # Настройка Flask-Login
@@ -21,6 +19,16 @@ def load_user(user_id):
         user.add_login(request.url)  # Сохраняем информацию о заходе и текущем URL
         save_users(users)  # Сохраняем изменения в users
     return user
+
+@app.before_request
+def load_user():
+    g.user = current_user  # Устанавливаем текущего пользователя в g
+
+@app.context_processor
+def inject_theme():
+    if g.user.is_authenticated:  # Проверяем, что пользователь аутентифицирован
+        return dict(is_dark_theme=g.user.theme == 'dark')
+    return dict(is_dark_theme=False)
 
 # Импорт маршрутов
 from .auth import auth_bp

@@ -51,7 +51,7 @@ def profile():
         
     # Получаем количество запросов за каждый день
     daily_requests = user.daily_requests
-
+    print(json.dumps(current_user.__dict__, indent=4))
     return render_template("profile.html", current_user=current_user, submissions=sbm, daily_requests=daily_requests, tabs=user.tabs)
 
 @views_bp.route('/api/submissions', methods=['GET'])
