@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Контест{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='base_styles_dark.css') }}">
+    {% if is_dark_theme %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='base_styles_dark.css') }}">
+    {% else %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='base_styles_light.css') }}">
+    {% endif %}
     <link rel="stylesheet" href="{{ url_for('static', filename='base_styles.css') }}">
     
     <script>

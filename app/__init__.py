@@ -1,8 +1,10 @@
 # app/__init__.py
 from flask import Flask, request, g
 from flask_login import LoginManager, current_user
+from .models import load_users, save_users
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'templates'))
 app.secret_key = "supersecretkey"
 
 # Настройка Flask-Login
