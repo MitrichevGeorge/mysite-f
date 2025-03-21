@@ -1,12 +1,16 @@
 <!-- register.html -->
 {% extends "base.html" %}
 {% block content %}
-<h1>Регистрация</h1>
-<form method="POST">
-    <p>Email: <input type="email" name="email" required></p>
-    <p>Имя пользователя: <input type="text" name="username" required></p>
-    <p>Пароль: <input type="password" name="password" required></p>
-    <p>Подтвердите пароль: <input type="password" name="confirm_password" required></p>
-    <p><input type="submit" value="Зарегистрироваться"></p>
-</form>
+<link rel="stylesheet" href="{{ url_for('static', filename='reg-log.css') }}">
+<div class="form-container">
+    <h1>Регистрация</h1>
+    <form method="POST">
+        <p>Email: <input type="email" name="email" required></p>
+        <p>Имя пользователя: <input type="text" name="username" required></p>
+        <p>Пароль: <input type="password" name="password" required></p>
+        <p>Подтвердите пароль: <input type="password" name="confirm_password" required></p>
+        <p><input type="submit" value="Зарегистрироваться"></p>
+    </form>
+    <p>Уже есть аккаунт? <a href="{{ url_for('auth.login') }}">Войти</a></p>
+</div>
 {% endblock %}

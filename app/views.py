@@ -13,7 +13,11 @@ TASKS_DIR = "tasks/"
 @views_bp.route('/')
 def index():
     tasks = os.listdir(TASKS_DIR)  # Теперь os доступен
-    return render_template('index.html', tasks=tasks, current_user=current_user, tabs=current_user.tabs)
+    if current_user.is_authenticated:
+        return render_template('index.html', tasks=tasks, current_user=current_user, tabs=current_user.tabs)
+    else:
+        return render_template('index.html', tasks=tasks, current_user=current_user, tabs=[])  # Provide an empty list for tabs
+
 
 @views_bp.route('/profile')
 @login_required

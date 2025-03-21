@@ -51,7 +51,7 @@ header.scrolled {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     padding: 1px 6px;
     border-radius: 5px;
 }
@@ -145,6 +145,11 @@ header .user-name {
     padding: 10px;
     border-radius: 5px;
     transition: background-color 0.2s;
+}
+
+header{
+    padding-right: 40px;
+    max-width: calc(100% - 20px);
 }
 
 .dropdown {

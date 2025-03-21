@@ -1,6 +1,6 @@
 # app/auth.py
 from flask import Blueprint, request, redirect, url_for, flash, render_template
-from flask_login import login_user
+from flask_login import login_user, logout_user, login_required, current_user  # Ensure logout_user is imported
 from .models import User, load_users, save_users
 from werkzeug.security import generate_password_hash
 
@@ -61,6 +61,7 @@ def login():
     return render_template('login.html')
 
 @auth_bp.route('/logout')
+@login_required
 def logout():
-    logout_user()
-    return redirect(url_for('views.index'))
+    logout_user()  # This should now work correctly
+    return redirect(url_for("views.index"))
