@@ -3,7 +3,7 @@ import os
 import json
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from datetime import datetime
+from datetime import datetime, timedelta
 import base64
 import struct
 
@@ -28,7 +28,7 @@ def getTabName(url):
     return "Contest"
 
 class User(UserMixin):
-    def __init__(self, id, email, username, password_hash, submissions=None, login_history=None, daily_requests=None, tabs=None, theme='light'):
+    def __init__(self, id, email, username, password_hash, submissions=None, login_history=None, daily_requests=None, tabs=None, theme='light', reset_code=None, reset_code_expiration=None):
         self.id = id
         self.email = email
         self.username = username
@@ -36,8 +36,11 @@ class User(UserMixin):
         self.submissions = submissions if submissions else []
         self.login_history = login_history if login_history else []
         self.daily_requests = daily_requests if daily_requests else [0] * 366
-        self.tabs = tabs if tabs else []  # Список вкладок
-        self.theme = theme  # Тема пользователя
+        self.tabs = tabs if tabs else []  # List of tabs
+        self.theme = theme  # User theme
+        self.reset_code = reset_code  # Password reset code
+        self.reset_code_expiration = reset_code_expiration  # Expiration time for reset code
+
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
