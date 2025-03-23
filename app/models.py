@@ -38,9 +38,8 @@ class User(UserMixin):
         self.daily_requests = daily_requests if daily_requests else [0] * 366
         self.tabs = tabs if tabs else []  # List of tabs
         self.theme = theme  # User theme
-        self.reset_code = reset_code  # Password reset code
-        self.reset_code_expiration = reset_code_expiration  # Expiration time for reset code
-
+        self.recovery_code = reset_code  # Храним как значение, а не список
+        self.recovery_code_expiration = reset_code_expiration  # Храним как значение, а не список
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -52,9 +51,9 @@ class User(UserMixin):
         self.submissions.append(submission)
 
     def add_login(self, url):
-        if not gsl(url).startswith("/api/"):
+        if not url.startswith("/api/"):  # Предполагается, что gsl() — это опечатка
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            self.login_history.append({"timestamp": timestamp, "url": url})  # Сохраняем временную метку и URL
+            self.login_history.append({"timestamp": timestamp, "url": url})
             
             # Ограничиваем количество записей в истории входа до 100
             if len(self.login_history) > 100:
@@ -63,10 +62,10 @@ class User(UserMixin):
             # Увеличиваем количество запросов за текущий день
             current_day = datetime.now().timetuple().tm_yday - 1  # Получаем номер дня в году (0-365)
             self.daily_requests[current_day] += 1
-            el = {"url":url,"name":getTabName(gsl(url))}
-            if not el in self.tabs:
+            el = {"url": url, "name": getTabName(url)}  # Замените на реальную функцию getTabName
+            if el not in self.tabs:
                 self.tabs.append(el)
-                if len(self.tabs)>20:
+                if len(self.tabs) > 20:
                     self.tabs.pop(0)
 
     def to_dict(self):
@@ -79,6 +78,17 @@ class User(UserMixin):
     def __iter__(self):
         return iter(self.to_dict().items())
 
+    def set_recovery_code(self, code):
+        print(f"Set recovery code: {code}")
+        self.recovery_code = code  # Присваиваем значение напрямую
+        self.recovery_code_expiration = datetime.now() + timedelta(minutes=15)  # Код действителен 15 минут
+        print(self.recovery_code, self.recovery_code_expiration)
+
+    def is_recovery_code_valid(self, code):
+        print(self.recovery_code, self.recovery_code_expiration)
+        print(code, self.recovery_code, self.recovery_code_expiration, datetime.now())
+        return self.recovery_code == code and datetime.now() < self.recovery_code_expiration
+
 def decode_daily_requests(encoded_requests):
     daily_requests_bin = base64.b64decode(encoded_requests)
     num_requests = len(daily_requests_bin) // struct.calcsize('i')
@@ -90,6 +100,9 @@ def load_users():
             users_data = json.load(f)
             users = {}
             for user_data in users_data:
+                # Преобразуем строку recovery_code_expiration обратно в datetime
+                expiration = datetime.fromisoformat(user_data['recovery_code_expiration']) if user_data.get('recovery_code_expiration') else None
+
                 users[user_data['id']] = User(
                     id=user_data['id'],
                     email=user_data['email'],
@@ -98,8 +111,10 @@ def load_users():
                     submissions=user_data.get('submissions', []),
                     login_history=user_data.get('login_history', []),
                     daily_requests=decode_daily_requests(user_data.get('daily_requests', base64.b64encode(struct.pack('0i')).decode('utf-8'))),
-                    tabs=user_data.get('tabs', []),  # Загружаем вкладки
-                    theme=user_data.get('theme', 'light')  # Загружаем тему пользователя
+                    tabs=user_data.get('tabs', []),
+                    theme=user_data.get('theme', 'light'),
+                    reset_code=user_data.get('recovery_code', None),
+                    reset_code_expiration=expiration  # Передаем преобразованный datetime
                 )
             return users
     return {}
@@ -107,10 +122,11 @@ def load_users():
 def save_users(users):
     users_data = []
     for user in users.values():
-        # Упаковываем daily_requests в бинарный формат
         daily_requests_bin = struct.pack(f'{len(user.daily_requests)}i', *user.daily_requests)
-        # Кодируем бинарные данные в строку с помощью base64
         daily_requests_encoded = base64.b64encode(daily_requests_bin).decode('utf-8')
+
+        # Преобразуем recovery_code_expiration в строку ISO, если оно есть
+        expiration_str = user.recovery_code_expiration.isoformat() if user.recovery_code_expiration else None
 
         users_data.append({
             "id": user.id,
@@ -119,10 +135,15 @@ def save_users(users):
             "password_hash": user.password_hash,
             "submissions": user.submissions,
             "login_history": user.login_history,
-            "daily_requests": daily_requests_encoded,  # Сохраняем закодированные данные
-            "tabs": user.tabs,  # Сохраняем вкладки
-            "theme": user.theme  # Сохраняем тему пользователя
+            "daily_requests": daily_requests_encoded,
+            "tabs": user.tabs,
+            "theme": user.theme,
+            "recovery_code": user.recovery_code,
+            "recovery_code_expiration": expiration_str  # Сохраняем как строку
         })
+
+    with open(USERS_FILE, 'w') as f:
+        json.dump(users_data, f, ensure_ascii=True, indent=4)
 
     with open(USERS_FILE, 'w') as f:
         json.dump(users_data, f, ensure_ascii=True, indent=4)

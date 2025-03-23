@@ -1,0 +1,29 @@
+<!-- enter_recovery_code.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="form-container">
+    <div class="card">
+        <div class="card2">
+            <form class="form" method="POST">
+                <p id="heading">Введите код восстановления</p>
+                <input type="hidden" name="email" value="{{ email }}">
+                <div class="field">
+                    <input type="text" class="input-field" placeholder="Код восстановления" name="recovery_code" required autoComplete="off" />
+                </div>
+                <div class="btn">
+                    <button type="submit" class="submit-button">Продолжить</button>
+                </div>
+            </form>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+{% endblock %}

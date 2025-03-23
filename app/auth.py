@@ -54,35 +54,59 @@ def send_email(to_email, username, recovery_code):
 def forgot_password():
     if request.method == "POST":
         email = request.form['email']
-        users = load_users()  # Load users from your data source
-        user = next((u for u in users.values() if u.email == email), None)
-
-        if user:
-            # Generate a random code for password reset
-            recovery_code = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
-            send_email(email, user.username, recovery_code)  # Send the email with the recovery code
-            flash('Письмо с кодом для восстановления пароля отправлено на ваш email.', 'success')
-            return redirect(url_for('auth.login'))
-        else:
-            flash('Пользователь с таким email не найден.', 'error')
-
-    return render_template('forgot_password.html')  # Render the password recovery form
-
-
-@auth_bp.route("/verify-code", methods=["GET", "POST"])
-def verify_code():
-    if request.method == "POST":
-        email = request.form['email']
-        code = request.form['code']
         users = load_users()
         user = next((u for u in users.values() if u.email == email), None)
 
-        if user and user.reset_code == code and datetime.now() < user.reset_code_expiration:
-            return render_template('reset_password.html', email=email)  # Show reset password form
+        if user:
+            recovery_code = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
+            user.set_recovery_code(recovery_code)
+            send_email(email, user.username, recovery_code)
+            save_users(users)  # Сохраняем изменения в users.json
+            flash('Письмо с кодом для восстановления пароля отправлено на ваш email.', 'success')
+            return redirect(url_for('auth.enter_recovery_code', email=email))
         else:
-            flash('Неверный код или код истек.', 'error')
+            flash('Пользователь с таким email не найден.', 'error')
 
-    return render_template('verify_code.html')  # Page to enter the reset code
+    return render_template('forgot_password.html')
+@auth_bp.route("/enter-recovery-code", methods=["GET", "POST"])
+def enter_recovery_code():
+    if request.method == "POST":
+        email = request.form['email']
+        print(f"Email: {email}")
+        recovery_code = request.form['recovery_code']
+        print(email, recovery_code)
+        users = load_users()
+        user = next((u for u in users.values() if u.email == email), None)
+        if user and user.is_recovery_code_valid(recovery_code):
+            return render_template('reset_password.html', email=email)  # Render password reset form
+        else:
+            flash('Неверный код восстановления или код истек.', 'error')
+
+    return render_template('enter_recovery_code.html', email = request.args.get('email'))  # Render enter recovery code form
+
+@auth_bp.route("/update-password", methods=["POST"])
+def update_password():
+    email = request.form['email']
+    new_password = request.form['new_password']
+    confirm_password = request.form['confirm_password']
+    
+    if new_password != confirm_password:
+        flash('Пароли не совпадают.', 'error')
+        return redirect(url_for('auth.enter_recovery_code', email=email))
+
+    users = load_users()
+    user = next((u for u in users.values() if u.email == email), None)
+
+    if user:
+        user.set_password(new_password)  # Update the user's password
+        user.recovery_code = None  # Clear the recovery code
+        user.recovery_code_expiration = None  # Clear the expiration time
+        save_users(users)  # Save updated users
+        flash('Пароль успешно обновлён.', 'success')
+        return redirect(url_for('auth.login'))
+
+    flash('Ошибка при обновлении пароля.', 'error')
+    return redirect(url_for('auth.enter_recovery_code', email=email))
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
