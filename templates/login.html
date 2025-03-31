@@ -8,18 +8,32 @@
             <form class="form" method="POST">
                 <p id="heading">Вход</p>
                 <div class="field">
+                    <svg class="input-icon" viewBox="0 0 16 16" fill="currentColor" height="16" width="20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 2v2h2V2H2zm3 0v5h2V2H5zm3 0v8h2V2H8zm3 0v11h2V2h-2zm-9 12v-2h12v2H2z"/>
+                    </svg>
                     <input type="email" class="input-field" placeholder="Email" name="email" required autoComplete="off" />
                 </div>
                 <div class="field">
+                    <svg class="input-icon" viewBox="0 0 20 16" fill="currentColor" height="16" width="20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 5h-2V3a3 3 0 0 0-6 0v2H6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3zm-5-2a1 1 0 1 1 2 0v2h-2V3z"/>
+                    </svg>
                     <input type="password" class="input-field" placeholder="Пароль" name="password" required />
                 </div>
                 <div class="btn">
                     <button class="button1" type="submit">Войти</button>
                 </div>
-                <p>Нет аккаунта? <a href="{{ url_for('auth.register') }}">Зарегистрироваться</a></p>
-                <a class="button3" href="{{ url_for('auth.forgot_password') }}">Забыли пароль?</a> <!-- Link to password recovery -->
+                <p class="btext">Нет аккаунта? <a href="{{ url_for('auth.register') }}">Зарегистрироваться</a></p>
+                <a class="button3" href="{{ url_for('auth.forgot_password') }}">Забыли пароль?</a>
             </form>
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('mousemove', (e) => {
+        const follower = document.body.querySelector('::before');
+        document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
+        document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
+    });
+</script>
+<!-- Your existing Cloudflare script remains here -->
 {% endblock %}
