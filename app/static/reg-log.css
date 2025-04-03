@@ -3,7 +3,9 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     position: relative;
-    overflow: hidden; /* Prevent scrollbars from animation */
+    overflow: hidden;
+    --mouse-x: 0;
+    --mouse-y: 0;
 }
 
 .form-container {
@@ -16,17 +18,33 @@ body {
     z-index: 1;
 }
 
-/* Cursor following animation */
+/* Эффект слежения за курсором для body */
 body::before {
     content: '';
     position: fixed;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(0, 255, 117, 0.2) 0%, rgba(55, 0, 255, 0.1) 50%, transparent 70%);
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(0, 255, 117, 0.2) 30%, transparent 70%);
     pointer-events: none;
     z-index: 0;
-    transform: translate(-50%, -50%);
+    transform: translate(calc(var(--mouse-x) - 75px), calc(var(--mouse-y) - 75px));
     transition: transform 0.1s ease-out;
+    filter: blur(20px);
+    opacity: 0.7;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(55, 0, 255, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    transform: translate(calc(var(--mouse-x) - 40px), calc(var(--mouse-y) - 40px));
+    transition: transform 0.05s ease-out;
+    filter: blur(10px);
+    opacity: 0.5;
 }
 
 .input-icon {
@@ -34,9 +52,8 @@ body::before {
     left: 15px;
     color: #00ff75;
     transition: all 0.3s ease;
-    width: 20px; /* Increased from 16px to accommodate wider icons */
-    height: 16px;
-    fill: currentColor;
+    width: 30px;
+    height: 24px;
 }
 
 .card {
@@ -64,6 +81,7 @@ body::before {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 5px rgba(0, 255, 117, 0.3);
 }
 
 .form {
@@ -86,7 +104,7 @@ body::before {
 
 .input-field {
     width: 100%;
-    padding: 12px 15px 12px 45px;
+    padding: 12px 15px 12px 55px;
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 50px;
     background: rgba(255, 255, 255, 0.05);
@@ -120,39 +138,61 @@ body::before {
     overflow: hidden;
     transition: all 0.3s ease;
     font-size: 1.1em;
+    --button-mouse-x: 0;
+    --button-mouse-y: 0;
+    z-index: 3;
 }
 
+/* Эффект стрелки */
 .button1::before {
     content: '➔';
     position: absolute;
     right: 20px;
     opacity: 0;
     transition: all 0.4s ease;
+    z-index: 2;
+}
+
+.intext {
+    position: relative;
+    z-index: 2;
+}
+
+/* Эффект "лучика" внутри кнопки */
+.button1::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(255, 105, 210, 0.8) 10%, transparent 60%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+    opacity: 0;
+    filter: blur(5px);
+    z-index: 1;
+}
+
+.button1-shadow {
+    position: absolute;
+    width: 60px; /* Уменьшаем размер для более точного свечения */
+    height: 60px;
+    background: radial-gradient(circle, rgba(0, 255, 117, 0.5) 10%, transparent 60%);
+    pointer-events: none;
+    filter: blur(15px); /* Более мягкое размытие */
+    opacity: 0; /* Скрыта по умолчанию */
+    transition: opacity 0.2s ease; /* Плавное появление/исчезновение */
+    z-index: 1; /* Устанавливаем выше, чем у ::after, но ниже текста */
 }
 
 .button1:hover::before {
     opacity: 1;
     right: 15px;
-    animation: bounce 0.6s infinite;
-}
-
-.button1::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 0.6s ease;
+    animation: bounce 0.5s infinite;
 }
 
 .button1:hover::after {
-    width: 200%;
-    height: 200%;
-    opacity: 0;
+    opacity: 0.8;
 }
 
 .button1:hover {
@@ -203,14 +243,4 @@ a:hover {
 
 .btext {
     color: #707070;
-}
-
-/* Add to reg-log.css */
-body {
-    --mouse-x: 0;
-    --mouse-y: 0;
-}
-
-body::before {
-    transform: translate(var(--mouse-x), var(--mouse-y));
 }

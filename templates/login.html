@@ -8,19 +8,22 @@
             <form class="form" method="POST">
                 <p id="heading">Вход</p>
                 <div class="field">
-                    <svg class="input-icon" viewBox="0 0 16 16" fill="currentColor" height="16" width="20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 2v2h2V2H2zm3 0v5h2V2H5zm3 0v8h2V2H8zm3 0v11h2V2h-2zm-9 12v-2h12v2H2z"/>
+                    <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M4 14H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M15 14H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14.8191 14.0261C14.6079 14.6063 14.2228 15.1072 13.7164 15.4605C13.21 15.8137 12.607 16.0021 11.9895 16C11.3721 15.9978 10.7703 15.8052 10.2664 15.4484C9.76251 15.0916 9.38095 14.588 9.17383 14.0064" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <input type="email" class="input-field" placeholder="Email" name="email" required autoComplete="off" />
                 </div>
                 <div class="field">
-                    <svg class="input-icon" viewBox="0 0 20 16" fill="currentColor" height="16" width="20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 5h-2V3a3 3 0 0 0-6 0v2H6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3zm-5-2a1 1 0 1 1 2 0v2h-2V3z"/>
+                    <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 9V6C16 4.34315 14.6569 3 13 3H11C9.34315 3 8 4.34315 8 6V9M16 9H8M16 9C17.6569 9 19 10.3431 19 12V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V12C5 10.3431 6.34315 9 8 9M12 14V17M13 14C13 14.5523 12.5523 15 12 15C11.4477 15 11 14.5523 11 14C11 13.4477 11.4477 13 12 13C12.5523 13 13 13.4477 13 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <input type="password" class="input-field" placeholder="Пароль" name="password" required />
                 </div>
                 <div class="btn">
-                    <button class="button1" type="submit">Войти</button>
+                    <button class="button1" type="submit"><div class="intext">Войти</div><span class="button1-shadow"></span></button>
                 </div>
                 <p class="btext">Нет аккаунта? <a href="{{ url_for('auth.register') }}">Зарегистрироваться</a></p>
                 <a class="button3" href="{{ url_for('auth.forgot_password') }}">Забыли пароль?</a>
@@ -30,10 +33,126 @@
 </div>
 <script>
     document.addEventListener('mousemove', (e) => {
-        const follower = document.body.querySelector('::before');
         document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
         document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
     });
+
+    const button = document.querySelector('.button1');
+    if (button) {
+        let styleSheet = document.createElement('style');
+        document.head.appendChild(styleSheet);
+        let spotlightRuleIndex; // Для "лучика"
+        let shadowRuleIndex;    // Для второй тени
+        let entryEdge = null;   // Храним край входа курсора
+
+        button.addEventListener('mouseenter', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Определяем, с какого края вошел курсор
+            const fromLeft = x < rect.width / 2 && x <= 10;
+            const fromRight = x > rect.width / 2 && x >= rect.width - 10;
+            const fromTop = y < rect.height / 2 && y <= 10;
+            const fromBottom = y > rect.height / 2 && y >= rect.height - 10;
+
+            if (fromLeft) entryEdge = 'left';
+            else if (fromRight) entryEdge = 'right';
+            else if (fromTop) entryEdge = 'top';
+            else if (fromBottom) entryEdge = 'bottom';
+        });
+
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const spotlightSize = 30; // Размер "лучика"
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Обновляем "лучик"
+            if (!styleSheet.sheet.cssRules.length || !spotlightRuleIndex) {
+                spotlightRuleIndex = styleSheet.sheet.insertRule(
+                    `.button1::after { left: ${x}px; top: ${y}px; opacity: 0.8; }`,
+                    0
+                );
+            } else {
+                styleSheet.sheet.deleteRule(spotlightRuleIndex);
+                spotlightRuleIndex = styleSheet.sheet.insertRule(
+                    `.button1::after { left: ${x}px; top: ${y}px; opacity: 0.8; }`,
+                    0
+                );
+            }
+
+            // Обновляем вторую тень в зависимости от края входа
+            let shadowX, shadowY;
+            const shadowSize = 50; // Размер тени (можно настроить)
+            if (entryEdge === 'left') {
+                shadowX = -shadowSize; // Тень слева
+                shadowY = y;
+            } else if (entryEdge === 'right') {
+                shadowX = rect.width; // Тень справа
+                shadowY = y;
+            } else if (entryEdge === 'top') {
+                shadowX = x;
+                shadowY = -shadowSize; // Тень сверху
+            } else if (entryEdge === 'bottom') {
+                shadowX = x;
+                shadowY = rect.height; // Тень снизу
+            }
+
+            if (shadowRuleIndex !== undefined) {
+                styleSheet.sheet.deleteRule(shadowRuleIndex);
+            }
+            shadowRuleIndex = styleSheet.sheet.insertRule(
+                `.button1-shadow { left: ${shadowX}px; top: ${shadowY}px; opacity: 0.5; }`,
+                spotlightRuleIndex + 1
+            );
+        });
+
+        button.addEventListener('mouseleave', () => {
+            // Скрываем "лучик"
+            if (styleSheet.sheet.cssRules.length && spotlightRuleIndex !== undefined) {
+                styleSheet.sheet.deleteRule(spotlightRuleIndex);
+                spotlightRuleIndex = styleSheet.sheet.insertRule(
+                    `.button1::after { opacity: 0; }`,
+                    0
+                );
+            }
+
+            // Скрываем вторую тень
+            if (shadowRuleIndex !== undefined) {
+                styleSheet.sheet.deleteRule(shadowRuleIndex);
+                shadowRuleIndex = undefined;
+            }
+            entryEdge = null; // Сбрасываем край входа
+        });
+    }
 </script>
-<!-- Your existing Cloudflare script remains here -->
+<script>
+   if (button) {
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left; // Позиция X относительно кнопки
+            const y = e.clientY - rect.top;  // Позиция Y относительно кнопки
+            const centerX = rect.width / 2;  // Центр кнопки по X
+            const centerY = rect.height / 2; // Центр кнопки по Y
+
+            // Усиливаем сдвиг по Y, уменьшая делитель
+            const shadowX = (x - centerX) / 3; // Сдвиг по X чуть менее интенсивный
+            const shadowY = (y - centerY) / 1; // Сдвиг по Y максимально интенсивный
+            // Размытие зависит от расстояния от центра
+            const blur = 20 + Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)) / 10;
+
+            // Устанавливаем box-shadow с двумя слоями
+            button.style.boxShadow = `
+                0 5px 15px rgba(0, 255, 117, 0.4), /* Первая статичная тень */
+                ${shadowX}px ${shadowY}px ${blur}px rgba(55, 0, 255, 0.5) /* Вторая динамическая тень */
+            `;
+        });
+
+        button.addEventListener('mouseleave', () => {
+            // Сбрасываем box-shadow до начального состояния
+            button.style.boxShadow = '0 5px 15px rgba(0, 255, 117, 0.4)';
+        });
+    }
+</script>
 {% endblock %}
