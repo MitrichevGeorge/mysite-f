@@ -1,4 +1,17 @@
 /* reg-log.css */
+header {
+    background-color: #2f354d;
+    color: #e0e0e0;
+}
+
+.logo {
+    color: #e0e0e0;
+}
+
+.tbtt {
+    color: #e0e0e0;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;

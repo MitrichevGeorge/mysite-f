@@ -1,17 +1,16 @@
-<!-- register.html -->
 {% extends "base.html" %}
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='reg-log.css') }}">
 <div class="form-container">
     <div class="card">
         <div class="card2">
-            <form class="form" method="POST">
+            <form class="form" id="register-form" method="POST">
                 <p id="heading">Регистрация</p>
                 <div class="field">
                     <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 20V19C5 16.2386 7.23858 14 10 14H14C16.7614 14 19 16.2386 19 19V20M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <input type="text" class="input-field" placeholder="Имя пользователя" name="username" required autoComplete="off" />
+                    <input type="text" class="input-field" placeholder="Имя пользователя" name="username" required autocomplete="off" />
                 </div>
                 <div class="field">
                     <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +19,7 @@
                         <path d="M15 14H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M14.8191 14.0261C14.6079 14.6063 14.2228 15.1072 13.7164 15.4605C13.21 15.8137 12.607 16.0021 11.9895 16C11.3721 15.9978 10.7703 15.8052 10.2664 15.4484C9.76251 15.0916 9.38095 14.588 9.17383 14.0064" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <input type="email" class="input-field" placeholder="Email" name="email" required autoComplete="off" />
+                    <input type="email" class="input-field" placeholder="Email" name="email" required autocomplete="off" />
                 </div>
                 <div class="field">
                     <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,6 +44,55 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#register-form').on('submit', function(e) {
+            e.preventDefault();
+            showNotification('info', 'Запрос отправлен, ждем ответа...');
+            $.ajax({
+                url: '{{ url_for("auth.register") }}',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.status === 'success') {
+                        showNotification('success', response.message);
+                        setTimeout(() => window.location.href = '{{ url_for("auth.login") }}', 3000);
+                    } else {
+                        showNotification('error', response.message);
+                    }
+                },
+                error: function() {
+                    showNotification('error', 'Ошибка сервера. Попробуйте снова.');
+                }
+            });
+        });
+    });
+
+    function showNotification(type, message) {
+        const colors = {
+            success: '#00ff75',
+            error: '#ff3333',
+            info: '#1a73e8'
+        };
+        const notification = $(`
+            <div class="notification" style="background-color: ${colors[type]}; position: fixed; top: 20px; right: 20px; padding: 15px; color: white; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 1000;">
+                <span>${message}</span>
+                <span class="close-btn" style="margin-left: 15px; cursor: pointer;">✖</span>
+                <div class="progress-bar" style="position: absolute; bottom: 0; left: 0; height: 5px; background-color: rgba(255,255,255,0.8); width: 100%; animation: shrink 5s linear forwards;"></div>
+            </div>
+        `);
+        $('body').append(notification);
+        setTimeout(() => notification.remove(), 5000);
+        notification.find('.close-btn').on('click', () => notification.remove());
+    }
+</script>
+<style>
+    @keyframes shrink {
+        from { width: 100%; }
+        to { width: 0%; }
+    }
+</style>
 <script>
     document.addEventListener('mousemove', (e) => {
         document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
