@@ -61,10 +61,10 @@
                     } else {
                         showNotification('error', response.message);
                     }
-                },
-                error: function() {
-                    showNotification('error', 'Ошибка сервера. Попробуйте снова.');
                 }
+            }).fail(function(jqXHR) {
+                const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.message : 'Ошибка сервера. Попробуйте снова.';
+                showNotification('error', errorMessage);
             });
         });
     });

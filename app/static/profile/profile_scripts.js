@@ -33,44 +33,30 @@ document.addEventListener('DOMContentLoaded', function () {
     const maxValue = Math.max(...dailyRequests);
 
     // Учитываем сдвиг начала года
-    let dayOffset = yearStartOffset || 0;  // Если сдвиг не указан, по умолчанию 0
+    let dayOffset = yearStartOffset || 0;
 
-    
     for (let day = 0; day < 7; day++) {
         for (let week = 0; week < weeksInYear; week++) {
-            const index = week * 7 + day - dayOffset;  // Учитываем сдвиг
+            const index = week * 7 + day - dayOffset;
             const cell = document.createElement('div');
-            if (index < 0 || index >= daysInYear){
+            if (index < 0 || index >= daysInYear) {
                 cell.classList.add('trpcl');
                 heatmap.appendChild(cell);
-            }
-            else{
+            } else {
                 cell.classList.add('cell');
 
                 const value = dailyRequests[index];
-                cell.setAttribute('data-count', `${getShortDateFromWeekAndDay(2025,week,day)}: ${value}`);
-                cell.setAttribute('num', value)
+                cell.setAttribute('data-count', `${getShortDateFromWeekAndDay(2025, week, day)}: ${value}`);
+                cell.setAttribute('num', value);
                 const level = normalizeValue(value, minValue, maxValue);
-                cell.style.backgroundColor = getColorForLevel(level, false);
-    
+                cell.style.backgroundColor = getColorForLevel(level, isDarkTheme);
+
                 heatmap.appendChild(cell);
             }
         }
     }
 
-    // Остальной код (тема, нормализация и т.д.) остается без изменений
-    const themeToggle = document.getElementById('theme-toggle');
-    themeToggle.addEventListener('change', function () {
-        const isDarkMode = themeToggle.checked;
-        document.body.classList.toggle('dark', isDarkMode);
-
-        const cells = document.querySelectorAll('.cell');
-        cells.forEach(cell => {
-            const value = parseInt(cell.getAttribute('num'), 10);
-            const level = normalizeValue(value, minValue, maxValue);
-            cell.style.backgroundColor = getColorForLevel(level, isDarkMode);
-        });
-    });
+    loadSubmissions();
 });
 
 function normalizeValue(value, min, max) {
@@ -84,12 +70,12 @@ function getColorForLevel(level, isDarkMode) {
     const darkColors = [
         '#0e4429', '#006d32', '#26a641', '#39d353'
     ];
-    if (level > 0){
+    if (level > 0) {
         const colors = isDarkMode ? darkColors : lightColors;
         const index = Math.floor(level * (colors.length - 1));
         return colors[index] || colors[0];
     }
-    return isDarkMode ? '#2d333b' : '#ebedf0'
+    return isDarkMode ? '#2d333b' : '#ebedf0';
 }
 
 function showTab(tabName) {
@@ -118,8 +104,6 @@ function toggleTestDetails(id) {
         details.style.display = details.style.display === 'none' ? 'table-row' : 'none';
     }
 }
-
-document.addEventListener('DOMContentLoaded', loadSubmissions);
 
 function loadSubmissions() {
     fetch('/api/submissions')

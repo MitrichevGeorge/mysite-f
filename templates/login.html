@@ -5,7 +5,7 @@
 <div class="form-container">
     <div class="card">
         <div class="card2">
-            <form class="form" method="POST">
+            <form class="form" method="POST" id="loginForm">
                 <p id="heading">Вход</p>
                 <div class="field">
                     <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
@@ -14,7 +14,7 @@
                         <path d="M15 14H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M14.8191 14.0261C14.6079 14.6063 14.2228 15.1072 13.7164 15.4605C13.21 15.8137 12.607 16.0021 11.9895 16C11.3721 15.9978 10.7703 15.8052 10.2664 15.4484C9.76251 15.0916 9.38095 14.588 9.17383 14.0064" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <input type="email" class="input-field" placeholder="Email" name="email" required autoComplete="off" />
+                    <input type="text" class="input-field" placeholder="Email или имя пользователя" name="identifier" required autocomplete="off" />
                 </div>
                 <div class="field">
                     <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
@@ -31,6 +31,16 @@
         </div>
     </div>
 </div>
+
+<!-- Оверлей для выбора аккаунта -->
+<div id="accountOverlay" class="account-overlay">
+    <div class="account-container">
+        <h2>Выберите аккаунт</h2>
+        <div id="accountList" class="account-list"></div>
+        <p class="account-note">Показаны только аккаунты, соответствующие введенным email и паролю.</p>
+    </div>
+</div>
+
 <script>
     document.addEventListener('mousemove', (e) => {
         document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
@@ -41,16 +51,15 @@
     if (button) {
         let styleSheet = document.createElement('style');
         document.head.appendChild(styleSheet);
-        let spotlightRuleIndex; // Для "лучика"
-        let shadowRuleIndex;    // Для второй тени
-        let entryEdge = null;   // Храним край входа курсора
+        let spotlightRuleIndex;
+        let shadowRuleIndex;
+        let entryEdge = null;
 
         button.addEventListener('mouseenter', (e) => {
             const rect = button.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            // Определяем, с какого края вошел курсор
             const fromLeft = x < rect.width / 2 && x <= 10;
             const fromRight = x > rect.width / 2 && x >= rect.width - 10;
             const fromTop = y < rect.height / 2 && y <= 10;
@@ -64,11 +73,10 @@
 
         button.addEventListener('mousemove', (e) => {
             const rect = button.getBoundingClientRect();
-            const spotlightSize = 30; // Размер "лучика"
+            const spotlightSize = 30;
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            // Обновляем "лучик"
             if (!styleSheet.sheet.cssRules.length || !spotlightRuleIndex) {
                 spotlightRuleIndex = styleSheet.sheet.insertRule(
                     `.button1::after { left: ${x}px; top: ${y}px; opacity: 0.8; }`,
@@ -82,21 +90,20 @@
                 );
             }
 
-            // Обновляем вторую тень в зависимости от края входа
             let shadowX, shadowY;
-            const shadowSize = 50; // Размер тени (можно настроить)
+            const shadowSize = 50;
             if (entryEdge === 'left') {
-                shadowX = -shadowSize; // Тень слева
+                shadowX = -shadowSize;
                 shadowY = y;
             } else if (entryEdge === 'right') {
-                shadowX = rect.width; // Тень справа
+                shadowX = rect.width;
                 shadowY = y;
             } else if (entryEdge === 'top') {
                 shadowX = x;
-                shadowY = -shadowSize; // Тень сверху
+                shadowY = -shadowSize;
             } else if (entryEdge === 'bottom') {
                 shadowX = x;
-                shadowY = rect.height; // Тень снизу
+                shadowY = rect.height;
             }
 
             if (shadowRuleIndex !== undefined) {
@@ -109,7 +116,6 @@
         });
 
         button.addEventListener('mouseleave', () => {
-            // Скрываем "лучик"
             if (styleSheet.sheet.cssRules.length && spotlightRuleIndex !== undefined) {
                 styleSheet.sheet.deleteRule(spotlightRuleIndex);
                 spotlightRuleIndex = styleSheet.sheet.insertRule(
@@ -118,41 +124,59 @@
                 );
             }
 
-            // Скрываем вторую тень
             if (shadowRuleIndex !== undefined) {
                 styleSheet.sheet.deleteRule(shadowRuleIndex);
                 shadowRuleIndex = undefined;
             }
-            entryEdge = null; // Сбрасываем край входа
+            entryEdge = null;
         });
     }
-</script>
-<script>
-   if (button) {
-        button.addEventListener('mousemove', (e) => {
-            const rect = button.getBoundingClientRect();
-            const x = e.clientX - rect.left; // Позиция X относительно кнопки
-            const y = e.clientY - rect.top;  // Позиция Y относительно кнопки
-            const centerX = rect.width / 2;  // Центр кнопки по X
-            const centerY = rect.height / 2; // Центр кнопки по Y
 
-            // Усиливаем сдвиг по Y, уменьшая делитель
-            const shadowX = (x - centerX) / 3; // Сдвиг по X чуть менее интенсивный
-            const shadowY = (y - centerY) / 1; // Сдвиг по Y максимально интенсивный
-            // Размытие зависит от расстояния от центра
-            const blur = 20 + Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)) / 10;
-
-            // Устанавливаем box-shadow с двумя слоями
-            button.style.boxShadow = `
-                0 5px 15px rgba(0, 255, 117, 0.4), /* Первая статичная тень */
-                ${shadowX}px ${shadowY}px ${blur}px rgba(55, 0, 255, 0.5) /* Вторая динамическая тень */
-            `;
+    // Обработка формы входа
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const response = await fetch('{{ url_for("auth.login") }}', {
+            method: 'POST',
+            body: formData
         });
+        const result = await response.json();
 
-        button.addEventListener('mouseleave', () => {
-            // Сбрасываем box-shadow до начального состояния
-            button.style.boxShadow = '0 5px 15px rgba(0, 255, 117, 0.4)';
+        if (result.status === 'success') {
+            window.location.href = result.redirect;
+        } else if (result.status === 'select') {
+            const accountList = document.getElementById('accountList');
+            accountList.innerHTML = '';
+            result.users.forEach(user => {
+                const accountCard = document.createElement('div');
+                accountCard.className = 'account-card';
+                accountCard.dataset.userId = user.id;
+                accountCard.innerHTML = `<span>${user.username}</span>`;
+                accountCard.addEventListener('click', () => selectAccount(user.id));
+                accountList.appendChild(accountCard);
+            });
+            document.getElementById('accountOverlay').style.display = 'flex';
+            document.querySelector('.form-container').style.filter = 'blur(5px)';
+        } else {
+            alert(result.message);
+        }
+    });
+
+    async function selectAccount(userId) {
+        const formData = new FormData();
+        formData.append('user_id', userId);
+
+        const response = await fetch('{{ url_for("auth.select_account") }}', {
+            method: 'POST',
+            body: formData
         });
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            window.location.href = result.redirect;
+        } else {
+            alert(result.message);
+        }
     }
 </script>
 {% endblock %}

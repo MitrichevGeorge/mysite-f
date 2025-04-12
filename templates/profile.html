@@ -1,24 +1,17 @@
 <!-- profile.html -->
 {% extends "base.html" %}
 {% block content %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='profile_styles.css') }}">
-    <script src="{{ url_for('static', filename='profile_scripts.js') }}"></script>
+    {% if is_dark_theme %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='profile/profile_styles_dark.css') }}">
+    {% else %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='profile/profile_styles_light.css') }}">
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile/profile_styles.css') }}">
+    <script src="{{ url_for('static', filename='profile/profile_scripts.js') }}"></script>
     <script>
         const dailyRequests = {{ daily_requests|tojson }};
         const yearStartOffset = 2;
-    </script>
-
-    <script>
-        function saveThemePreference() {
-            const isDarkTheme = document.getElementById('theme-toggle').checked;
-            fetch('/update-theme', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ theme: isDarkTheme }),
-            });
-        }
+        const isDarkTheme = {{ is_dark_theme|tojson }};
     </script>
 
     <div class="container">
@@ -37,11 +30,6 @@
 
             <div class="activity-section">
                 <h2 class="activity-title">Активность</h2>
-                <div class="theme-switch">
-                    <label for="theme-toggle">Тёмная тема:</label>
-                    <input type="checkbox" id="theme-toggle" {% if current_user.theme == 'dark' %}checked{% endif %}>
-                </div>
-                <button id="save-theme" onclick="saveThemePreference()">Сохранить тему</button>
 
                 <div class="calendar">
                     <table>
@@ -68,7 +56,6 @@
                             <td>
                                 <div class="days">
                                     <span class="dupr">Пн</span>
-                                    <!--<span>Чт</span>-->
                                     <span class="ddwn">Вс</span>
                                 </div>
                             </td>
@@ -96,7 +83,7 @@
                     </a>
                 </div>
                 {% endfor %}
-                <p class="ps">Тут написано только 100 последних заходов так что не пугайтесь если старые заходы будут исчезать. Всё таки диск сервера не бесконечен.</p>
+                <p class="ps">Тут написано только 100 последних заходов, так что не пугайтесь, если старые заходы будут исчезать. Всё-таки диск сервера не бесконечен.</p>
             </div>
 
             <div id="submissions-tab" class="tab-content" style="display: none;">

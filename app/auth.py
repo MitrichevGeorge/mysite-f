@@ -1,3 +1,4 @@
+# app/auth.py
 import imaplib
 import email
 import smtplib
@@ -120,41 +121,39 @@ def verify_email(code):
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        identifier = request.form['email']
-        password = request.form['password']
+        identifier = request.form.get('identifier')
+        password = request.form.get('password')
+        if not identifier or not password:
+            return jsonify({'status': 'error', 'message': 'Отсутствуют данные формы'}), 400
         users = load_users()
 
-        matching_users = [
-            user for user in users.values()
-            if (user.email == identifier or user.username == identifier)
-        ]
-
-        if not matching_users:
-            return jsonify({'status': 'error', 'message': 'Неверный email или имя пользователя'}), 400
-
-        if len(matching_users) == 1:
-            user = matching_users[0]
-            if not user.is_verified:
+        # Проверяем, является ли identifier username
+        user_by_username = next((user for user in users.values() if user.username == identifier), None)
+        if user_by_username:
+            if not user_by_username.is_verified:
                 return jsonify({'status': 'error', 'message': 'Пожалуйста, подтвердите ваш email перед входом.'}), 400
-            if user.check_password(password):
-                login_user(user)
+            if user_by_username.check_password(password):
+                login_user(user_by_username)
                 return jsonify({'status': 'success', 'message': 'Вход успешен!', 'redirect': url_for('views.index')})
             else:
                 return jsonify({'status': 'error', 'message': 'Неверный пароль'}), 400
 
-        else:
-            valid_users = [user for user in matching_users if user.check_password(password) and user.is_verified]
-            if not valid_users:
-                return jsonify({'status': 'error', 'message': 'Неверный пароль или email не подтвержден'}), 400
-            elif len(valid_users) == 1:
-                login_user(valid_users[0])
-                return jsonify({'status': 'success', 'message': 'Вход успешен!', 'redirect': url_for('views.index')})
-            else:
-                return jsonify({
-                    'status': 'select',
-                    'message': 'Найдено несколько аккаунтов. Выберите один:',
-                    'users': [{'id': user.id, 'username': user.username} for user in valid_users]
-                })
+        # Если не username, проверяем как email
+        matching_users = [user for user in users.values() if user.email == identifier]
+        if not matching_users:
+            return jsonify({'status': 'error', 'message': 'Неверный email или имя пользователя'}), 400
+
+        # Фильтруем пользователей с правильным паролем и подтвержденным email
+        valid_users = [user for user in matching_users if user.check_password(password) and user.is_verified]
+        if not valid_users:
+            return jsonify({'status': 'error', 'message': 'Неверный пароль или email не подтвержден'}), 400
+
+        # Всегда возвращаем список аккаунтов для выбора
+        return jsonify({
+            'status': 'select',
+            'message': 'Найдено несколько аккаунтов. Выберите один:',
+            'users': [{'id': user.id, 'username': user.username} for user in valid_users]
+        })
 
     return render_template('login.html')
 
@@ -168,9 +167,76 @@ def select_account():
         return jsonify({'status': 'success', 'message': 'Вход успешен!', 'redirect': url_for('views.index')})
     return jsonify({'status': 'error', 'message': 'Ошибка при выборе аккаунта'}), 400
 
+@auth_bp.route("/forgot-password", methods=["GET", "POST"])
+def forgot_password():
+    if request.method == "POST":
+        email = request.form['email']
+        users = load_users()
+        user = next((u for u in users.values() if u.email == email), None)
+
+        if user:
+            recovery_code = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
+            user.set_recovery_code(recovery_code)
+            send_email_async(email, "Восстановление пароля", f"""
+            <!DOCTYPE html>
+            <html>
+            <body>
+                <h1>Восстановление пароля</h1>
+                <p>Здравствуйте, {user.username}!</p>
+                <p>Ваш код для восстановления пароля: <strong>{recovery_code}</strong></p>
+                <p>Код действителен в течение 15 минут.</p>
+                <p>Если вы не запрашивали восстановление пароля, проигнорируйте это письмо.</p>
+            </body>
+            </html>
+            """)
+            save_users(users)
+            flash('Письмо с кодом для восстановления пароля отправлено на ваш email.', 'success')
+            return redirect(url_for('auth.enter_recovery_code', email=email))
+        else:
+            flash('Пользователь с таким email не найден.', 'error')
+
+    return render_template('forgot_password.html')
+
+@auth_bp.route("/enter-recovery-code", methods=["GET", "POST"])
+def enter_recovery_code():
+    if request.method == "POST":
+        email = request.form['email']
+        recovery_code = request.form['recovery_code']
+        users = load_users()
+        user = next((u for u in users.values() if u.email == email), None)
+        if user and user.is_recovery_code_valid(recovery_code):
+            return render_template('reset_password.html', email=email)
+        else:
+            flash('Неверный код восстановления или код истек.', 'error')
+
+    return render_template('enter_recovery_code.html', email=request.args.get('email'))
+
+@auth_bp.route("/update-password", methods=["POST"])
+def update_password():
+    email = request.form['email']
+    new_password = request.form['new_password']
+    confirm_password = request.form['confirm_password']
+    
+    if new_password != confirm_password:
+        flash('Пароли не совпадают.', 'error')
+        return redirect(url_for('auth.enter_recovery_code', email=email))
+
+    users = load_users()
+    user = next((u for u in users.values() if u.email == email), None)
+
+    if user:
+        user.set_password(new_password)
+        user.recovery_code = None
+        user.recovery_code_expiration = None
+        save_users(users)
+        flash('Пароль успешно обновлён.', 'success')
+        return redirect(url_for('auth.login'))
+
+    flash('Ошибка при обновлении пароля.', 'error')
+    return redirect(url_for('auth.enter_recovery_code', email=email))
+
 @auth_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for("views.index"))
-

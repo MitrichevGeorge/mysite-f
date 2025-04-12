@@ -1,0 +1,97 @@
+/* static/profile/profile_styles_light.css */
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.profile-card {
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.profile-title {
+    color: rgb(17, 24, 39);
+}
+
+.info-label {
+    color: rgb(107, 114, 128);
+}
+
+.info-value {
+    color: rgb(17, 24, 39);
+}
+
+.activity-title {
+    color: rgb(17, 24, 39);
+}
+
+.cell {
+    background-color: #ebedf0;
+}
+
+.cell:hover {
+    outline: 2px solid #000000;
+}
+
+.tabsq {
+    background: white;
+}
+
+.tab-button {
+    background: rgb(249, 250, 251);
+    border: 1px solid rgb(229, 231, 235);
+}
+
+.tab-button.active {
+    background: white;
+    border-color: rgb(79, 70, 229);
+    color: rgb(79, 70, 229);
+}
+
+.login-entry {
+    background: rgb(249, 250, 251);
+}
+
+.login-timestamp {
+    color: rgb(107, 114, 128);
+}
+
+.login-url {
+    color: rgb(59, 130, 246);
+}
+
+.submission-card {
+    border: 1px solid rgb(229, 231, 235);
+}
+
+.submission-header {
+    background-color: rgb(249, 250, 251);
+}
+
+.submission-details {
+    border-top: 1px solid rgb(229, 231, 235);
+}
+
+.results-table th,
+.results-table td {
+    border-bottom: 1px solid rgb(229, 231, 235);
+}
+
+.verdict-badge.accepted {
+    background-color: rgb(16, 185, 129);
+    color: white;
+}
+
+.verdict-badge.wrong {
+    background-color: rgb(239, 68, 68);
+    color: white;
+}
+
+.verdict-badge.error {
+    background-color: rgb(245, 158, 11);
+    color: white;
+}
+
+.ps {
+    color: rgb(40, 47, 60);
+}

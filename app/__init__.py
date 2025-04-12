@@ -6,6 +6,7 @@ import os
 
 app = Flask(__name__, template_folder=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'templates'))
 app.secret_key = "supersecretkey"
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 # Настройка Flask-Login
 login_manager = LoginManager()

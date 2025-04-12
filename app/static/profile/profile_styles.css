@@ -1,4 +1,4 @@
-/* static/profile_styles.css */
+/* static/profile/profile_styles.css */
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -7,15 +7,8 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
-    color: #000000;
     transition: background-color 0.3s, color 0.3s;
     overflow-x: hidden;
-}
-
-body.dark {
-    background-color: #121212;
-    color: #ffffff;
 }
 
 header {
@@ -30,18 +23,14 @@ header {
 }
 
 .profile-card {
-    background-color: white;
     border-radius: 0.5rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     padding: 1.5rem;
     margin-bottom: 2rem;
-    width: 303.275;
 }
 
 .profile-title {
     font-size: 1.5rem;
     font-weight: bold;
-    color: rgb(17, 24, 39);
     margin-bottom: 1.5rem;
 }
 
@@ -65,7 +54,7 @@ header {
 }
 
 .info-label {
-    color: rgb(107, 114, 128);
+    font-weight: 500;
 }
 
 .info-value {
@@ -111,18 +100,18 @@ header {
 
 .days {
     display: flex;
-    flex-direction: column; /* Элементы располагаются вертикально */
-    height: 100%; /* Убедитесь, что контейнер имеет высоту */
+    flex-direction: column;
+    height: 100%;
     margin-right: 5px;
 }
 
 .days span {
-    height: 10px; /* Высота ячейки календаря */
-    line-height: 10px; /* Выравнивание текста по центру */
-    text-align: right; /* Выравнивание текста справа */
+    height: 10px;
+    line-height: 10px;
+    text-align: right;
 }
 
-.ddwn{
+.ddwn {
     bottom: 0;
     margin-bottom: 0;
     margin-top: 60px;
@@ -132,7 +121,6 @@ header {
     display: grid;
     grid-template-columns: repeat(53, 10px);
     grid-gap: 2px;
-    grid-column: auto;
 }
 
 .cell {
@@ -141,23 +129,14 @@ header {
     border-radius: 2px;
     transition: background-color 0.3s, outline 0.2s;
     position: relative;
-    background-color: #ebedf0;
 }
 
-.trpcl{
+.trpcl {
     background-color: transparent;
     border: none;
     color: inherit;
     transition: background-color 0.3s;
     border-radius: 2px;
-}
-
-.cell:hover {
-    outline: 2px solid #000000;
-}
-
-.cell:hover {
-    outline: 2px solid #ffffff;
 }
 
 .cell:hover::after {
@@ -173,11 +152,9 @@ header {
     font-size: 12px;
     white-space: nowrap;
     z-index: 10;
-    transition: 1.2s ease;
 }
 
 .tabsq {
-    background: white;
     border-radius: 0.5rem;
     padding: 1.5rem;
 }
@@ -192,16 +169,8 @@ header {
 .tab-button {
     padding: 0.75rem;
     text-align: center;
-    background: rgb(249, 250, 251);
-    border: 1px solid rgb(229, 231, 235);
     border-radius: 0.375rem;
     cursor: pointer;
-}
-
-.tab-button.active {
-    background: white;
-    border-color: rgb(79, 70, 229);
-    color: rgb(79, 70, 229);
 }
 
 .login-entry {
@@ -209,17 +178,11 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background: rgb(249, 250, 251);
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
-.login-timestamp {
-    color: rgb(107, 114, 128);
-}
-
 .login-url {
-    color: rgb(59, 130, 246);
     text-decoration: none;
 }
 
@@ -228,7 +191,6 @@ header {
 }
 
 .submission-card {
-    border: 1px solid rgb(229, 231, 235);
     border-radius: 0.5rem;
     margin-bottom: 1rem;
 }
@@ -238,7 +200,6 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: rgb(249, 250, 251);
     cursor: pointer;
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
@@ -246,7 +207,6 @@ header {
 
 .submission-details {
     padding: 1rem;
-    border-top: 1px solid rgb(229, 231, 235);
 }
 
 .results-table {
@@ -259,7 +219,6 @@ header {
 .results-table td {
     padding: 0.75rem;
     text-align: left;
-    border-bottom: 1px solid rgb(229, 231, 235);
 }
 
 .verdict-badge {
@@ -269,33 +228,13 @@ header {
     font-weight: 500;
 }
 
-.verdict-badge.accepted {
-    background-color: rgb(16, 185, 129);
-    color: white;
-}
-
-.verdict-badge.wrong {
-    background-color: rgb(239, 68, 68);
-    color: white;
-}
-
-.verdict-badge.error {
-    background-color: rgb(245, 158, 11);
-    color: white;
-}
-
 .ps {
     margin: 40px;
     font-size: small;
     font-family: 'Courier New';
-    color: rgb(40, 47, 60);
     text-align: center;
 }
 
-body.dark .ps {
-    color: rgb(119, 134, 163);
-}
-
-.tab-content{
+.tab-content {
     margin: 40px;
 }
