@@ -52,63 +52,128 @@
         </div>
     </div>
 </div>
+<div class="account-overlay" id="register-overlay" style="display: none;">
+    <div class="account-container">
+        <div id="sending-state" style="display: none;">
+            <svg class="spinner" width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="#00ff75" stroke-width="2" fill="none" />
+                <path d="M12 2a10 10 0 0 1 10 10" stroke="#00ff75" stroke-width="2" stroke-linecap="round">
+                    <animateTransform
+                        attributeName="transform"
+                        type="rotate"
+                        from="0 12 12"
+                        to="360 12 12"
+                        dur="1s"
+                        repeatCount="indefinite" />
+                </path>
+            </svg>
+            <h2>Отправка письма<span class="ellipsis"></span></h2>
+        </div>
+        <div id="success-state" style="display: none;">
+            <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="#00ff75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 19H5C3.89543 19 3 18.1046 3 17V7C3 5.89543 3.89543 5 5 5H19C20.1046 5 21 5.89543 21 7V12" stroke="#00ff75" stroke-width="2" stroke-linecap="round"/>
+                <path d="M16 17.5L18 19.5L21.5 16" stroke="#00ff75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h2>Письмо отправлено Вам на почту</h2>
+            <button class="button1" id="go-to-mail">
+                <div class="intext">Перейти к почте</div>
+                <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 8px; margin-bottom: 0;">
+                    <path d="M10.1429 7H7C5.89543 7 5 7.89543 5 9V17C5 18.1046 5.89543 19 7 19H15C16.1046 19 17 18.1046 17 17V13.2143M19 5H15M19 5V9M19 5L9 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="button1-shadow"></span>
+            </button>
+        </div>
+        <div id="error-state" style="display: none;">
+            <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="#ff3333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13 19H5C3.89543 19 3 18.1046 3 17V7C3 5.89543 3.89543 5 5 5H19C20.1046 5 21 5.89543 21 7V12" stroke="#ff3333" stroke-width="2" stroke-linecap="round"/>
+                <path d="M17 16L19 18M21 20L19 18M19 18L21 16M19 18L17 20" stroke="#ff3333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h2 id="error-message">Ошибка отправки письма</h2>
+            <button class="button1" id="back-to-register">
+                <div class="intext">Вернуться к регистрации</div>
+                <span class="button1-shadow"></span>
+            </button>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
+        let userEmail = '';
+
         $('#register-form').on('submit', function(e) {
             e.preventDefault();
-            showNotification('info', 'Запрос отправлен, ждем ответа...');
+            userEmail = $(this).find('input[name="email"]').val();
+            showOverlay('sending');
             $.ajax({
                 url: '{{ url_for("auth.register") }}',
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function(response) {
                     if (response.status === 'success') {
-                        showNotification('success', response.message);
-                        setTimeout(() => window.location.href = '{{ url_for("auth.login") }}', 3000);
+                        showOverlay('success');
                     } else {
-                        showNotification('error', response.message);
+                        showOverlay('error', response.message || 'Ошибка при регистрации.');
                     }
+                },
+                error: function(jqXHR) {
+                    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.message : 'Ошибка сервера. Попробуйте снова.';
+                    showOverlay('error', errorMessage);
                 }
-            }).fail(function(jqXHR) {
-                const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.message : 'Ошибка сервера. Попробуйте снова.';
-                showNotification('error', errorMessage);
             });
         });
+
+        $('#go-to-mail').on('click', function() {
+            const domain = userEmail.split('@')[1];
+            const emailProviders = {
+                'gmail.com': 'https://mail.google.com',
+                'outlook.com': 'https://outlook.live.com',
+                'yahoo.com': 'https://mail.yahoo.com',
+                'mail.ru': 'https://mail.ru'
+                // Add more providers as needed
+            };
+            const url = emailProviders[domain] || `https://${domain}`;
+            window.open(url, '_blank');
+        });
+
+        $('#back-to-register').on('click', function() {
+            $('#register-overlay').fadeOut(300);
+        });
+
+        function showOverlay(state, message = '') {
+            $('#sending-state, #success-state, #error-state').hide();
+            $('#register-overlay').fadeIn(300);
+            if (state === 'sending') {
+                $('#sending-state').show();
+            } else if (state === 'success') {
+                $('#success-state').show();
+            } else if (state === 'error') {
+                $('#error-state').show();
+                $('#error-message').text(message);
+            }
+        }
     });
 
-    function showNotification(type, message) {
-        const colors = {
-            success: '#00ff75',
-            error: '#ff3333',
-            info: '#1a73e8'
-        };
-        const notification = $(`
-            <div class="notification" style="background-color: ${colors[type]}; position: fixed; top: 20px; right: 20px; padding: 15px; color: white; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 1000;">
-                <span>${message}</span>
-                <span class="close-btn" style="margin-left: 15px; cursor: pointer;">✖</span>
-                <div class="progress-bar" style="position: absolute; bottom: 0; left: 0; height: 5px; background-color: rgba(255,255,255,0.8); width: 100%; animation: shrink 5s linear forwards;"></div>
-            </div>
-        `);
-        $('body').append(notification);
-        setTimeout(() => notification.remove(), 5000);
-        notification.find('.close-btn').on('click', () => notification.remove());
+    function togglePassword(icon) {
+        const input = icon.previousElementSibling;
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        icon.innerHTML = isPassword
+            ? `<path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
+            : `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M1 1l22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
     }
 </script>
-<style>
-    @keyframes shrink {
-        from { width: 100%; }
-        to { width: 0%; }
-    }
-</style>
 <script>
     document.addEventListener('mousemove', (e) => {
         document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
         document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
     });
 
-    const button = document.querySelector('.button1');
-    if (button) {
+    function setupButton(button) {
         let styleSheet = document.createElement('style');
         document.head.appendChild(styleSheet);
         let spotlightRuleIndex;
@@ -119,8 +184,6 @@
             const rect = button.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
-            // Определяем, с какого края вошел курсор
             const fromLeft = x < rect.width / 2 && x <= 10;
             const fromRight = x > rect.width / 2 && x >= rect.width - 10;
             const fromTop = y < rect.height / 2 && y <= 10;
@@ -134,11 +197,9 @@
 
         button.addEventListener('mousemove', (e) => {
             const rect = button.getBoundingClientRect();
-            const spotlightSize = 30;
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            // Обновляем "лучик"
             if (!styleSheet.sheet.cssRules.length || !spotlightRuleIndex) {
                 spotlightRuleIndex = styleSheet.sheet.insertRule(
                     `.button1::after { left: ${x}px; top: ${y}px; opacity: 0.8; }`,
@@ -152,7 +213,6 @@
                 );
             }
 
-            // Обновляем вторую тень
             let shadowX, shadowY;
             const shadowSize = 50;
             if (entryEdge === 'left') {
@@ -179,7 +239,6 @@
         });
 
         button.addEventListener('mouseleave', () => {
-            // Скрываем "лучик"
             if (styleSheet.sheet.cssRules.length && spotlightRuleIndex !== undefined) {
                 styleSheet.sheet.deleteRule(spotlightRuleIndex);
                 spotlightRuleIndex = styleSheet.sheet.insertRule(
@@ -187,51 +246,33 @@
                     0
                 );
             }
-
-            // Скрываем вторую тень
             if (shadowRuleIndex !== undefined) {
                 styleSheet.sheet.deleteRule(shadowRuleIndex);
                 shadowRuleIndex = undefined;
             }
             entryEdge = null;
         });
+
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const shadowX = (x - centerX) / 3;
+            const shadowY = (y - centerY) / 1;
+            const blur = 20 + Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)) / 10;
+            button.style.boxShadow = `
+                0 5px 15px rgba(0, 255, 117, 0.4),
+                ${shadowX}px ${shadowY}px ${blur}px rgba(55, 0, 255, 0.5)
+            `;
+        });
+
+        button.addEventListener('mouseleave', () => {
+            button.style.boxShadow = '0 5px 15px rgba(0, 255, 117, 0.4)';
+        });
     }
+
+    document.querySelectorAll('.button1').forEach(setupButton);
 </script>
-<script>
-    if (button) {
-         button.addEventListener('mousemove', (e) => {
-             const rect = button.getBoundingClientRect();
-             const x = e.clientX - rect.left;
-             const y = e.clientY - rect.top;
-             const centerX = rect.width / 2;
-             const centerY = rect.height / 2;
- 
-             const shadowX = (x - centerX) / 3; // Сдвиг по X чуть менее интенсивный
-             const shadowY = (y - centerY) / 1; // Сдвиг по Y максимально интенсивный
-             const blur = 20 + Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)) / 10;
- 
-             // Устанавливаем box-shadow с двумя слоями
-             button.style.boxShadow = `
-                 0 5px 15px rgba(0, 255, 117, 0.4), /* Первая статичная тень */
-                 ${shadowX}px ${shadowY}px ${blur}px rgba(55, 0, 255, 0.5) /* Вторая динамическая тень */
-             `;
-         });
- 
-         button.addEventListener('mouseleave', () => {
-             button.style.boxShadow = '0 5px 15px rgba(0, 255, 117, 0.4)';
-         });
-     }
-</script>
-<script>
-    function togglePassword(icon) {
-        const input = icon.previousElementSibling;
-        const isPassword = input.type === 'password';
-        input.type = isPassword ? 'text' : 'password';
-        icon.innerHTML = isPassword
-            ? `<path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-               <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
-            : `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-               <path d="M1 1l22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
-    }
-    </script>
 {% endblock %}

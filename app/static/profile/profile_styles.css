@@ -508,6 +508,8 @@ header {
     border-radius: var(--border-radius);
     margin-bottom: 0.5rem;
     background-color: var(--login-entry-bg);
+    padding: 5px 10px;
+    margin-top: 20px;
 }
 
 .task-actions {
@@ -518,4 +520,16 @@ header {
 .task-entry span {
     font-weight: 500;
     color: var(--value-color);
+}
+
+.task-link {
+    text-decoration: none;
+    color: var(--link-color);
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.task-link:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
 }

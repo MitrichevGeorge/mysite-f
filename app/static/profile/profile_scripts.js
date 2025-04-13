@@ -150,6 +150,15 @@ function loadSubmissions() {
                 submissionDetails.id = `details-${submissionIndex}`;
                 submissionDetails.className = 'submission-details';
                 submissionDetails.style.display = 'none';
+                
+                // Добавляем ссылку "Перейти к задаче"
+                const taskLink = document.createElement('a');
+                taskLink.href = `/task/${submission.task_name || ''}`;
+                taskLink.textContent = 'Перейти к задаче';
+                taskLink.className = 'task-link';
+                taskLink.style.display = 'block';
+                taskLink.style.marginBottom = '10px';
+                
                 const codeHeader = document.createElement('h3');
                 codeHeader.textContent = 'Код';
                 const codePre = document.createElement('pre');
@@ -202,6 +211,7 @@ function loadSubmissions() {
                 });
                 resultsTable.appendChild(thead);
                 resultsTable.appendChild(tbody);
+                submissionDetails.appendChild(taskLink); // Добавляем ссылку перед кодом
                 submissionDetails.appendChild(codeHeader);
                 submissionDetails.appendChild(codePre);
                 submissionDetails.appendChild(resultsHeader);

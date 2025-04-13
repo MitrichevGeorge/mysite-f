@@ -536,3 +536,98 @@ a:hover {
     opacity: 0;
     transform: translateY(10px);
 }
+
+.ellipsis::after {
+    content: '';
+    animation: ellipsis 1.5s infinite;
+    display: inline-block;
+    width: 1em;
+}
+
+@keyframes ellipsis {
+    0% { content: ''; }
+    33% { content: '.'; }
+    66% { content: '..'; }
+    100% { content: '...'; }
+}
+
+/* Center SVG icons */
+.account-container svg {
+    display: block;
+    margin: 0 auto 1.5rem;
+}
+
+/* Style buttons in overlay */
+.account-container .button1 {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Adjust overlay content spacing */
+.account-container h2 {
+    margin-bottom: 1rem;
+}
+
+.account-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+    overflow: auto; /* Для прокрутки на маленьких экранах */
+}
+
+.account-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 2.5rem;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px; /* Минимальная высота для стабильности */
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+    .account-container {
+        padding: 1.5rem;
+        max-width: 95%;
+    }
+
+    .account-container h2 {
+        font-size: 1.8rem;
+    }
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.intext{
+    margin-left: auto;
+}
+
+.account-container{
+    margin: auto;
+    margin-top: calc(50% - 200px);
+}
