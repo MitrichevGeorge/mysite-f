@@ -225,3 +225,95 @@ header a {
 .tabs.show-right-shadow .shdw-right {
     opacity: 1; /* Показываем тень справа */
 }
+
+.flash-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 300px;
+    z-index: 2000;
+}
+
+.flash-message {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease;
+    max-height: 100px; /* Ограничение для 4 строк */
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.flash-message.expanded {
+    max-height: 500px; /* Максимальная высота при разворачивании */
+}
+
+.flash-message .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.flash-message .content {
+    padding-right: 20px;
+    word-wrap: break-word;
+}
+
+.flash-message .expand-arrow {
+    display: none;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 0;
+    font-size: 14px;
+}
+
+.flash-message.show-arrow .expand-arrow {
+    display: block;
+}
+
+.flash-message .timer-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    animation: timer 5s linear forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes timer {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}

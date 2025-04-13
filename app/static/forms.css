@@ -1,0 +1,201 @@
+/* static/css/forms.css */
+
+/* Общие переменные */
+:root {
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Светлая тема */
+:where(.light) {
+    --bg-body: #f5f7fa;
+    --bg-card: #ffffff;
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --input-bg: #ffffff;
+    --input-border: #e2e8f0;
+    --input-focus: #3182ce;
+    --btn-bg: #3182ce;
+    --btn-text: #ffffff;
+    --btn-hover: #2b6cb0;
+    --link-color: #3182ce;
+    --link-hover: #2b6cb0;
+    --shadow: var(--shadow-sm);
+}
+
+/* Темная тема */
+:where(.dark) {
+    --bg-body: #1a202c;
+    --bg-card: #2d3748;
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --input-bg: #4a5568;
+    --input-border: #718096;
+    --input-focus: #63b3ed;
+    --btn-bg: #63b3ed;
+    --btn-text: #1a202c;
+    --btn-hover: #4299e1;
+    --link-color: #63b3ed;
+    --link-hover: #4299e1;
+    --shadow: var(--shadow-dark);
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: var(--transition);
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.form-card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 32px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.form-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    box-sizing: border-box;
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn:hover {
+    background-color: var(--btn-hover);
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--link-color);
+    text-decoration: none;
+    margin-top: 16px;
+    transition: var(--transition);
+}
+
+.back-link:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .form-card {
+        padding: 24px;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    .form-group input {
+        padding: 10px 14px;
+    }
+
+    .btn {
+        padding: 12px;
+    }
+}
+
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 52px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    transition: var(--transition);
+}
+
+:where(.light) .password-toggle {
+    fill: #bad2fa;
+}
+
+:where(.light) .password-toggle:hover {
+    fill: #6796c1;
+}
+
+:where(.dark) .password-toggle {
+    fill: #a0aec0;
+}
+
+:where(.dark) .password-toggle:hover {
+    fill: #63b3ed;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group input.with-toggle {
+    padding-right: 48px;
+}

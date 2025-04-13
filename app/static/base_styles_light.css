@@ -82,3 +82,48 @@ header .user-name:hover{
     width: 20px; /* Ширина тени */
     background: linear-gradient(to left, rgba(82, 61, 61, 0.8), transparent);
 }
+
+.flash-message {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.flash-message.success {
+    background-color: #e8f5e9;
+}
+
+.flash-message.error {
+    background-color: #ffebee;
+}
+
+.flash-message.info {
+    background-color: #e3f2fd;
+}
+
+.flash-message .close {
+    color: #402831;
+}
+
+.flash-message .close:hover {
+    color: #ee87af;
+}
+
+.flash-message .expand-arrow {
+    color: #111b2e;
+}
+
+.flash-message .timer-bar {
+    background-color: #a87c8d;
+}
+
+.flash-message.success .timer-bar {
+    background-color: #4caf50;
+}
+
+.flash-message.error .timer-bar {
+    background-color: #f44336;
+}
+
+.flash-message.info .timer-bar {
+    background-color: #2196f3;
+}

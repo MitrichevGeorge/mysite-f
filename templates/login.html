@@ -1,4 +1,3 @@
-<!-- login.html -->
 {% extends "base.html" %}
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='reg-log.css') }}">
@@ -7,23 +6,44 @@
         <div class="card2">
             <form class="form" method="POST" id="loginForm">
                 <p id="heading">Вход</p>
-                <div class="field">
-                    <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M4 14H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M15 14H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14.8191 14.0261C14.6079 14.6063 14.2228 15.1072 13.7164 15.4605C13.21 15.8137 12.607 16.0021 11.9895 16C11.3721 15.9978 10.7703 15.8052 10.2664 15.4484C9.76251 15.0916 9.38095 14.588 9.17383 14.0064" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <input type="text" class="input-field" placeholder="Email или имя пользователя" name="identifier" required autocomplete="off" />
+                <div class="login-options">
+                    <button type="button" class="login-option-btn active" id="byPasswordBtn" onclick="showPasswordLogin()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 9V6C16 4.34315 14.6569 3 13 3H11C9.34315 3 8 4.34315 8 6V9M16 9H8M16 9C17.6569 9 19 10.3431 19 12V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V12C5 10.3431 6.34315 9 8 9M12 14V17M13 14C13 14.5523 12.5523 15 12 15C11.4477 15 11 14.5523 11 14C11 13.4477 11.4477 13 12 13C12.5523 13 13 13.4477 13 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        По паролю
+                    </button>
+                    <button type="button" class="login-option-btn" id="byCodeBtn" onclick="showCodeLogin()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        По одноразовому коду
+                    </button>
                 </div>
-                <div class="field">
-                    <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="#00000000" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 9V6C16 4.34315 14.6569 3 13 3H11C9.34315 3 8 4.34315 8 6V9M16 9H8M16 9C17.6569 9 19 10.3431 19 12V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V12C5 10.3431 6.34315 9 8 9M12 14V17M13 14C13 14.5523 12.5523 15 12 15C11.4477 15 11 14.5523 11 14C11 13.4477 11.4477 13 12 13C12.5523 13 13 13.4477 13 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <input type="password" class="input-field" placeholder="Пароль" name="password" required />
+                <div id="loginFields">
+                    <div class="field">
+                        <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M4 14H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 14H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14.8191 14.0261C14.6079 14.6063 14.2228 15.1072 13.7164 15.4605C13.21 15.8137 12.607 16.0021 11.9895 16C11.3721 15.9978 10.7703 15.8052 10.2664 15.4484C9.76251 15.0916 9.38095 14.588 9.17383 14.0064" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" class="input-field" placeholder="Email или имя пользователя" name="identifier" required autocomplete="off" />
+                    </div>
+                    <div class="field" id="passwordField">
+                        <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 9V6C16 4.34315 14.6569 3 13 3H11C9.34315 3 8 4.34315 8 6V9M16 9H8M16 9C17.6569 9 19 10.3431 19 12V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V12C5 10.3431 6.34315 9 8 9M12 14V17M13 14C13 14.5523 12.5523 15 12 15C11.4477 15 11 14.5523 11 14C11 13.4477 11.4477 13 12 13C12.5523 13 13 13.4477 13 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="password" class="input-field with-toggle" placeholder="Пароль" name="password" required />
+                        <svg class="password-toggle" onclick="togglePassword(this)" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 1l22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
                 </div>
                 <div class="btn">
-                    <button class="button1" type="submit"><div class="intext">Войти</div><span class="button1-shadow"></span></button>
+                    <button class="button1" type="submit"><div class="intext" id="submitText">Войти</div><span class="button1-shadow"></span></button>
                 </div>
                 <p class="btext">Нет аккаунта? <a href="{{ url_for('auth.register') }}">Зарегистрироваться</a></p>
                 <a class="button3" href="{{ url_for('auth.forgot_password') }}">Забыли пароль?</a>
@@ -32,7 +52,6 @@
     </div>
 </div>
 
-<!-- Оверлей для выбора аккаунта -->
 <div id="accountOverlay" class="account-overlay">
     <div class="account-container">
         <h2>Выберите аккаунт</h2>
@@ -42,6 +61,30 @@
 </div>
 
 <script>
+    let loginMode = 'password';
+
+    function showPasswordLogin() {
+        console.log('Переключение на вход по паролю');
+        loginMode = 'password';
+        document.getElementById('passwordField').style.display = 'block';
+        document.getElementById('byPasswordBtn').classList.add('active');
+        document.getElementById('byCodeBtn').classList.remove('active');
+        document.getElementById('submitText').textContent = 'Войти';
+        document.querySelector('input[name="identifier"]').required = true;
+        document.querySelector('input[name="password"]').required = true;
+    }
+
+    function showCodeLogin() {
+        console.log('Переключение на вход по коду');
+        loginMode = 'code';
+        document.getElementById('passwordField').style.display = 'none';
+        document.getElementById('byPasswordBtn').classList.remove('active');
+        document.getElementById('byCodeBtn').classList.add('active');
+        document.getElementById('submitText').textContent = 'Получить код';
+        document.querySelector('input[name="identifier"]').required = true;
+        document.querySelector('input[name="password"]').required = false;
+    }
+
     document.addEventListener('mousemove', (e) => {
         document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
         document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
@@ -73,44 +116,29 @@
 
         button.addEventListener('mousemove', (e) => {
             const rect = button.getBoundingClientRect();
-            const spotlightSize = 30;
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
             if (!styleSheet.sheet.cssRules.length || !spotlightRuleIndex) {
                 spotlightRuleIndex = styleSheet.sheet.insertRule(
-                    `.button1::after { left: ${x}px; top: ${y}px; opacity: 0.8; }`,
+                    `.button1::after { left: ${x}px; top: ${y}px; opacity: 0.9; }`,
                     0
                 );
             } else {
                 styleSheet.sheet.deleteRule(spotlightRuleIndex);
                 spotlightRuleIndex = styleSheet.sheet.insertRule(
-                    `.button1::after { left: ${x}px; top: ${y}px; opacity: 0.8; }`,
+                    `.button1::after { left: ${x}px; top: ${y}px; opacity: 0.9; }`,
                     0
                 );
             }
 
-            let shadowX, shadowY;
-            const shadowSize = 50;
-            if (entryEdge === 'left') {
-                shadowX = -shadowSize;
-                shadowY = y;
-            } else if (entryEdge === 'right') {
-                shadowX = rect.width;
-                shadowY = y;
-            } else if (entryEdge === 'top') {
-                shadowX = x;
-                shadowY = -shadowSize;
-            } else if (entryEdge === 'bottom') {
-                shadowX = x;
-                shadowY = rect.height;
-            }
-
+            let shadowX = x;
+            let shadowY = y;
             if (shadowRuleIndex !== undefined) {
                 styleSheet.sheet.deleteRule(shadowRuleIndex);
             }
             shadowRuleIndex = styleSheet.sheet.insertRule(
-                `.button1-shadow { left: ${shadowX}px; top: ${shadowY}px; opacity: 0.5; }`,
+                `.button1-shadow { left: ${shadowX}px; top: ${shadowY}px; opacity: 0.6; }`,
                 spotlightRuleIndex + 1
             );
         });
@@ -132,33 +160,80 @@
         });
     }
 
-    // Обработка формы входа
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
         e.preventDefault();
+        console.log('Форма отправлена, loginMode:', loginMode);
         const formData = new FormData(e.target);
-        const response = await fetch('{{ url_for("auth.login") }}', {
-            method: 'POST',
-            body: formData
-        });
-        const result = await response.json();
 
-        if (result.status === 'success') {
-            window.location.href = result.redirect;
-        } else if (result.status === 'select') {
-            const accountList = document.getElementById('accountList');
-            accountList.innerHTML = '';
-            result.users.forEach(user => {
-                const accountCard = document.createElement('div');
-                accountCard.className = 'account-card';
-                accountCard.dataset.userId = user.id;
-                accountCard.innerHTML = `<span>${user.username}</span>`;
-                accountCard.addEventListener('click', () => selectAccount(user.id));
-                accountList.appendChild(accountCard);
+        try {
+            console.log('Отправка запроса на /login');
+            const response = await fetch('{{ url_for("auth.login") }}', {
+                method: 'POST',
+                body: formData
             });
-            document.getElementById('accountOverlay').style.display = 'flex';
-            document.querySelector('.form-container').style.filter = 'blur(5px)';
-        } else {
-            alert(result.message);
+            const result = await response.json();
+            console.log('Ответ от /login:', result);
+
+            if (result.status === 'success') {
+                if (loginMode === 'code') {
+                    window.location.href = '{{ url_for("auth.request_one_time_code") }}?email=' + 
+                        encodeURIComponent(result.email) + '&user_id=' + result.user_id;
+                } else {
+                    window.location.href = result.redirect;
+                }
+            } else if (result.status === 'select') {
+                const accountList = document.getElementById('accountList');
+                accountList.innerHTML = '';
+                if (!result.users || !Array.isArray(result.users)) {
+                    console.error('Некорректные данные пользователей:', result.users);
+                    alert('Ошибка: неверные данные аккаунтов');
+                    return;
+                }
+                result.users.forEach(user => {
+                    if (!user || !user.username || !user.id) {
+                        console.warn('Некорректный пользователь:', user);
+                        return;
+                    }
+                    const accountCard = document.createElement('div');
+                    accountCard.className = 'account-card';
+                    accountCard.dataset.userId = user.id;
+                    accountCard.innerHTML = `<span>${user.username}</span>`;
+                    accountCard.addEventListener('click', () => {
+                        if (loginMode === 'code') {
+                            // Отправляем запрос для генерации кода для выбранного пользователя
+                            const selectFormData = new FormData();
+                            selectFormData.append('identifier', user.username);
+                            fetch('{{ url_for("auth.login") }}', {
+                                method: 'POST',
+                                body: selectFormData
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.status === 'success') {
+                                    window.location.href = '{{ url_for("auth.request_one_time_code") }}?email=' + 
+                                        encodeURIComponent(data.email) + '&user_id=' + data.user_id;
+                                } else {
+                                    alert(data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Ошибка при выборе аккаунта:', error);
+                                alert('Произошла ошибка.');
+                            });
+                        } else {
+                            selectAccount(user.id);
+                        }
+                    });
+                    accountList.appendChild(accountCard);
+                });
+                document.getElementById('accountOverlay').style.display = 'flex';
+                document.querySelector('.form-container').style.filter = 'blur(5px)';
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Ошибка при отправке формы:', error);
+            alert('Произошла ошибка. Проверьте консоль для деталей.');
         }
     });
 
@@ -177,6 +252,17 @@
         } else {
             alert(result.message);
         }
+    }
+
+    function togglePassword(icon) {
+        const input = icon.previousElementSibling;
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        icon.innerHTML = isPassword
+            ? `<path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
+            : `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M1 1l22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
     }
 </script>
 {% endblock %}

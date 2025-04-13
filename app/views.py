@@ -183,19 +183,36 @@ def change_password():
         current_password = request.form.get('current_password')
         new_password = request.form.get('new_password')
         confirm_password = request.form.get('confirm_password')
+
         users = load_users()
         user = users.get(current_user.id)
+
+        if not user:
+            flash('Пользователь не найден.', 'error')
+            return redirect(url_for('views.change_password'))
+
         if not user.check_password(current_password):
             flash('Текущий пароль неверный.', 'error')
             return redirect(url_for('views.change_password'))
+
         if new_password != confirm_password:
             flash('Новые пароли не совпадают.', 'error')
             return redirect(url_for('views.change_password'))
+
         if len(new_password) < 6:
             flash('Пароль должен содержать минимум 6 символов.', 'error')
             return redirect(url_for('views.change_password'))
-        user.set_password(new_password)
-        save_users(users)
-        flash('Пароль успешно изменен.', 'success')
-        return redirect(url_for('views.profile'))
+        
+
+        try:
+            user.set_password(new_password)
+            save_users(users)
+            flash('Пароль успешно изменен.', 'success')
+            print(f"Password changed successfully for user {current_user.username}")
+            return redirect(url_for('views.profile'))
+        except Exception as e:
+            print(f"Error saving user data: {e}")
+            flash('Ошибка при сохранении нового пароля.', 'error')
+            return redirect(url_for('views.change_password'))
+
     return render_template('change_password.html')

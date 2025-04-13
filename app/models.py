@@ -23,7 +23,7 @@ def getTabName(url):
     return "Contest"
 
 class User(UserMixin):
-    def __init__(self, id, email, username, password_hash, submissions=None, login_history=None, daily_requests=None, tabs=None, theme='light', reset_code=None, reset_code_expiration=None, is_verified=False, verification_code=None):
+    def __init__(self, id, email, username, password_hash, submissions=None, login_history=None, daily_requests=None, tabs=None, theme='light', reset_code=None, reset_code_expiration=None, is_verified=False, verification_code=None, one_time_code=None, one_time_code_expiration=None):
         self.id = id
         self.email = email
         self.username = username
@@ -35,8 +35,10 @@ class User(UserMixin):
         self.theme = theme
         self.recovery_code = reset_code
         self.recovery_code_expiration = reset_code_expiration
-        self.is_verified = is_verified  # Флаг подтверждения email
-        self.verification_code = verification_code  # Код для подтверждения email
+        self.is_verified = is_verified
+        self.verification_code = verification_code
+        self.one_time_code = one_time_code
+        self.one_time_code_expiration = one_time_code_expiration
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -90,6 +92,7 @@ def load_users():
             users = {}
             for user_data in users_data:
                 expiration = datetime.fromisoformat(user_data['recovery_code_expiration']) if user_data.get('recovery_code_expiration') else None
+                one_time_expiration = datetime.fromisoformat(user_data['one_time_code_expiration']) if user_data.get('one_time_code_expiration') else None
                 users[user_data['id']] = User(
                     id=user_data['id'],
                     email=user_data['email'],
@@ -103,7 +106,9 @@ def load_users():
                     reset_code=user_data.get('recovery_code', None),
                     reset_code_expiration=expiration,
                     is_verified=user_data.get('is_verified', False),
-                    verification_code=user_data.get('verification_code', None)
+                    verification_code=user_data.get('verification_code', None),
+                    one_time_code=user_data.get('one_time_code', None),
+                    one_time_code_expiration=one_time_expiration
                 )
             return users
     return {}
@@ -114,6 +119,7 @@ def save_users(users):
         daily_requests_bin = struct.pack(f'{len(user.daily_requests)}i', *user.daily_requests)
         daily_requests_encoded = base64.b64encode(daily_requests_bin).decode('utf-8')
         expiration_str = user.recovery_code_expiration.isoformat() if user.recovery_code_expiration else None
+        one_time_expiration_str = user.one_time_code_expiration.isoformat() if user.one_time_code_expiration else None
         users_data.append({
             "id": user.id,
             "email": user.email,
@@ -127,7 +133,9 @@ def save_users(users):
             "recovery_code": user.recovery_code,
             "recovery_code_expiration": expiration_str,
             "is_verified": user.is_verified,
-            "verification_code": user.verification_code
+            "verification_code": user.verification_code,
+            "one_time_code": user.one_time_code,
+            "one_time_code_expiration": one_time_expiration_str
         })
     with open(USERS_FILE, 'w') as f:
         json.dump(users_data, f, ensure_ascii=True, indent=4)

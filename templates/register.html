@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card2">
             <form class="form" id="register-form" method="POST">
-                <p id="heading">Регистрация</p>
+                <p id="heading" style="font-size: 2rem;">Регистрация</p>
                 <div class="field">
                     <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 20V19C5 16.2386 7.23858 14 10 14H14C16.7614 14 19 16.2386 19 19V20M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -25,7 +25,11 @@
                     <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16 9V6C16 4.34315 14.6569 3 13 3H11C9.34315 3 8 4.34315 8 6V9M16 9H8M16 9C17.6569 9 19 10.3431 19 12V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V12C5 10.3431 6.34315 9 8 9M12 14V17M13 14C13 14.5523 12.5523 15 12 15C11.4477 15 11 14.5523 11 14C11 13.4477 11.4477 13 12 13C12.5523 13 13 13.4477 13 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <input type="password" class="input-field" placeholder="Пароль" name="password" required />
+                    <input type="password" class="input-field with-toggle" placeholder="Пароль" name="password" required />
+                    <svg class="password-toggle" onclick="togglePassword(this)" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1 1l22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
                 <div class="field">
                     <svg class="input-icon" width="30" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +38,11 @@
                         <circle cx="12" cy="17.5" r="1.5" fill="currentColor"/>
                         <circle cx="16.5" cy="17.5" r="1.5" fill="currentColor"/>
                     </svg>
-                    <input type="password" class="input-field" placeholder="Подтвердите пароль" name="confirm_password" required />
+                    <input type="password" class="input-field with-toggle" placeholder="Подтвердите пароль" name="confirm_password" required />
+                    <svg class="password-toggle" onclick="togglePassword(this)" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1 1l22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
                 <div class="btn">
                     <button class="button1" type="submit"><div class="intext">Зарегистрироваться</div><span class="button1-shadow"></span></button>
@@ -193,15 +201,13 @@
     if (button) {
          button.addEventListener('mousemove', (e) => {
              const rect = button.getBoundingClientRect();
-             const x = e.clientX - rect.left; // Позиция X относительно кнопки
-             const y = e.clientY - rect.top;  // Позиция Y относительно кнопки
-             const centerX = rect.width / 2;  // Центр кнопки по X
-             const centerY = rect.height / 2; // Центр кнопки по Y
+             const x = e.clientX - rect.left;
+             const y = e.clientY - rect.top;
+             const centerX = rect.width / 2;
+             const centerY = rect.height / 2;
  
-             // Усиливаем сдвиг по Y, уменьшая делитель
              const shadowX = (x - centerX) / 3; // Сдвиг по X чуть менее интенсивный
              const shadowY = (y - centerY) / 1; // Сдвиг по Y максимально интенсивный
-             // Размытие зависит от расстояния от центра
              const blur = 20 + Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)) / 10;
  
              // Устанавливаем box-shadow с двумя слоями
@@ -212,9 +218,20 @@
          });
  
          button.addEventListener('mouseleave', () => {
-             // Сбрасываем box-shadow до начального состояния
              button.style.boxShadow = '0 5px 15px rgba(0, 255, 117, 0.4)';
          });
      }
- </script>
+</script>
+<script>
+    function togglePassword(icon) {
+        const input = icon.previousElementSibling;
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        icon.innerHTML = isPassword
+            ? `<path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
+            : `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+               <path d="M1 1l22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    }
+    </script>
 {% endblock %}

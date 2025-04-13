@@ -253,6 +253,7 @@ header {
     border-radius: var(--border-radius);
     padding: 1.5rem;
     background-color: var(--tabs-bg);
+    box-shadow: var(--shadow-card);
 }
 
 .tab-list {

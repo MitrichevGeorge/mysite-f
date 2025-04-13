@@ -14,6 +14,7 @@ from .models import User, load_users, save_users
 from werkzeug.security import generate_password_hash
 import uuid
 import threading
+from datetime import datetime, timedelta
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -60,6 +61,24 @@ def send_verification_email(to_email, username, verification_code):
     </html>
     """
     send_email_async(to_email, "Подтверждение регистрации", html_body)
+
+def send_one_time_code(to_email, username, code):
+    print(f"DEBUG: One-time code for {username} ({to_email}): {code}")
+    print(f"Sending one-time code to {to_email}")
+    """Send one-time code to email."""
+    html_body = f"""
+    <!DOCTYPE html>
+    <html>
+    <body>
+        <h1>Вход по одноразовому коду</h1>
+        <p>Здравствуйте, {username}!</p>
+        <p>Ваш одноразовый код для входа: <strong>{code}</strong></p>
+        <p>Код действителен в течение 10 минут.</p>
+        <p>Если вы не запрашивали код, проигнорируйте это письмо.</p>
+    </body>
+    </html>
+    """
+    send_email_async(to_email, "Вход по одноразовому коду", html_body)
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -120,42 +139,135 @@ def verify_email(code):
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('views.index'))
+
     if request.method == 'POST':
         identifier = request.form.get('identifier')
         password = request.form.get('password')
-        if not identifier or not password:
-            return jsonify({'status': 'error', 'message': 'Отсутствуют данные формы'}), 400
+        login_mode = 'password' if password else 'code'
+
+        print(f"Login attempt with identifier: {identifier}, mode: {login_mode}")
+
         users = load_users()
+        if login_mode == 'password':
+            matching_users = [
+                user for user in users.values()
+                if (user.email == identifier or user.username == identifier) and user.is_verified
+            ]
+            if not matching_users:
+                print("No verified users found for password login")
+                return jsonify({'status': 'error', 'message': 'Пользователь не найден или email не подтвержден'}), 400
 
-        # Проверяем, является ли identifier username
-        user_by_username = next((user for user in users.values() if user.username == identifier), None)
-        if user_by_username:
-            if not user_by_username.is_verified:
-                return jsonify({'status': 'error', 'message': 'Пожалуйста, подтвердите ваш email перед входом.'}), 400
-            if user_by_username.check_password(password):
-                login_user(user_by_username)
-                return jsonify({'status': 'success', 'message': 'Вход успешен!', 'redirect': url_for('views.index')})
+            if len(matching_users) == 1:
+                user = matching_users[0]
+                if check_password_hash(user.password_hash, password):
+                    login_user(user)
+                    print(f"User {user.username} logged in successfully")
+                    return jsonify({'status': 'success', 'message': 'Вход успешен!', 'redirect': url_for('views.index')})
+                else:
+                    print("Invalid password")
+                    return jsonify({'status': 'error', 'message': 'Неверный пароль'}), 400
             else:
-                return jsonify({'status': 'error', 'message': 'Неверный пароль'}), 400
+                print("Multiple accounts found, prompting selection")
+                return jsonify({
+                    'status': 'select',
+                    'message': 'Найдено несколько аккаунтов. Выберите один:',
+                    'users': [{'id': user.id, 'username': user.username} for user in matching_users]
+                })
 
-        # Если не username, проверяем как email
-        matching_users = [user for user in users.values() if user.email == identifier]
-        if not matching_users:
-            return jsonify({'status': 'error', 'message': 'Неверный email или имя пользователя'}), 400
+        elif login_mode == 'code':
+            user_by_username = next((user for user in users.values() if user.username == identifier), None)
+            matching_users = [user for user in users.values() if user.email == identifier]
 
-        # Фильтруем пользователей с правильным паролем и подтвержденным email
-        valid_users = [user for user in matching_users if user.check_password(password) and user.is_verified]
-        if not valid_users:
-            return jsonify({'status': 'error', 'message': 'Неверный пароль или email не подтвержден'}), 400
+            if user_by_username:
+                print(f"Found user by username: {user_by_username.username}")
+                if not user_by_username.is_verified:
+                    print("User email not verified")
+                    return jsonify({'status': 'error', 'message': 'Пожалуйста, подтвердите ваш email перед входом.'}), 400
+                # Генерируем одноразовый код
+                one_time_code = ''.join(random.choices(string.digits, k=6))
+                user_by_username.one_time_code = one_time_code
+                user_by_username.one_time_code_expiration = datetime.now() + timedelta(minutes=10)
+                save_users(users)
+                print(f"Generated one-time code {one_time_code} for {user_by_username.email}")
+                # Отправляем код на email
+                send_one_time_code(user_by_username.email, user_by_username.username, one_time_code)
+                print("Called send_one_time_code")
+                return jsonify({
+                    'status': 'success',
+                    'message': 'Код отправлен на ваш email.',
+                    'email': user_by_username.email,
+                    'user_id': user_by_username.id
+                })
 
-        # Всегда возвращаем список аккаунтов для выбора
-        return jsonify({
-            'status': 'select',
-            'message': 'Найдено несколько аккаунтов. Выберите один:',
-            'users': [{'id': user.id, 'username': user.username} for user in valid_users]
-        })
+            if matching_users:
+                print(f"Found {len(matching_users)} users by email")
+                valid_users = [user for user in matching_users if user.is_verified]
+                if not valid_users:
+                    print("No verified users found")
+                    return jsonify({'status': 'error', 'message': 'Все аккаунты с этим email не подтверждены.'}), 400
+                if len(valid_users) == 1:
+                    user = valid_users[0]
+                    # Генерируем одноразовый код
+                    one_time_code = ''.join(random.choices(string.digits, k=6))
+                    user.one_time_code = one_time_code
+                    user.one_time_code_expiration = datetime.now() + timedelta(minutes=10)
+                    save_users(users)
+                    print(f"Generated one-time code {one_time_code} for {user.email}")
+                    # Отправляем код на email
+                    send_one_time_code(user.email, user.username, one_time_code)
+                    print("Called send_one_time_code")
+                    return jsonify({
+                        'status': 'success',
+                        'message': 'Код отправлен на ваш email.',
+                        'email': user.email,
+                        'user_id': user.id
+                    })
+                else:
+                    print("Multiple accounts found, prompting selection")
+                    return jsonify({
+                        'status': 'select',
+                        'message': 'Найдено несколько аккаунтов. Выберите один:',
+                        'users': [{'id': user.id, 'username': user.username} for user in valid_users],
+                        'email': identifier
+                    })
+
+            print("User not found")
+            return jsonify({'status': 'error', 'message': 'Пользователь не найден'}), 400
 
     return render_template('login.html')
+
+@auth_bp.route('/request-one-time-code', methods=['GET'])
+def request_one_time_code():
+    print("Rendering request_one_time_code.html")
+    return render_template('request_one_time_code.html')
+
+@auth_bp.route('/verify-one-time-code', methods=['POST'])
+def verify_one_time_code():
+    email = request.form.get('email')
+    code = request.form.get('code')
+    user_id = request.form.get('user_id')
+
+    print(f"Verifying code for email: {email}, user_id: {user_id}, code: {code}")
+
+    users = load_users()
+    user = users.get(int(user_id)) if user_id else None
+
+    if not user or user.email != email:
+        print("User not found or email mismatch")
+        return jsonify({'status': 'error', 'message': 'Пользователь не найден'}), 400
+
+    if user.one_time_code == code and user.one_time_code_expiration and datetime.now() < user.one_time_code_expiration:
+        user.one_time_code = None
+        user.one_time_code_expiration = None
+        save_users(users)
+        login_user(user)
+        print(f"User {user.username} logged in successfully")
+        return jsonify({'status': 'success', 'message': 'Вход успешен!', 'redirect': url_for('views.index')})
+    else:
+        print("Invalid code or expired")
+        return jsonify({'status': 'error', 'message': 'Неверный код или срок действия истек'}), 400
 
 @auth_bp.route('/select_account', methods=['POST'])
 def select_account():

@@ -36,6 +36,7 @@
     </style>
 </head>
 <body>
+    <div class="flash-container" id="flash-container"></div>
     <header id="header">
         <a href="/" class="logo">Главная</a>
         <div class="tabs" id="tabs">
@@ -65,6 +66,7 @@
             </div>
         {% endif %}
     </header>
+    {% if current_user.is_authenticated %}
     <script>
         document.querySelectorAll('.close').forEach(button => {
             button.addEventListener('click', function(event) {
@@ -137,10 +139,11 @@
             });
         });
     </script>
-
+    {% endif %}
     <main>
         {% block content %}{% endblock %}
     </main>
+    {% if current_user.is_authenticated %}
     <script>
         const userName = document.getElementById('user-name');
         const userDropdown = document.getElementById('user-dropdown');
@@ -163,6 +166,76 @@
         userDropdown.addEventListener('mouseleave', function() {
             userDropdown.style.display = 'none';
         });
+    </script>
+    {% endif %}
+    <script>
+        function showFlashMessage(message, category = 'info') {
+            const flashContainer = document.getElementById('flash-container');
+            const flashDiv = document.createElement('div');
+            flashDiv.className = `flash-message ${category}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'content';
+            contentDiv.textContent = message;
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'close';
+            closeBtn.innerHTML = '✖';
+            
+            const timerBar = document.createElement('div');
+            timerBar.className = 'timer-bar';
+            
+            const expandArrow = document.createElement('div');
+            expandArrow.className = 'expand-arrow';
+            expandArrow.innerHTML = '↓';
+            
+            flashDiv.appendChild(contentDiv);
+            flashDiv.appendChild(closeBtn);
+            flashDiv.appendChild(timerBar);
+            flashDiv.appendChild(expandArrow);
+            
+            flashContainer.prepend(flashDiv);
+            
+            // Проверка на многострочность
+            const lineHeight = parseInt(getComputedStyle(contentDiv).lineHeight);
+            const contentHeight = contentDiv.offsetHeight;
+            if (contentHeight > lineHeight * 4) {
+                flashDiv.classList.add('show-arrow');
+            }
+            
+            // Обработчик клика по стрелке
+            expandArrow.addEventListener('click', () => {
+                flashDiv.classList.toggle('expanded');
+                expandArrow.innerHTML = flashDiv.classList.contains('expanded') ? '↑' : '↓';
+            });
+            
+            // Обработчик закрытия
+            closeBtn.addEventListener('click', () => {
+                flashDiv.style.animation = 'slideUp 0.3s ease';
+                setTimeout(() => {
+                    flashDiv.remove();
+                }, 300);
+            });
+            
+            // Таймер исчезновения (5 секунд)
+            setTimeout(() => {
+                if (flashDiv.parentNode) {
+                    flashDiv.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => {
+                        flashDiv.remove();
+                    }, 300);
+                }
+            }, 5000);
+        }
+    </script>
+    <script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    showFlashMessage('{{ message | safe }}', '{{ category }}');
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
     </script>
 </body>
 </html>
