@@ -1,0 +1,33 @@
+<!-- templates/create_task.html -->
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="form-card">
+            <h1 class="form-title">Создать новую задачу</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Название задачи:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Файл с условием (MD):</label>
+                    <input type="file" id="description" name="description" accept=".md" required>
+                </div>
+                <div class="form-group">
+                    <label for="tests">Архив с тестами (ZIP):</label>
+                    <input type="file" id="tests" name="tests" accept=".zip" required>
+                </div>
+                <div class="form-group">
+                    <label for="time_limit">Ограничение по времени (мс):</label>
+                    <input type="number" id="time_limit" name="time_limit" value="2000" required>
+                </div>
+                <div class="form-group">
+                    <label for="memory_limit">Ограничение по памяти (МБ):</label>
+                    <input type="number" id="memory_limit" name="memory_limit" value="1024" required>
+                </div>
+                <button type="submit" class="btn">Создать задачу</button>
+            </form>
+            <a href="{{ url_for('views.profile') }}" class="back-link">Вернуться в профиль</a>
+        </div>
+    </div>
+{% endblock %}

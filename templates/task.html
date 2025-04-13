@@ -1,3 +1,4 @@
+<!-- templates/task.html -->
 {% extends "base.html" %}
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.css">
@@ -29,24 +30,62 @@
         padding: 2px 4px;
         border-radius: 3px;
     }
-    .taskn{
+    .taskn {
         margin-left: 20px;
     }
-    textarea[id="code-input"]{
+    textarea[id="code-input"] {
         padding: 5px;
         border-radius: 10px;
+    }
+    .submission-card {
+        border: 1px solid var(--submission-border);
+        border-radius: var(--border-radius);
+        margin-bottom: 1rem;
+    }
+    .submission-header {
+        padding: 1rem;
+        background-color: var(--submission-header-bg);
+        cursor: pointer;
+    }
+    .submission-details {
+        padding: 1rem;
+        border-top: 1px solid var(--submission-details-border);
+        display: none;
+    }
+    .submission-details table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .submission-details th, .submission-details td {
+        padding: 0.75rem;
+        border-bottom: 1px solid var(--table-border);
+    }
+    .no-submissions {
+        color: var(--label-color);
+        font-style: italic;
+    }
+    #refresh-submissions {
+        padding: 8px 16px;
+        background-color: var(--button-bg, #4CAF50);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    #refresh-submissions:hover {
+        background-color: var(--button-hover-bg, #45a049);
     }
 </style>
 
 {% if is_dark_theme %}
     <style>
-        .taskn{
+        .taskn {
             color: #668cb3;
         }
     </style>
 {% else %}
     <style>
-        .taskn{
+        .taskn {
             color: #3e5974;
         }
     </style>
@@ -60,6 +99,9 @@
     const markdownText = document.getElementById('description').textContent;
     const htmlContent = marked(markdownText);
     document.getElementById('description').innerHTML = htmlContent;
+
+    // Передаем task_name в JavaScript
+    const taskName = "{{ task_name | safe }}";
 </script>
 
 <!-- Форма для отправки кода -->
@@ -68,9 +110,85 @@
     <input type="hidden" name="task_name" value="{{ task_name }}">
     <input type="submit" value="Отправить">
 </form>
+
 <!-- Список посылок -->
-<h2>Посылки</h2>
-<div id="submissions-list">
-    <!-- Список посылок будет загружен сюда через JavaScript -->
+<div style="display: flex; align-items: center;">
+    <h2 style="margin-right: 10px;">Посылки</h2>
+    <button id="refresh-submissions" onclick="loadSubmissions()">Обновить</button>
 </div>
+<div id="submissions-list">
+    {% if submissions %}
+        {% for submission in submissions %}
+            {% if submission.task_name == task_name %}
+                <div class="submission-card">
+                    <div class="submission-header">
+                        <span>Посылка от {{ submission.timestamp }} | Баллы: {{ submission.score }}</span>
+                    </div>
+                    <div class="submission-details">
+                        <p><strong>Код:</strong></p>
+                        <pre><code>{{ submission.code }}</code></pre>
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Тест</th>
+                                    <th>Вердикт</th>
+                                    <th>Время (мс)</th>
+                                    <th>Память (МБ)</th>
+                                    <th>Ошибка</th>
+                                    {% if submission.results[0].stdin is defined %}
+                                        <th>Ввод</th>
+                                        <th>Вывод</th>
+                                        <th>Ожидаемый вывод</th>
+                                    {% endif %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for result in submission.results %}
+                                    <tr>
+                                        <td>{{ result.test_num }}</td>
+                                        <td>
+                                            <span class="verdict-badge
+                                                {% if result.verdict == 'OK' %}accepted
+                                                {% elif result.verdict == 'WA' %}wrong
+                                                {% else %}error{% endif %}">
+                                                {{ result.full_verdict }}
+                                            </span>
+                                        </td>
+                                        <td>{{ result.duration }}</td>
+                                        <td>{{ result.memory }}</td>
+                                        <td>{{ result.error_info }}</td>
+                                        {% if result.stdin is defined %}
+                                            <td>{{ result.stdin | e }}</td>
+                                            <td>{{ result.stdout | e }}</td>
+                                            <td>{{ result.expected_stdout | e }}</td>
+                                        {% else %}
+                                            <td>Скрыто</td>
+                                            <td>Скрыто</td>
+                                            <td>Скрыто</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        {% if not submissions | selectattr('task_name', 'equalto', task_name) | list %}
+            <p class="no-submissions">Нет посылок на эту задачу.</p>
+        {% endif %}
+    {% else %}
+        <p class="no-submissions">Нет посылок на эту задачу.</p>
+    {% endif %}
+</div>
+
+<script>
+    // Скрипт для сворачивания/разворачивания деталей посылки
+    document.querySelectorAll('.submission-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const details = header.nextElementSibling;
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+</script>
 {% endblock %}

@@ -1,84 +1,128 @@
-let visibleTests = [];
+// static/tasks.js
 
-// Функция для генерации заготовки кода
+// Генерация заготовки кода
 function generateCodeTemplate() {
     return `def solve():
     # Ваша реализация здесь
     pass
-    if __name__ == "__main__":
-        result = solve()
-        print(result)`;
+
+if __name__ == "__main__":
+    result = solve()
+    print(result)`;
 }
 
-// Функция для загрузки списка тестов через API
+// Загрузка списка тестов через API
 function loadTaskTests() {
-    fetch(`/api/task/{{ task_name }}/tests`)
-    .then(response => response.json())
-    .then(data => {
-        visibleTests = data.visible_tests || [];
-        loadSubmissions();
-    })
-    .catch(error => {
-        console.error('Ошибка при загрузке списка тестов:', error);
-        alert('Произошла ошибка при загрузке списка тестов.');
-    });
-}
-
-// Функция для загрузки данных о посылках через API
-function loadSubmissions() {
-    fetch('/api/submissions')
-    .then(response => response.json())
-    .then(data => {
-        const submissionsList = document.getElementById('submissions-list');
-        submissionsList.innerHTML = '';
-        const filteredSubmissions = data.filter(submission => submission.task_name === '{{ task_name }}');
-        filteredSubmissions.forEach((submission, submissionIndex) => {
-            const submissionDiv = document.createElement('div');
-            submissionDiv.className = 'submission';
-            const submissionHeader = document.createElement('div');
-            submissionHeader.className = 'submission-header';
-            submissionHeader.innerHTML = `
-                <span>Посылка ${submissionIndex + 1} | Дата и времени: ${submission.timestamp}</span>
-                <span>Баллы: ${submission.score}</span>
-                <button>Подробнее</button>
-            `;
-            submissionHeader.onclick = () => toggleDetails(`details-${submissionIndex}`);
-            const submissionDetails = document.createElement('div');
-            submissionDetails.id = `details-${submissionIndex}`;
-            submissionDetails.className = 'submission-details';
-            submissionDetails.style.display = 'none';
-            const codeHeader = document.createElement('h3');
-            codeHeader.textContent = 'Код';
-            const codePre = document.createElement('pre');
-            codePre.textContent = submission.code || 'Код отсутствует';
-            submissionDetails.appendChild(codeHeader);
-            submissionDetails.appendChild(codePre);
-            submissionDiv.appendChild(submissionHeader);
-            submissionDiv.appendChild(submissionDetails);
-            submissionsList.appendChild(submissionDiv);
+    fetch(`/api/task/${taskName}/tests`)
+        .then(response => {
+            if (!response.ok) throw new Error("Ошибка при загрузке тестов");
+            return response.json();
+        })
+        .then(data => {
+            console.log("Тесты загружены:", data);
+            // Если тесты нужны для отображения, можно добавить логику здесь
+        })
+        .catch(error => {
+            console.error("Ошибка:", error);
+            alert("Не удалось загрузить тесты.");
         });
-    })
-    .catch(error => {
-        console.error('Ошибка при загрузке данных:', error);
-        alert('Произошла ошибка при загрузке данных.');
-    });
 }
 
-// Функции для раскрытия/скрытия деталей
+// Загрузка посылок через API
+function loadSubmissions() {
+    fetch("/api/submissions")
+        .then(response => {
+            if (!response.ok) throw new Error("Ошибка при загрузке посылок");
+            return response.json();
+        })
+        .then(data => {
+            const submissionsList = document.getElementById("submissions-list");
+            submissionsList.innerHTML = "";
+            const filteredSubmissions = data.filter(submission => submission.task_name === taskName);
+            if (filteredSubmissions.length === 0) {
+                submissionsList.innerHTML = '<p class="no-submissions">Нет посылок на эту задачу.</p>';
+                return;
+            }
+            filteredSubmissions.forEach((submission, index) => {
+                const submissionDiv = document.createElement("div");
+                submissionDiv.className = "submission-card";
+                let resultsTable = `
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Тест</th>
+                                <th>Вердикт</th>
+                                <th>Время (мс)</th>
+                                <th>Память (МБ)</th>
+                                <th>Ошибка</th>
+                                <th>Ввод</th>
+                                <th>Вывод</th>
+                                <th>Ожидаемый вывод</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                submission.results.forEach(result => {
+                    resultsTable += `
+                        <tr>
+                            <td>${result.test_num}</td>
+                            <td>
+                                <span class="verdict-badge ${
+                                    result.verdict === 'OK' ? 'accepted' :
+                                    result.verdict === 'WA' ? 'wrong' : 'error'
+                                }">
+                                    ${result.full_verdict}
+                                </span>
+                            </td>
+                            <td>${result.duration}</td>
+                            <td>${result.memory}</td>
+                            <td>${result.error_info || ''}</td>
+                            <td>${result.stdin ? result.stdin.replace(/</g, '&lt;').replace(/>/g, '&gt;') : 'Скрыто'}</td>
+                            <td>${result.stdout ? result.stdout.replace(/</g, '&lt;').replace(/>/g, '&gt;') : 'Скрыто'}</td>
+                            <td>${result.expected_stdout ? result.expected_stdout.replace(/</g, '&lt;').replace(/>/g, '&gt;') : 'Скрыто'}</td>
+                        </tr>`;
+                });
+                resultsTable += `</tbody></table>`;
+                submissionDiv.innerHTML = `
+                    <div class="submission-header" onclick="toggleDetails('details-${index}')">
+                        <span>Посылка ${index + 1} | Дата: ${submission.timestamp}</span>
+                        <span>Баллы: ${submission.score}</span>
+                    </div>
+                    <div id="details-${index}" class="submission-details" style="display: none;">
+                        <h3>Код</h3>
+                        <pre>${submission.code ? submission.code.replace(/</g, '&lt;').replace(/>/g, '&gt;') : "Код отсутствует"}</pre>
+                        ${resultsTable}
+                    </div>
+                `;
+                submissionsList.appendChild(submissionDiv);
+            });
+        })
+        .catch(error => {
+            console.error("Ошибка:", error);
+            alert("Не удалось загрузить посылки.");
+        });
+}
+
+// Сворачивание/разворачивание деталей посылки
 function toggleDetails(id) {
     const details = document.getElementById(id);
-    details.style.display = details.style.display === 'none' ? 'block' : 'none';
+    details.style.display = details.style.display === "none" ? "block" : "none";
 }
 
-// Инициализация CodeMirror с заготовкой кода
-document.addEventListener('DOMContentLoaded', async () => {
-    const template = generateCodeTemplate();
-    const editor = CodeMirror.fromTextArea(document.getElementById('code-input'), {
-        value: template,
-        mode: 'python',
+// Инициализация
+document.addEventListener("DOMContentLoaded", () => {
+    // Настройка CodeMirror
+    const editor = CodeMirror.fromTextArea(document.getElementById("code-input"), {
+        value: generateCodeTemplate(),
+        mode: "python",
         lineNumbers: true,
-        theme: 'material',
+        theme: "material",
         indentUnit: 4
     });
-    loadTaskTests();
+
+    // Загрузка тестов
+    if (typeof taskName !== "undefined") {
+        loadTaskTests();
+    } else {
+        console.error("taskName не определен");
+    }
 });

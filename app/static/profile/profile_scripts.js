@@ -131,13 +131,17 @@ function loadSubmissions() {
         .then(data => {
             const submissionsList = document.getElementById('submissions-list');
             submissionsList.innerHTML = '';
+            if (data.length === 0) {
+                submissionsList.innerHTML = '<p>Нет посылок для отображения.</p>';
+                return;
+            }
             data.forEach((submission, submissionIndex) => {
                 const submissionDiv = document.createElement('div');
                 submissionDiv.className = 'submission-card';
                 const submissionHeader = document.createElement('div');
                 submissionHeader.className = 'submission-header';
                 submissionHeader.innerHTML = `
-                    <span>Посылка ${submissionIndex + 1} | Дата и время: ${submission.timestamp}</span>
+                    <span>Посылка ${submissionIndex + 1} | Задача: ${submission.task_name || 'Неизвестная задача'} | Дата и время: ${submission.timestamp}</span>
                     <span>Баллы: ${submission.score}</span>
                     <button>Подробнее</button>
                 `;

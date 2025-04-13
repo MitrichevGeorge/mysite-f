@@ -77,6 +77,28 @@
             </div>
         </div>
 
+        <div class="tasks-section">
+            <h2 class="settings-title">Мои задачи</h2>
+            {% if current_user.is_creator %}
+                <a href="{{ url_for('tasks.create_task') }}" class="settings-btn">Создать новую задачу</a>
+                {% if my_tasks %}
+                    {% for task in my_tasks %}
+                        <div class="task-entry">
+                            <span>{{ task.title }}</span>
+                            <div class="task-actions">
+                                <a href="{{ url_for('tasks.task', task_name=task.name) }}" class="settings-btn">Решить</a>
+                                <a href="{{ url_for('tasks.edit_task', task_name=task.name) }}" class="settings-btn">Редактировать</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>У вас пока нет созданных задач.</p>
+                {% endif %}
+            {% else %}
+                <p>Вы не являетесь создателем. Вы можете попросить у администраторов сделать Вас создателем.</p>
+            {% endif %}
+        </div>
+
         <div class="tabsq">
             <div class="tab-list">
                 <button class="tab-button active" onclick="showTab('history')">История заходов</button>

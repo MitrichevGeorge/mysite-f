@@ -8,17 +8,15 @@ from werkzeug.security import generate_password_hash
 
 views_bp = Blueprint('views', __name__)
 
-# Путь к папке с задачами
 TASKS_DIR = "tasks/"
 
 @views_bp.route('/')
 def index():
-    tasks = os.listdir(TASKS_DIR)  # Теперь os доступен
+    tasks = os.listdir(TASKS_DIR)
     if current_user.is_authenticated:
         return render_template('index.html', tasks=tasks, current_user=current_user, tabs=current_user.tabs)
     else:
-        return render_template('index.html', tasks=tasks, current_user=current_user, tabs=[])  # Provide an empty list for tabs
-
+        return render_template('index.html', tasks=tasks, current_user=current_user, tabs=[])
 
 @views_bp.route('/profile')
 @login_required
@@ -53,11 +51,22 @@ def profile():
             "code": submission["code"]
         }
         sbm.append(filtered_submission)
-        
-    # Получаем количество запросов за каждый день
+
+    # Получаем список задач, созданных пользователем
+    my_tasks = []
+    for task_name in os.listdir(TASKS_DIR):
+        config_path = os.path.join(TASKS_DIR, task_name, "config.json")
+        if os.path.exists(config_path):
+            with open(config_path, 'r') as f:
+                config = json.load(f)
+            if config.get("creator_id") == user.id:
+                my_tasks.append({
+                    "name": task_name,
+                    "title": config.get("title", task_name)
+                })
+
     daily_requests = user.daily_requests
-    print(json.dumps(current_user.__dict__, indent=4))
-    return render_template("profile.html", current_user=current_user, submissions=sbm, daily_requests=daily_requests, tabs=user.tabs)
+    return render_template("profile.html", current_user=current_user, submissions=sbm, daily_requests=daily_requests, tabs=user.tabs, my_tasks=my_tasks)
 
 @views_bp.route('/api/submissions', methods=['GET'])
 @login_required

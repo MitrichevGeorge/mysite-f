@@ -1,0 +1,33 @@
+<!-- templates/edit_task.html -->
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="form-card">
+            <h1 class="form-title">Редактировать задачу</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Название задачи:</label>
+                    <input type="text" id="title" name="title" value="{{ config.title }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Новый файл с условием (MD, опционально):</label>
+                    <input type="file" id="description" name="description" accept=".md">
+                </div>
+                <div class="form-group">
+                    <label for="tests">Новый архив с тестами (ZIP, опционально):</label>
+                    <input type="file" id="tests" name="tests" accept=".zip">
+                </div>
+                <div class="form-group">
+                    <label for="time_limit">Ограничение по времени (мс):</label>
+                    <input type="number" id="time_limit" name="time_limit" value="{{ config.time_limit }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="memory_limit">Ограничение по памяти (МБ):</label>
+                    <input type="number" id="memory_limit" name="memory_limit" value="{{ config.memory_limit }}" required>
+                </div>
+                <button type="submit" class="btn">Сохранить изменения</button>
+            </form>
+            <a href="{{ url_for('views.profile') }}" class="back-link">Вернуться в профиль</a>
+        </div>
+    </div>
+{% endblock %}

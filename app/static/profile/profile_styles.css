@@ -72,11 +72,11 @@
     --submission-details-border: rgb(55, 65, 81);
     --table-border: rgb(55, 65, 81);
     --ps-color: rgb(119, 134, 163);
-    --btn-bg: #39d353;
-    --btn-text: #000000;
-    --btn-hover-bg: #26a641;
-    --link-color: #39d353;
-    --link-hover: #26a641;
+    --btn-bg: #1f2937;
+    --btn-text: #e6e6e6;
+    --btn-hover-bg: #2c3f5b;
+    --link-color: #34c24d;
+    --link-hover: #29a341;
     --input-border: #444;
     --input-bg: #2d2d2d;
 }
@@ -490,4 +490,32 @@ header {
 
 .back-link:hover {
     color: var(--link-hover);
+}
+
+.tasks-section {
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin: 20px 0;
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-card);
+}
+
+.task-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 0.5rem;
+    background-color: var(--login-entry-bg);
+}
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.task-entry span {
+    font-weight: 500;
+    color: var(--value-color);
 }
