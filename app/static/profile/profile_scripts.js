@@ -1,38 +1,23 @@
-// static/profile_scripts.js
+// static/profile/profile_scripts.js
 function getShortDateFromWeekAndDay(year, weekNumber, dayOfWeek) {
-    // Создаем дату, начиная с первого дня года
     const firstDayOfYear = new Date(year, 0, 1);
-
-    // Находим первый понедельник года (начало первой недели)
     const firstMonday = new Date(firstDayOfYear);
     firstMonday.setDate(firstDayOfYear.getDate() + (1 - firstDayOfYear.getDay() + 8) % 7);
-
-    // Вычисляем дату, добавляя недели и дни
     const targetDate = new Date(firstMonday);
     targetDate.setDate(firstMonday.getDate() + (weekNumber - 1) * 7 + (dayOfWeek - 1));
-
-    // Получаем день месяца
     const day = targetDate.getDate();
-
-    // Получаем краткое название месяца (например, "Jan")
     const month = targetDate.toLocaleString('default', { month: 'short' });
-
-    // Получаем краткое обозначение дня недели (например, "Mo", "Tu")
     const weekday = targetDate.toLocaleString('default', { weekday: 'short' }).slice(0, 2);
-
-    // Возвращаем результат в формате "31 Jan, Mo"
     return `${day} ${month}, ${weekday}`;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Календарь
     const heatmap = document.getElementById('heatmap');
     const daysInYear = dailyRequests.length;
     const weeksInYear = 53;
-
     const minValue = Math.min(...dailyRequests);
     const maxValue = Math.max(...dailyRequests);
-
-    // Учитываем сдвиг начала года
     let dayOffset = yearStartOffset || 0;
 
     for (let day = 0; day < 7; day++) {
@@ -44,16 +29,53 @@ document.addEventListener('DOMContentLoaded', function () {
                 heatmap.appendChild(cell);
             } else {
                 cell.classList.add('cell');
-
                 const value = dailyRequests[index];
                 cell.setAttribute('data-count', `${getShortDateFromWeekAndDay(2025, week, day)}: ${value}`);
                 cell.setAttribute('num', value);
                 const level = normalizeValue(value, minValue, maxValue);
                 cell.style.backgroundColor = getColorForLevel(level, isDarkTheme);
-
                 heatmap.appendChild(cell);
             }
         }
+    }
+
+    // Обработчик переключателя темы
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('change', function () {
+            const selectedTheme = themeToggle.value;
+            fetch('/update-theme', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ theme: selectedTheme }),
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload(); // Перезагружаем для применения темы
+                } else {
+                    alert('Ошибка при изменении темы');
+                }
+            }).catch(error => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при изменении темы');
+            });
+        });
+    }
+
+    // Обработчики кнопок настроек
+    const changeUsernameBtn = document.getElementById('change-username-btn');
+    if (changeUsernameBtn) {
+        changeUsernameBtn.addEventListener('click', function () {
+            window.location.href = '/change-username';
+        });
+    }
+
+    const changePasswordBtn = document.getElementById('change-password-btn');
+    if (changePasswordBtn) {
+        changePasswordBtn.addEventListener('click', function () {
+            window.location.href = '/change-password';
+        });
     }
 
     loadSubmissions();
@@ -75,18 +97,16 @@ function getColorForLevel(level, isDarkMode) {
         const index = Math.floor(level * (colors.length - 1));
         return colors[index] || colors[0];
     }
-    return isDarkMode ? '#2d333b' : '#ebedf0';
+    return isDarkMode ? '#2d2d2d' : '#ebedf0';
 }
 
 function showTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.style.display = 'none';
     });
-
     document.querySelectorAll('.tab-button').forEach(button => {
         button.classList.remove('active');
     });
-
     document.getElementById(tabName + '-tab').style.display = 'block';
     document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
 }
@@ -111,11 +131,9 @@ function loadSubmissions() {
         .then(data => {
             const submissionsList = document.getElementById('submissions-list');
             submissionsList.innerHTML = '';
-
             data.forEach((submission, submissionIndex) => {
                 const submissionDiv = document.createElement('div');
                 submissionDiv.className = 'submission-card';
-
                 const submissionHeader = document.createElement('div');
                 submissionHeader.className = 'submission-header';
                 submissionHeader.innerHTML = `
@@ -124,22 +142,18 @@ function loadSubmissions() {
                     <button>Подробнее</button>
                 `;
                 submissionHeader.onclick = () => toggleDetails(`details-${submissionIndex}`);
-
                 const submissionDetails = document.createElement('div');
                 submissionDetails.id = `details-${submissionIndex}`;
                 submissionDetails.className = 'submission-details';
                 submissionDetails.style.display = 'none';
-
                 const codeHeader = document.createElement('h3');
                 codeHeader.textContent = 'Код';
                 const codePre = document.createElement('pre');
                 codePre.textContent = submission.code || 'Код отсутствует';
-
                 const resultsHeader = document.createElement('h3');
                 resultsHeader.textContent = 'Результаты тестов';
                 const resultsTable = document.createElement('table');
                 resultsTable.className = 'results-table';
-
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
                     <tr>
@@ -150,7 +164,6 @@ function loadSubmissions() {
                         <th>Информация об ошибке</th>
                     </tr>
                 `;
-
                 const tbody = document.createElement('tbody');
                 submission.results.forEach((test, testIndex) => {
                     const testRow = document.createElement('tr');
@@ -163,7 +176,6 @@ function loadSubmissions() {
                         <td>${test.error_info || '-'}</td>
                     `;
                     testRow.onclick = () => toggleTestDetails(`test-details-${submissionIndex}-${testIndex}`);
-
                     const testDetailsRow = document.createElement('tr');
                     testDetailsRow.id = `test-details-${submissionIndex}-${testIndex}`;
                     testDetailsRow.className = 'test-details';
@@ -181,22 +193,17 @@ function loadSubmissions() {
                             <pre class="warpped">${test.full_error_info || '-'}</pre>
                         </td>
                     `;
-
                     tbody.appendChild(testRow);
                     tbody.appendChild(testDetailsRow);
                 });
-
                 resultsTable.appendChild(thead);
                 resultsTable.appendChild(tbody);
-
                 submissionDetails.appendChild(codeHeader);
                 submissionDetails.appendChild(codePre);
                 submissionDetails.appendChild(resultsHeader);
                 submissionDetails.appendChild(resultsTable);
-
                 submissionDiv.appendChild(submissionHeader);
                 submissionDiv.appendChild(submissionDetails);
-
                 submissionsList.appendChild(submissionDiv);
             });
         })

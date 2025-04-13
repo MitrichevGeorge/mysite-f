@@ -1,11 +1,6 @@
-<!-- profile.html -->
+<!-- templates/profile.html -->
 {% extends "base.html" %}
 {% block content %}
-    {% if is_dark_theme %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='profile/profile_styles_dark.css') }}">
-    {% else %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='profile/profile_styles_light.css') }}">
-    {% endif %}
     <link rel="stylesheet" href="{{ url_for('static', filename='profile/profile_styles.css') }}">
     <script src="{{ url_for('static', filename='profile/profile_scripts.js') }}"></script>
     <script>
@@ -30,7 +25,6 @@
 
             <div class="activity-section">
                 <h2 class="activity-title">Активность</h2>
-
                 <div class="calendar">
                     <table>
                         <tr>
@@ -65,6 +59,21 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2 class="settings-title">Настройки</h2>
+            <div class="settings-item buttons">
+                <button id="change-username-btn" class="settings-btn">Сменить имя пользователя</button>
+                <button id="change-password-btn" class="settings-btn">Сменить пароль</button>
+            </div>
+            <div class="settings-item">
+                <label for="theme-toggle">Тема:</label>
+                <select id="theme-toggle">
+                    <option value="light" {% if current_user.theme == 'light' %}selected{% endif %}>Светлая</option>
+                    <option value="dark" {% if current_user.theme == 'dark' %}selected{% endif %}>Тёмная</option>
+                </select>
             </div>
         </div>
 

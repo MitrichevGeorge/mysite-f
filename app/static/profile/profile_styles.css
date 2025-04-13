@@ -1,4 +1,86 @@
 /* static/profile/profile_styles.css */
+
+/* Общие стили */
+:root {
+    --border-radius: 0.5rem;
+    --transition: 0.3s;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-dark: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --grid-gap: 2px;
+    --cell-size: 10px;
+}
+
+/* Цвета для светлой темы */
+:where(.light) {
+    --bg-body: #ffffff;
+    --text-body: #000000;
+    --bg-card: #ffffff;
+    --shadow-card: var(--shadow-md);
+    --title-color: rgb(17, 24, 39);
+    --label-color: rgb(107, 114, 128);
+    --value-color: rgb(17, 24, 39);
+    --activity-title: rgb(17, 24, 39);
+    --cell-bg: #ebedf0;
+    --cell-hover: #000000;
+    --tabs-bg: #ffffff;
+    --tab-bg: rgb(249, 250, 251);
+    --tab-border: rgb(229, 231, 235);
+    --tab-active-bg: #ffffff;
+    --tab-active-border: rgb(79, 70, 229);
+    --tab-active-color: rgb(79, 70, 229);
+    --login-entry-bg: rgb(249, 250, 251);
+    --login-timestamp: rgb(107, 114, 128);
+    --login-url: rgb(59, 130, 246);
+    --submission-border: rgb(229, 231, 235);
+    --submission-header-bg: rgb(249, 250, 251);
+    --submission-details-border: rgb(229, 231, 235);
+    --table-border: rgb(229, 231, 235);
+    --ps-color: rgb(40, 47, 60);
+    --btn-bg: #e0e0e0;
+    --btn-text: #333333;
+    --btn-hover-bg: #d0d0d0;
+    --link-color: #007bff;
+    --link-hover: #0056b3;
+    --input-border: #ccc;
+    --input-bg: #ffffff;
+}
+
+/* Цвета для темной темы */
+:where(.dark) {
+    --bg-body: #121212;
+    --text-body: #ffffff;
+    --bg-card: #1e1e1e;
+    --shadow-card: var(--shadow-dark);
+    --title-color: rgb(229, 231, 235);
+    --label-color: rgb(156, 163, 175);
+    --value-color: rgb(229, 231, 235);
+    --activity-title: rgb(229, 231, 235);
+    --cell-bg: #2d2d2d;
+    --cell-hover: #ffffff;
+    --tabs-bg: #1e1e1e;
+    --tab-bg: rgb(31, 41, 55);
+    --tab-border: rgb(55, 65, 81);
+    --tab-active-bg: #2d3748;
+    --tab-active-border: rgb(129, 140, 248);
+    --tab-active-color: rgb(129, 140, 248);
+    --login-entry-bg: rgb(31, 41, 55);
+    --login-timestamp: rgb(156, 163, 175);
+    --login-url: rgb(99, 179, 237);
+    --submission-border: rgb(55, 65, 81);
+    --submission-header-bg: rgb(31, 41, 55);
+    --submission-details-border: rgb(55, 65, 81);
+    --table-border: rgb(55, 65, 81);
+    --ps-color: rgb(119, 134, 163);
+    --btn-bg: #39d353;
+    --btn-text: #000000;
+    --btn-hover-bg: #26a641;
+    --link-color: #39d353;
+    --link-hover: #26a641;
+    --input-border: #444;
+    --input-bg: #2d2d2d;
+}
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -7,12 +89,14 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    transition: background-color 0.3s, color 0.3s;
+    background-color: var(--bg-body);
+    color: var(--text-body);
+    transition: background-color var(--transition), color var(--transition);
     overflow-x: hidden;
 }
 
 header {
-    padding-right: 0px;
+    padding-right: 0;
 }
 
 .container {
@@ -23,15 +107,18 @@ header {
 }
 
 .profile-card {
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     padding: 1.5rem;
     margin-bottom: 2rem;
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-card);
 }
 
 .profile-title {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
+    color: var(--title-color);
 }
 
 .profile-info {
@@ -55,10 +142,12 @@ header {
 
 .info-label {
     font-weight: 500;
+    color: var(--label-color);
 }
 
 .info-value {
     font-weight: 500;
+    color: var(--value-color);
 }
 
 .activity-section {
@@ -69,6 +158,7 @@ header {
     font-size: 1.25rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    color: var(--activity-title);
 }
 
 .theme-switch {
@@ -106,8 +196,8 @@ header {
 }
 
 .days span {
-    height: 10px;
-    line-height: 10px;
+    height: var(--cell-size);
+    line-height: var(--cell-size);
     text-align: right;
 }
 
@@ -119,24 +209,21 @@ header {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(53, 10px);
-    grid-gap: 2px;
+    grid-template-columns: repeat(53, var(--cell-size));
+    grid-gap: var(--grid-gap);
 }
 
 .cell {
-    width: 10px;
-    height: 10px;
+    width: var(--cell-size);
+    height: var(--cell-size);
     border-radius: 2px;
-    transition: background-color 0.3s, outline 0.2s;
+    background-color: var(--cell-bg);
+    transition: background-color var(--transition), outline 0.2s;
     position: relative;
 }
 
-.trpcl {
-    background-color: transparent;
-    border: none;
-    color: inherit;
-    transition: background-color 0.3s;
-    border-radius: 2px;
+.cell:hover {
+    outline: 2px solid var(--cell-hover);
 }
 
 .cell:hover::after {
@@ -154,9 +241,18 @@ header {
     z-index: 10;
 }
 
+.trpcl {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    transition: background-color var(--transition);
+    border-radius: 2px;
+}
+
 .tabsq {
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     padding: 1.5rem;
+    background-color: var(--tabs-bg);
 }
 
 .tab-list {
@@ -171,6 +267,15 @@ header {
     text-align: center;
     border-radius: 0.375rem;
     cursor: pointer;
+    background-color: var(--tab-bg);
+    border: 1px solid var(--tab-border);
+    color: var(--label-color);
+}
+
+.tab-button.active {
+    background-color: var(--tab-active-bg);
+    border-color: var(--tab-active-border);
+    color: var(--tab-active-color);
 }
 
 .login-entry {
@@ -178,21 +283,28 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     margin-bottom: 0.5rem;
+    background-color: var(--login-entry-bg);
 }
 
 .login-url {
     text-decoration: none;
+    color: var(--login-url);
 }
 
 .login-url:hover {
     text-decoration: underline;
 }
 
+.login-timestamp {
+    color: var(--login-timestamp);
+}
+
 .submission-card {
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     margin-bottom: 1rem;
+    border: 1px solid var(--submission-border);
 }
 
 .submission-header {
@@ -201,12 +313,14 @@ header {
     align-items: center;
     padding: 1rem;
     cursor: pointer;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     margin-bottom: 0.5rem;
+    background-color: var(--submission-header-bg);
 }
 
 .submission-details {
     padding: 1rem;
+    border-top: 1px solid var(--submission-details-border);
 }
 
 .results-table {
@@ -219,6 +333,7 @@ header {
 .results-table td {
     padding: 0.75rem;
     text-align: left;
+    border-bottom: 1px solid var(--table-border);
 }
 
 .verdict-badge {
@@ -228,13 +343,150 @@ header {
     font-weight: 500;
 }
 
+.verdict-badge.accepted {
+    background-color: rgb(16, 185, 129);
+    color: white;
+}
+
+.verdict-badge.wrong {
+    background-color: rgb(239, 68, 68);
+    color: white;
+}
+
+.verdict-badge.error {
+    background-color: rgb(245, 158, 11);
+    color: white;
+}
+
 .ps {
     margin: 40px;
     font-size: small;
     font-family: 'Courier New';
     text-align: center;
+    color: var(--ps-color);
 }
 
 .tab-content {
     margin: 40px;
+}
+
+.settings-section {
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-card);
+}
+
+.settings-title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.settings-item {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.settings-item.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.settings-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    transition: background-color 0.2s;
+}
+
+.settings-btn:hover {
+    background-color: var(--btn-hover-bg);
+}
+
+.settings-item label {
+    margin-right: 10px;
+    font-size: 1em;
+}
+
+#theme-toggle {
+    padding: 5px;
+    font-size: 1em;
+    border-radius: 4px;
+    width: 150px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--text-body);
+}
+
+.form-card {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-card);
+}
+
+.form-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--text-body);
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover-bg);
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    font-size: 1em;
+    color: var(--link-color);
+}
+
+.back-link:hover {
+    color: var(--link-hover);
 }

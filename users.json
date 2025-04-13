@@ -1038,22 +1038,6 @@
         "submissions": [],
         "login_history": [
             {
-                "timestamp": "2025-04-12 20:21:09",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-12 20:21:12",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-04-12 20:21:13",
-                "url": "http://127.0.0.1:5000/api/submissions"
-            },
-            {
-                "timestamp": "2025-04-12 20:21:26",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
                 "timestamp": "2025-04-12 20:21:28",
                 "url": "http://127.0.0.1:5000/task/task1"
             },
@@ -1140,9 +1124,321 @@
             {
                 "timestamp": "2025-04-12 21:15:56",
                 "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:28:15",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:28:16",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:28:25",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-12 21:28:25",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:28:25",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:28:27",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-12 21:28:27",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:28:28",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:28:43",
+                "url": "http://127.0.0.1:5000/change-username"
+            },
+            {
+                "timestamp": "2025-04-12 21:28:47",
+                "url": "http://127.0.0.1:5000/change-username"
+            },
+            {
+                "timestamp": "2025-04-12 21:29:15",
+                "url": "http://127.0.0.1:5000/change-username"
+            },
+            {
+                "timestamp": "2025-04-12 21:29:41",
+                "url": "http://127.0.0.1:5000/change-username"
+            },
+            {
+                "timestamp": "2025-04-12 21:29:46",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:29:47",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:29:49",
+                "url": "http://127.0.0.1:5000/change-password"
+            },
+            {
+                "timestamp": "2025-04-12 21:29:51",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:29:52",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:24",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:24",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:24",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:26",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:26",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:27",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:29",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:30",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:30",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:31",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:32",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:33",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:34",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:34",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:34",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:35",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:36",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:30:37",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:42:22",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:42:23",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:42:28",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:42:28",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:42:42",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:42:42",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:42:50",
+                "url": "http://127.0.0.1:5000/change-username"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:13",
+                "url": "http://127.0.0.1:5000/change-username"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:14",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:15",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:18",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:18",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:18",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:20",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:20",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:20",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:24",
+                "url": "http://127.0.0.1:5000/change-username"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:26",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:26",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:27",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:27",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:28",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:28",
+                "url": "http://127.0.0.1:5000/change-username"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:30",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:30",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:31",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:31",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-12 21:43:32",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-13 09:57:58",
+                "url": "http://127.0.0.1:5000/login"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:01",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:02",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:06",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:06",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:07",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:29",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:29",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:30",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:33",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:33",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:33",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:44",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:44",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-13 09:58:44",
+                "url": "http://127.0.0.1:5000/api/submissions"
             }
         ],
-        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABZAAAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "tabs": [
             {
                 "url": "http://127.0.0.1:5000/",
@@ -1158,6 +1454,22 @@
             },
             {
                 "url": "http://127.0.0.1:5000/task/task1",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/update-theme",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/change-username",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/change-password",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/login",
                 "name": "Contest"
             }
         ],

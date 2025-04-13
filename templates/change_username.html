@@ -1,0 +1,17 @@
+<!-- templates/change_username.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="form-card">
+        <h1 class="form-title">Сменить имя пользователя</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="username">Новое имя пользователя</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <button type="submit" class="btn">Сохранить</button>
+        </form>
+        <a href="{{ url_for('views.profile') }}" class="back-link">Назад в профиль</a>
+    </div>
+</div>
+{% endblock %}
