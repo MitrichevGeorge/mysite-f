@@ -13,7 +13,6 @@ from flask_login import login_user, logout_user, login_required, current_user
 from .models import User, load_users, save_users
 from werkzeug.security import generate_password_hash
 import uuid
-import threading
 from datetime import datetime, timedelta
 
 auth_bp = Blueprint('auth', __name__)
@@ -25,25 +24,23 @@ SMTP_PORT = 465
 USERNAME = "infsolvy@bk.ru"
 PASSWORD = "CThDRiNKVM9TkRVswFVF"
 
-def send_email_async(to_email, subject, html_body):
-    """Асинхронная отправка email в отдельном потоке."""
-    def send():
-        try:
-            msg = MIMEMultipart("alternative")
-            msg["Subject"] = subject
-            msg["From"] = USERNAME
-            msg["To"] = to_email
-            html_part = MIMEText(html_body, "html")
-            msg.attach(html_part)
-            with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
-                server.login(USERNAME, PASSWORD)
-                server.sendmail(USERNAME, to_email, msg.as_string())
-            print(f"Email successfully sent to {to_email}")
-        except Exception as e:
-            print(f"Error sending email: {e}")
-
-    thread = threading.Thread(target=send)
-    thread.start()
+def send_email(to_email, subject, html_body):
+    """Send email and return True if successful, False otherwise."""
+    try:
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = subject
+        msg["From"] = USERNAME
+        msg["To"] = to_email
+        html_part = MIMEText(html_body, "html")
+        msg.attach(html_part)
+        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+            server.login(USERNAME, PASSWORD)
+            server.sendmail(USERNAME, to_email, msg.as_string())
+        print(f"Email successfully sent to {to_email}")
+        return True
+    except Exception as e:
+        print(f"Error sending email: {e}")
+        return False
 
 def send_verification_email(to_email, username, verification_code):
     """Send verification email with a unique link."""
@@ -60,7 +57,7 @@ def send_verification_email(to_email, username, verification_code):
     </body>
     </html>
     """
-    send_email_async(to_email, "Подтверждение регистрации", html_body)
+    return send_email(to_email, "Подтверждение регистрации", html_body)
 
 def send_one_time_code(to_email, username, code):
     print(f"DEBUG: One-time code for {username} ({to_email}): {code}")
@@ -78,7 +75,7 @@ def send_one_time_code(to_email, username, code):
     </body>
     </html>
     """
-    send_email_async(to_email, "Вход по одноразовому коду", html_body)
+    return send_email(to_email, "Вход по одноразовому коду", html_body)
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -117,8 +114,10 @@ def register():
         users[new_user_id] = new_user
         save_users(users)
 
-        # Асинхронная отправка письма
-        send_verification_email(email, username, verification_code)
+        # Отправка письма
+        if not send_verification_email(email, username, verification_code):
+            return jsonify({'status': 'error', 'message': 'Ошибка отправки письма. Пожалуйста, попробуйте снова.'}), 500
+
         return jsonify({'status': 'success', 'message': 'Регистрация прошла успешно! Пожалуйста, подтвердите ваш email.'})
 
     return render_template('register.html')
@@ -192,7 +191,8 @@ def login():
                 save_users(users)
                 print(f"Generated one-time code {one_time_code} for {user_by_username.email}")
                 # Отправляем код на email
-                send_one_time_code(user_by_username.email, user_by_username.username, one_time_code)
+                if not send_one_time_code(user_by_username.email, user_by_username.username, one_time_code):
+                    return jsonify({'status': 'error', 'message': 'Ошибка отправки кода. Пожалуйста, попробуйте снова.'}), 500
                 print("Called send_one_time_code")
                 return jsonify({
                     'status': 'success',
@@ -216,7 +216,8 @@ def login():
                     save_users(users)
                     print(f"Generated one-time code {one_time_code} for {user.email}")
                     # Отправляем код на email
-                    send_one_time_code(user.email, user.username, one_time_code)
+                    if not send_one_time_code(user.email, user.username, one_time_code):
+                        return jsonify({'status': 'error', 'message': 'Ошибка отправки кода. Пожалуйста, попробуйте снова.'}), 500
                     print("Called send_one_time_code")
                     return jsonify({
                         'status': 'success',
@@ -289,7 +290,7 @@ def forgot_password():
         if user:
             recovery_code = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
             user.set_recovery_code(recovery_code)
-            send_email_async(email, "Восстановление пароля", f"""
+            if not send_email(email, "Восстановление пароля", f"""
             <!DOCTYPE html>
             <html>
             <body>
@@ -300,7 +301,9 @@ def forgot_password():
                 <p>Если вы не запрашивали восстановление пароля, проигнорируйте это письмо.</p>
             </body>
             </html>
-            """)
+            """):
+                flash('Ошибка отправки письма с кодом восстановления.', 'error')
+                return redirect(url_for('auth.forgot_password'))
             save_users(users)
             flash('Письмо с кодом для восстановления пароля отправлено на ваш email.', 'success')
             return redirect(url_for('auth.enter_recovery_code', email=email))

@@ -77,7 +77,7 @@
             </svg>
             <h2>Письмо отправлено Вам на почту</h2>
             <button class="button1" id="go-to-mail">
-                <div class="intext">Перейти к почте</div>
+                <div class="intext" id="mail-button-text">Открыть почту</div>
                 <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 8px; margin-bottom: 0;">
                     <path d="M10.1429 7H7C5.89543 7 5 7.89543 5 9V17C5 18.1046 5.89543 19 7 19H15C16.1046 19 17 18.1046 17 17V13.2143M19 5H15M19 5V9M19 5L9 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -114,6 +114,7 @@
                 success: function(response) {
                     if (response.status === 'success') {
                         showOverlay('success');
+                        updateMailButton(userEmail);
                     } else {
                         showOverlay('error', response.message || 'Ошибка при регистрации.');
                     }
@@ -128,19 +129,30 @@
         $('#go-to-mail').on('click', function() {
             const domain = userEmail.split('@')[1];
             const emailProviders = {
-                'gmail.com': 'https://mail.google.com',
-                'outlook.com': 'https://outlook.live.com',
-                'yahoo.com': 'https://mail.yahoo.com',
-                'mail.ru': 'https://mail.ru'
-                // Add more providers as needed
+                'gmail.com': 'mail.google.com',
+                'outlook.com': 'outlook.live.com',
+                'yahoo.com': 'mail.yahoo.com',
+                'mail.ru': 'mail.ru'
             };
-            const url = emailProviders[domain] || `https://${domain}`;
+            const url = emailProviders[domain] ? `https://${emailProviders[domain]}` : `https://${domain}`;
             window.open(url, '_blank');
         });
 
         $('#back-to-register').on('click', function() {
             $('#register-overlay').fadeOut(300);
         });
+
+        function updateMailButton(email) {
+            const domain = email.split('@')[1];
+            const emailProviders = {
+                'gmail.com': 'mail.google.com',
+                'outlook.com': 'outlook.live.com',
+                'yahoo.com': 'mail.yahoo.com',
+                'mail.ru': 'mail.ru'
+            };
+            const displayDomain = emailProviders[domain] || domain;
+            $('#mail-button-text').text(`Открыть ${displayDomain}`);
+        }
 
         function showOverlay(state, message = '') {
             $('#sending-state, #success-state, #error-state').hide();

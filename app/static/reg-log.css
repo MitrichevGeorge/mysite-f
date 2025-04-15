@@ -170,6 +170,7 @@ body::after {
     transition: all 0.3s ease;
     z-index: 3;
     box-shadow: 0 4px 15px rgba(0, 255, 117, 0.3);
+    padding: auto;
 }
 
 .button1::before {
@@ -184,6 +185,7 @@ body::after {
 .intext {
     position: relative;
     z-index: 2;
+    margin: auto;
 }
 
 .button1::after {
