@@ -1,0 +1,211 @@
+/* static/css/edit_task.css */
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --danger-color: #ff4444;
+    --danger-hover: #cc0000;
+    --background-light: #ffffff;
+    --background-dark: #1e1e1e;
+    --text-light: #333333;
+    --text-dark: #e0e0e0;
+    --border-light: #ddd;
+    --border-dark: #444;
+    --input-bg-light: #f8f9fa;
+    --input-bg-dark: #2d2d2d;
+    --table-header-bg-light: #f2f2f2;
+    --table-header-bg-dark: #333;
+}
+
+.dark {
+    --background: var(--background-dark);
+    --text: var(--text-dark);
+    --border: var(--border-dark);
+    --input-bg: var(--input-bg-dark);
+    --table-header-bg: var(--table-header-bg-dark);
+}
+
+.light {
+    --background: var(--background-light);
+    --text: var(--text-light);
+    --border: var(--border-light);
+    --input-bg: var(--input-bg-light);
+    --table-header-bg: var(--table-header-bg-light);
+}
+
+.container {
+    background: var(--background);
+    color: var(--text);
+}
+
+.form-card {
+    padding: 2rem;
+    border-radius: 8px;
+    background: var(--background);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea {
+    width: 100%;
+    max-width: 400px; /* Fixed width for most inputs */
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="file"] {
+    background: var(--input-bg); /* Ensure file input matches theme */
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.remove-test-btn {
+    background: var(--danger-color);
+    color: #fff;
+    padding: 0.5rem 1rem;
+}
+
+.remove-test-btn:hover {
+    background: var(--danger-hover);
+    transform: translateY(-1px);
+}
+
+.remove-test-btn:active {
+    transform: translateY(0);
+}
+
+.test-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.test-table th,
+.test-table td {
+    border: 1px solid var(--border);
+    padding: 0.75rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+.test-table th {
+    background: var(--table-header-bg);
+    color: var(--text);
+    font-weight: 600;
+}
+
+.test-table td {
+    background: var(--background);
+}
+
+.test-table .hidden-column {
+    width: 60px; /* Narrower checkbox column */
+    text-align: center;
+}
+
+.test-textarea {
+    min-height: 50px;
+    resize: none; /* Disable manual resizing */
+    font-family: monospace;
+    width: calc(100% - 24px);
+    max-width: 376px; /* Reduced by 24px from 400px */
+}
+
+.test-table input[type="checkbox"] {
+    width: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+/* EasyMDE Styles */
+.EasyMDEContainer .CodeMirror {
+    background: var(--input-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    width: 100%; /* Full width */
+}
+
+.EasyMDEContainer .CodeMirror-selected {
+    background: rgba(0, 123, 255, 0.2);
+}
+
+.EasyMDEContainer .editor-toolbar {
+    background: var(--table-header-bg);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    width: 100%; /* Full width */
+}
+
+.EasyMDEContainer .editor-toolbar button {
+    color: var(--text);
+}
+
+.EasyMDEContainer .editor-toolbar button:hover,
+.EasyMDEContainer .editor-toolbar button.active {
+    background: rgba(0, 123, 255, 0.2);
+}
+
+.EasyMDEContainer .editor-statusbar {
+    color: var(--text);
+    background: var(--input-bg);
+    width: 100%; /* Full width */
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
