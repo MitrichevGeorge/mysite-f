@@ -2,10 +2,11 @@
     "title": "task2",
     "creator_id": 4,
     "visible_tests": [
-        "1",
+        "1"
+    ],
+    "hidden_tests": [
         "2"
     ],
-    "hidden_tests": [],
     "time_limit": 2000,
     "memory_limit": 1024
 }

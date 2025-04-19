@@ -185,7 +185,8 @@ def edit_task(task_name):
                     with open(input_path, 'r', encoding='utf-8') as f_in, open(output_path, 'r', encoding='utf-8') as f_out:
                         tests.append({
                             "input": f_in.read(),
-                            "output": f_out.read()
+                            "output": f_out.read(),
+                            "hidden": test_num in config.get("hidden_tests", [])
                         })
 
         if request.method == 'POST':
@@ -195,6 +196,7 @@ def edit_task(task_name):
             description = request.form.get('description')
             test_inputs = request.form.getlist('test_input[]')
             test_outputs = request.form.getlist('test_output[]')
+            test_hidden = request.form.getlist('test_hidden[]')  # Получаем индексы скрытых тестов
             tests_zip = request.files.get('tests')
 
             if not title or not time_limit or not memory_limit:
@@ -208,8 +210,9 @@ def edit_task(task_name):
 
             # Save description
             if description:
+                normalized_description = '\n'.join(line for line in description.splitlines() if line.strip() or not line)
                 with open(description_path, 'w', encoding='utf-8') as f:
-                    f.write(description)
+                    f.write(normalized_description)
 
             # Handle tests
             if tests_zip:
@@ -234,9 +237,11 @@ def edit_task(task_name):
             # Update test configuration
             config["visible_tests"] = []
             config["hidden_tests"] = []
-            for file in os.listdir(tests_dir):
-                if file.startswith("input") and file.endswith(".txt"):
-                    test_num = file.replace("input", "").replace(".txt", "")
+            for i in range(1, len(test_inputs) + 1):
+                test_num = str(i)
+                if str(i - 1) in test_hidden:  # Индексы в test_hidden начинаются с 0
+                    config["hidden_tests"].append(test_num)
+                else:
                     config["visible_tests"].append(test_num)
 
             # Save config

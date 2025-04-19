@@ -29,7 +29,14 @@
                             <tr>
                                 <td><textarea name="test_input[]" class="test-textarea" required>{{ test.input }}</textarea></td>
                                 <td><textarea name="test_output[]" class="test-textarea" required>{{ test.output }}</textarea></td>
-                                <td class="hidden-column"><input type="checkbox" name="test_hidden[]" value="{{ loop.index0 }}" {% if test.hidden %}checked{% endif %}></td>
+                                <td class="hidden-column">
+                                <div class="form-groupcheck">
+                                    <input type="checkbox" name="test_hidden[]" id = "chb{{ loop.index0 }}" style="display: none;"
+                                        value="{{ loop.index0 }}" {% if test.hidden %}checked{% endif %}>
+                                    <!-- {{ test }} -->
+                                    <label for="chb{{ loop.index0 }}"></label>
+                                 </div>
+                                </td>
                                 <td><button type="button" class="remove-test-btn">Удалить</button></td>
                             </tr>
                             {% endfor %}
@@ -39,7 +46,23 @@
                 </div>
                 <div class="form-group">
                     <label for="tests">Или загрузить архив с тестами (ZIP, опционально):</label>
-                    <input type="file" id="tests" name="tests" accept=".zip">
+                    <div class="file-upload">
+                        <input type="file" id="tests" name="tests" accept=".zip" style="display: none;">
+                        <label for="tests" class="custom-button">Обзор</label>
+                        <span id="fileName">Не выбран файл</span>
+                    </div>
+                    <script>
+                        const fileInput = document.getElementById('tests');
+                        const fileNameDisplay = document.getElementById('fileName');
+                
+                        fileInput.addEventListener('change', () => {
+                            if (fileInput.files.length > 0) {
+                                fileNameDisplay.textContent = fileInput.files[0].name;
+                            } else {
+                                fileNameDisplay.textContent = 'Не выбран файл';
+                            }
+                        });
+                    </script>
                 </div>
                 <div class="form-group">
                     <label for="time_limit">Ограничение по времени (мс):</label>
@@ -109,6 +132,8 @@
                 const checkboxes = document.querySelectorAll('input[name="test_hidden[]"]');
                 checkboxes.forEach((checkbox, index) => {
                     checkbox.value = index;
+                    checkbox.id = `chb${index}`;
+                    checkbox.nextElementSibling.setAttribute('for', `chb${index}`);
                 });
                 adjustAllTextareaHeights();
             }

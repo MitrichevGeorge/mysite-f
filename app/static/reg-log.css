@@ -1,15 +1,26 @@
-/* reg-log.css */
-header {
-    background-color: #2f354d;
-    color: #e0e0e0;
-}
-
-.logo {
-    color: #e0e0e0;
-}
-
-.tbtt {
-    color: #e0e0e0;
+:root {
+    --bg-body: linear-gradient(135deg, #1a1a2e, #16213e);
+    --bg-header: #2f354d;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --bg-field: #1e1e1e;
+    --bg-button: linear-gradient(45deg, #00ff75, #3700ff);
+    --bg-button-secondary: #252525;
+    --bg-overlay: rgba(0, 0, 0, 0.8);
+    --text-primary: #e0e0e0;
+    --text-secondary: #909090;
+    --text-heading: linear-gradient(45deg, #00ff75, #3700ff);
+    --text-link: #00ff75;
+    --text-link-hover: #3700ff;
+    --text-placeholder: #707070;
+    --accent-green: #00ff75;
+    --accent-blue: #3700ff;
+    --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.3);
+    --shadow-button: 0 4px 15px rgba(0, 255, 117, 0.4);
+    --shadow-button-hover: 0 8px 25px rgba(0, 255, 117, 0.6), 0 12px 35px rgba(55, 0, 255, 0.4);
+    --border-radius-lg: 24px;
+    --border-radius-md: 12px;
+    --border-radius-sm: 8px;
+    --transition: all 0.3s ease;
 }
 
 body {
@@ -17,9 +28,17 @@ body {
     font-family: 'Inter', Arial, sans-serif;
     position: relative;
     overflow: hidden;
-    --mouse-x: 0;
-    --mouse-y: 0;
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    background: var(--bg-body);
+}
+
+header {
+    background-color: var(--bg-header);
+    color: var(--text-primary);
+}
+
+.logo,
+.tbtt {
+    color: var(--text-primary);
 }
 
 .form-container {
@@ -29,7 +48,6 @@ body {
     align-items: center;
     position: relative;
     z-index: 1;
-    transition: filter 0.3s ease;
 }
 
 body::before {
@@ -40,7 +58,7 @@ body::before {
     background: radial-gradient(circle, rgba(0, 255, 117, 0.2) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
-    transform: translate(calc(var(--mouse-x) - 100px), calc(var(--mouse-y) - 100px));
+    transform: translate(calc(var(--mouse-x, 0) - 100px), calc(var(--mouse-y, 0) - 100px));
     transition: transform 0.2s ease-out;
     filter: blur(30px);
     opacity: 0.6;
@@ -54,33 +72,21 @@ body::after {
     background: radial-gradient(circle, rgba(55, 0, 255, 0.15) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
-    transform: translate(calc(var(--mouse-x) - 50px), calc(var(--mouse-y) - 50px));
+    transform: translate(calc(var(--mouse-x, 0) - 50px), calc(var(--mouse-y, 0) - 50px));
     transition: transform 0.15s ease-out;
     filter: blur(15px);
     opacity: 0.4;
 }
 
-.input-icon {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #00ff75;
-    transition: all 0.3s ease;
-    width: 24px;
-    height: 24px;
-}
-
 .card {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-card);
     backdrop-filter: blur(12px);
-    border-radius: 24px;
+    border-radius: var(--border-radius-lg);
     padding: 2.5rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
     max-width: 400px;
     width: 100%;
-    width: 355px;
 }
 
 .card2 {
@@ -94,7 +100,7 @@ body::after {
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 3px;
-    background: linear-gradient(45deg, #00ff75, #3700ff);
+    background: var(--text-heading);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -104,9 +110,7 @@ body::after {
 .form {
     display: flex;
     flex-direction: column;
-    /*gap: 15px;*/
     padding: 1.5em;
-    position: relative;
     animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -120,10 +124,9 @@ body::after {
     display: flex;
     align-items: center;
     border-radius: 50px;
-    padding: 0;
-    background: #1e1e1e;
+    background: var(--bg-field);
     box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    transition: var(--transition);
     margin: 5px;
 }
 
@@ -133,20 +136,36 @@ body::after {
     border: 2px solid transparent;
     border-radius: 50px;
     background: transparent;
-    color: #e0e0e0;
+    color: var(--text-primary);
     font-size: 1rem;
     outline: none;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .input-field::placeholder {
-    color: #707070;
+    color: var(--text-placeholder);
 }
 
 .input-field:focus {
-    border-color: #00ff75;
+    border-color: var(--accent-green);
     background: rgba(255, 255, 255, 0.05);
     box-shadow: 0 0 20px rgba(0, 255, 117, 0.4);
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-green);
+    transition: var(--transition);
+    width: 24px;
+    height: 24px;
+}
+
+.field:hover .input-icon {
+    transform: scale(1.15) translateY(-50%);
+    color: var(--accent-blue);
 }
 
 .btn {
@@ -160,17 +179,15 @@ body::after {
     width: 100%;
     padding: 1em 24px;
     border: none;
-    border-radius: 8px;
-    background: linear-gradient(45deg, #00ff75, #3700ff);
+    border-radius: var(--border-radius-sm);
+    background: var(--bg-button);
     color: white;
     font-weight: 600;
     font-size: 1.1em;
     cursor: pointer;
     overflow: hidden;
-    transition: all 0.3s ease;
-    z-index: 3;
-    box-shadow: 0 4px 15px rgba(0, 255, 117, 0.3);
-    padding: auto;
+    transition: var(--transition);
+    box-shadow: var(--shadow-button);
 }
 
 .button1::before {
@@ -182,35 +199,17 @@ body::after {
     z-index: 2;
 }
 
-.intext {
-    position: relative;
-    z-index: 2;
-    margin: auto;
-}
-
 .button1::after {
     content: '';
     position: absolute;
     width: 100px;
     height: 100px;
-    background: radial-gradient(circle, rgba(255, 105, 210, 0.7) 10%, transparent 60%);
+    background: radial-gradient(circle, rgba(255, 105, 210, 0.8) 10%, transparent 60%);
     pointer-events: none;
     transform: translate(-50%, -50%);
     transition: transform 0.1s ease-out;
     opacity: 0;
-    filter: blur(8px);
-    z-index: 1;
-}
-
-.button1-shadow {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, rgba(0, 255, 117, 0.5) 10%, transparent 60%);
-    pointer-events: none;
-    filter: blur(25px);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    filter: blur(10px);
     z-index: 1;
 }
 
@@ -221,33 +220,30 @@ body::after {
 }
 
 .button1:hover::after {
-    opacity: 0.9;
+    opacity: 1;
 }
 
 .button1:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 255, 117, 0.5),
-                0 12px 30px rgba(55, 0, 255, 0.3);
+    box-shadow: var(--shadow-button-hover);
 }
 
 .button3 {
     margin-top: 1.5em;
     padding: 0.8em;
-    border-radius: 8px;
+    border-radius: var(--border-radius-sm);
     border: none;
-    outline: none;
-    background: #252525;
-    color: #e0e0e0;
+    background: var(--bg-button-secondary);
+    color: var(--text-primary);
     transition: all 0.4s ease-in-out;
     text-align: center;
-    display: block;
     width: 100%;
     font-size: 0.95em;
     cursor: pointer;
 }
 
 .button3:hover {
-    background: linear-gradient(45deg, #00ff75, #3700ff);
+    background: var(--bg-button);
     color: white;
     box-shadow: 0 8px 20px rgba(0, 255, 117, 0.5);
 }
@@ -257,24 +253,19 @@ body::after {
     50% { transform: translateX(5px); }
 }
 
-.field:hover .input-icon {
-    transform: scale(1.15) translateY(-50%);
-    color: #3700ff;
-}
-
 a {
-    color: #00ff75;
+    color: var(--text-link);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 a:hover {
-    color: #3700ff;
+    color: var(--text-link-hover);
     text-shadow: 0 0 12px rgba(55, 0, 255, 0.4);
 }
 
 .btext {
-    color: #909090;
+    color: var(--text-secondary);
     font-size: 0.95em;
     text-align: center;
 }
@@ -284,32 +275,40 @@ a:hover {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-overlay);
     backdrop-filter: blur(6px);
     z-index: 1000;
     justify-content: center;
     align-items: center;
     animation: fadeIn 0.3s ease;
+    overflow: auto;
 }
 
 .account-container {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-card);
     backdrop-filter: blur(12px);
-    border-radius: 24px;
+    border-radius: var(--border-radius-lg);
     padding: 2.5rem;
     max-width: 500px;
     width: 90%;
     text-align: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    margin: auto;
+    margin-top: calc(50% - 200px);
 }
 
 .account-container h2 {
     color: #fff;
     font-size: 2.2rem;
-    margin-bottom: 1.8rem;
-    background: linear-gradient(45deg, #00ff75, #3700ff);
+    margin-bottom: 1rem;
+    background: var(--text-heading);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -322,14 +321,14 @@ a:hover {
 }
 
 .account-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-card);
     border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    border-radius: var(--border-radius-md);
     padding: 1.2rem;
-    color: #e0e0e0;
+    color: var(--text-primary);
     font-size: 1.3rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -337,13 +336,13 @@ a:hover {
 
 .account-card:hover {
     background: rgba(255, 255, 255, 0.12);
-    border-color: #00ff75;
+    border-color: var(--accent-green);
     box-shadow: 0 0 20px rgba(0, 255, 117, 0.4);
     transform: translateY(-3px);
 }
 
 .account-note {
-    color: #909090;
+    color: var(--text-secondary);
     font-size: 0.9rem;
     margin-top: 1.8rem;
 }
@@ -356,12 +355,12 @@ a:hover {
     cursor: pointer;
     width: 24px;
     height: 24px;
-    fill: #707070;
-    transition: all 0.3s ease;
+    fill: var(--text-placeholder);
+    transition: var(--transition);
 }
 
 .password-toggle:hover {
-    fill: #00ff75;
+    fill: var(--accent-green);
 }
 
 .field:hover .password-toggle {
@@ -385,13 +384,13 @@ a:hover {
     gap: 8px;
     padding: 0.6em 1.2em;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
+    border-radius: var(--border-radius-sm);
     background: rgba(255, 255, 255, 0.03);
-    color: #909090;
+    color: var(--text-secondary);
     font-size: 0.95em;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     animation: slideIn 0.5s ease-in-out;
 }
 
@@ -408,15 +407,15 @@ a:hover {
 
 .login-option-btn.active {
     background: rgba(255, 255, 255, 0.08);
-    color: #e0e0e0;
-    border-color: #00ff75;
+    color: var(--text-primary);
+    border-color: var(--accent-green);
     box-shadow: 0 0 10px rgba(0, 255, 117, 0.3);
 }
 
 .login-option-btn:hover {
     background: rgba(255, 255, 255, 0.1);
-    color: #e0e0e0;
-    border-color: #3700ff;
+    color: var(--text-primary);
+    border-color: var(--accent-blue);
     box-shadow: 0 0 12px rgba(55, 0, 255, 0.3);
 }
 
@@ -431,7 +430,7 @@ a:hover {
     transform: translateY(10px);
 }
 
-#passwordLoginFields,
+#passwordLoginFields:not([style*="display: none"]),
 #codeLoginFields:not([style*="display: none"]) {
     opacity: 1;
     transform: translateY(0);
@@ -461,79 +460,33 @@ a:hover {
         padding: 0.5em 1em;
         font-size: 0.9em;
     }
+
+    .account-container {
+        padding: 1.5rem;
+        max-width: 95%;
+    }
+
+    .account-container h2 {
+        font-size: 1.8rem;
+    }
 }
 
-.button1 {
-    position: relative;
-    width: 100%;
-    padding: 1em 24px;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(45deg, #00ff75, #3700ff);
-    color: white;
-    font-weight: 600;
-    font-size: 1.1em;
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    z-index: 3;
-    box-shadow: 0 4px 15px rgba(0, 255, 117, 0.4); /* Первая постоянная тень */
+.account-container svg {
+    display: block;
+    margin: 0 auto 1.5rem;
 }
 
-.button1::before {
-    content: '➔';
-    position: absolute;
-    right: 20px;
-    opacity: 0;
-    transition: all 0.4s ease;
-    z-index: 2;
-}
-
-.button1::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, rgba(255, 105, 210, 0.8) 10%, transparent 60%);
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out;
-    opacity: 0;
-    filter: blur(10px);
-    z-index: 1;
-}
-
-.button1-shadow {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(circle, rgba(0, 255, 117, 0.6) 10%, transparent 60%);
-    pointer-events: none;
-    filter: blur(30px);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-}
-
-.button1:hover::before {
-    opacity: 1;
-    right: 15px;
-    animation: bounce 0.5s infinite;
-}
-
-.button1:hover::after {
-    opacity: 1;
-}
-
-.button1:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 255, 117, 0.6), /* Первая тень при ховере */
-                0 12px 35px rgba(55, 0, 255, 0.4); /* Вторая тень при ховере */
+.account-container .button1 {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #passwordField {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
 #passwordField[style*="display: none"] {
     opacity: 0;
     transform: translateY(10px);
@@ -553,69 +506,6 @@ a:hover {
     100% { content: '...'; }
 }
 
-/* Center SVG icons */
-.account-container svg {
-    display: block;
-    margin: 0 auto 1.5rem;
-}
-
-/* Style buttons in overlay */
-.account-container .button1 {
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Adjust overlay content spacing */
-.account-container h2 {
-    margin-bottom: 1rem;
-}
-
-.account-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(6px);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 0.3s ease;
-    overflow: auto; /* Для прокрутки на маленьких экранах */
-}
-
-.account-container {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    border-radius: 24px;
-    padding: 2.5rem;
-    max-width: 500px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px; /* Минимальная высота для стабильности */
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 480px) {
-    .account-container {
-        padding: 1.5rem;
-        max-width: 95%;
-    }
-
-    .account-container h2 {
-        font-size: 1.8rem;
-    }
-}
-
 .spinner {
     animation: spin 1s linear infinite;
 }
@@ -625,11 +515,6 @@ a:hover {
     100% { transform: rotate(360deg); }
 }
 
-.intext{
+.intext {
     margin-left: auto;
-}
-
-.account-container{
-    margin: auto;
-    margin-top: calc(50% - 200px);
 }

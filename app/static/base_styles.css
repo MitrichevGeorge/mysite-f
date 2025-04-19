@@ -1,59 +1,74 @@
+:root {
+    --font-family: 'Roboto', sans-serif;
+    --padding-sm: 10px;
+    --padding-md: 15px;
+    --padding-lg: 20px;
+    --border-radius-sm: 5px;
+    --border-radius-md: 6px;
+    --border-radius-lg: 8px;
+    --transition: all 0.3s ease;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --z-index-high: 1000;
+    --z-index-highest: 2000;
+    --scrollbar-height: 10px;
+    --scrollbar-height-scrolled: 5px;
+}
+
 body {
-    font-family: 'Roboto', sans-serif; /* Используем более современный шрифт */
+    font-family: var(--font-family);
     margin: 0;
     padding: 0;
 }
 
 header {
-    padding: 15px 20px; /* Увеличенные отступы */
-    margin: 0;
+    padding: var(--padding-md) var(--padding-lg);
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000;
-    transition: all 0.3s ease;
+    z-index: var(--z-index-high);
+    transition: var(--transition);
+    max-width: calc(100% - 20px);
 }
 
 header.scrolled {
-    padding: 10px; /* Уменьшаем отступ при прокрутке */
-    font-size: 14px; /* Увеличиваем размер шрифта */
+    padding: var(--padding-sm);
+    font-size: 14px;
 }
 
 .tabs {
     display: flex;
     overflow-x: auto;
     white-space: nowrap;
+    position: relative;
+    border-radius: var(--border-radius-sm);
 }
 
 .tab {
-    padding: 5px 15px;
-    border-radius: 8px;
+    padding: 5px var(--padding-md);
+    border-radius: var(--border-radius-lg);
     margin-right: 5px;
     display: flex;
     align-items: center;
     cursor: pointer;
     transition: background-color 0.3s;
-    padding-right: 4px;
 }
 
 .tab.scrolled {
     padding: 2px 12px;
-    padding-right: 2px;
-    border-radius: 6px;
+    border-radius: var(--border-radius-md);
 }
 
 .tab .close {
     margin-left: 5px;
-    cursor: pointer;
-    background-color: transparent;
+    background: none;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
     padding: 1px 6px;
-    border-radius: 5px;
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition);
 }
 
 .tab.scrolled .close {
@@ -63,9 +78,11 @@ header.scrolled {
 
 header a {
     text-decoration: none;
-    margin: 0 10px;
-    display: inline-block;
-    height: 100%;
+    margin: 0 var(--padding-sm);
+    padding: var(--padding-sm);
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.2s;
+    white-space: nowrap;
 }
 
 header .auth-links {
@@ -75,12 +92,12 @@ header .auth-links {
 }
 
 .submission {
-    border-radius: 5px;
-    margin-bottom: 10px;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--padding-sm);
 }
 
 .submission-header {
-    padding: 10px;
+    padding: var(--padding-sm);
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -88,7 +105,7 @@ header .auth-links {
 }
 
 .submission-details {
-    padding: 10px;
+    padding: var(--padding-sm);
     display: none;
 }
 
@@ -97,7 +114,8 @@ header .auth-links {
     border-collapse: collapse;
 }
 
-.test-table th, .test-table td {
+.test-table th,
+.test-table td {
     padding: 8px;
     text-align: left;
 }
@@ -116,138 +134,105 @@ header .auth-links {
 }
 
 .logo {
-    margin-right: 10px;
+    margin-right: var(--padding-sm);
 }
 
 main {
-    padding-top: 60px; /* Увеличиваем отступ для шапки */
-}
-
-.header .auth-links {
-    display: flex;
-    align-items: center;
+    padding-top: 60px;
 }
 
 header.scrolled .auth-links {
-    display: none; /* Скрываем кнопки при прокрутке */
+    display: none;
 }
 
 header.scrolled .user-name {
-    display: flex; /* Показываем имя пользователя при прокрутке */
+    display: flex;
     font-size: 16px;
 }
 
 header .user-name {
     cursor: pointer;
     display: none;
-    margin-right: 12px;
-    margin-left: 10px;
-    padding: 10px;
-    border-radius: 5px;
+    margin: 0 12px 0 var(--padding-sm);
+    padding: var(--padding-sm);
+    border-radius: var(--border-radius-sm);
     transition: background-color 0.2s;
-}
-
-header{
-    padding-right: 40px;
-    max-width: calc(100% - 20px);
 }
 
 .dropdown {
-    display: none; /* Скрываем по умолчанию */
-    position: absolute; /* Позволяет позиционировать относительно родителя */
-    border-radius: 8px; /* Скругление углов */
-    z-index: 1000; /* Убедитесь, что он выше других элементов */
-    margin-top: 5px; /* Отступ сверху */
+    display: none;
+    position: absolute;
+    border-radius: var(--border-radius-lg);
+    z-index: var(--z-index-high);
+    margin-top: 5px;
     top: 40px;
-    right: 0px;
+    right: 0;
 }
 
 .dropdown a {
-    display: block; /* Каждая ссылка занимает всю ширину */
-    padding: 10px; /* Отступы внутри */
-    text-decoration: none; /* Убираем подчеркивание */
-}
-
-header a {
+    display: block;
+    padding: var(--padding-sm);
     text-decoration: none;
-    margin: 0 10px;
-    white-space: nowrap; /* Prevents text from wrapping */
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.2s;
 }
 
-.tbtt{
+.tbtt {
     margin-right: 0;
 }
 
 .tabs::-webkit-scrollbar {
-    height: 10px;
+    height: var(--scrollbar-height);
 }
 
-.tabs.scrolled::-webkit-scrollbar{
-    height: 5px;
-    transform: translateY(-5px);
+.tabs.scrolled::-webkit-scrollbar {
+    height: var(--scrollbar-height-scrolled);
 }
 
-.tabs::-webkit-scrollbar-thumb{
-    border-radius: 5px;
+.tabs::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-sm);
 }
 
-.tabs.scrolled::-webkit-scrollbar-thumb{
+.tabs.scrolled::-webkit-scrollbar-thumb {
     border-radius: 2.5px;
-}
-
-.tabs {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    position: relative;
-    border-radius: 5px;
 }
 
 .shdw-left,
 .shdw-right {
-    content: "";
     position: absolute;
     top: 0;
-    height: 100%; /* Высота совпадает с высотой контейнера */
-    background-color: transparent; /* Убираем фоновый цвет */
+    height: 100%;
+    background: transparent;
     transition: opacity 0.3s ease-in-out;
     opacity: 0;
-    z-index: 1; /* Убедитесь, что тени находятся выше вкладок */
+    z-index: 1;
 }
 
-.tabs.show-left-shadow .shdw-left {
-    opacity: 1; /* Показываем тень слева */
-}
-
+.tabs.show-left-shadow .shdw-left,
 .tabs.show-right-shadow .shdw-right {
-    opacity: 1; /* Показываем тень справа */
+    opacity: 1;
 }
 
 .flash-container {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: var(--padding-sm);
+    right: var(--padding-sm);
     width: 300px;
-    z-index: 2000;
+    z-index: var(--z-index-highest);
 }
 
 .flash-message {
     position: relative;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: var(--padding-sm);
+    padding: var(--padding-md);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
     animation: slideIn 0.3s ease;
-    max-height: 100px; /* Ограничение для 4 строк */
+    max-height: 100px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .flash-message.expanded {
-    max-height: 500px; /* Максимальная высота при разворачивании */
+    max-height: 500px;
 }
 
 .flash-message .close {
@@ -288,32 +273,16 @@ header a {
 }
 
 @keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes slideUp {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100%); opacity: 0; }
 }
 
 @keyframes timer {
-    from {
-        width: 100%;
-    }
-    to {
-        width: 0;
-    }
+    from { width: 100%; }
+    to { width: 0; }
 }

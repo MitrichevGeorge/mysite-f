@@ -1,91 +1,103 @@
+:root {
+    --bg-body: #f0f4f8;
+    --bg-header: #e7bacb;
+    --bg-tab: #f0e5df;
+    --bg-submission: #ffffff;
+    --bg-table-header: #f2f2f2;
+    --bg-dropdown: #ffffff;
+    --bg-scrollbar-track: #e7bacb;
+    --bg-scrollbar-thumb: #a87c8d;
+    --bg-scrollbar-thumb-hover: #b1a5ac;
+    --text-primary: #333;
+    --text-link: #111b2e;
+    --text-close: #402831;
+    --text-close-hover: #ee87af;
+    --shadow: 0 2px 80px rgba(29, 42, 97, 0.893);
+    --shadow-hover: 0 0 3px 5px rgba(46, 46, 46, 0.223);
+    --shadow-tab: linear-gradient(to right, rgba(82, 61, 61, 0.8), transparent);
+    --shadow-tab-right: linear-gradient(to left, rgba(82, 61, 61, 0.8), transparent);
+}
+
 body {
-    background-color: #f0f4f8;
-    color: #333;
+    background-color: var(--bg-body);
+    color: var(--text-primary);
 }
 
 header {
-    background-color: #e7bacb;
-    color: #333;
+    background-color: var(--bg-header);
+    color: var(--text-primary);
 }
 
-header a{
-    color: #111b2e;
-}
-
+header a,
 .user-name {
-    color: #111b2e;
+    color: var(--text-link);
 }
 
 header.scrolled {
-    box-shadow: 0 2px 80px rgba(29, 42, 97, 0.893);
+    box-shadow: var(--shadow);
 }
 
 .tab {
-    background-color: #f0e5df;
-    color: #333;
+    background-color: var(--bg-tab);
+    color: var(--text-primary);
 }
 
 .submission {
-    background-color: #ffffff;
+    background-color: var(--bg-submission);
 }
 
 .test-table th {
-    background-color: #f2f2f2;
+    background-color: var(--bg-table-header);
 }
 
 .dropdown {
-    background-color: #ffffff;
+    background-color: var(--bg-dropdown);
     border: 1px solid #ccc;
 }
 
-header a:hover{
+header a:hover,
+header .user-name:hover {
     background-color: rgba(242, 242, 242, 0.608);
-    box-shadow: 0 0 3px 5px rgba(46, 46, 46, 0.223);
-}
-
-header .user-name:hover{
-    background-color: rgba(242, 242, 242, 0.608);
-    box-shadow: 0 0 3px 5px rgba(46, 46, 46, 0.223);
+    box-shadow: var(--shadow-hover);
 }
 
 .tabs::-webkit-scrollbar-track {
-    background-color: #e7bacb;
+    background-color: var(--bg-scrollbar-track);
 }
 
 .tabs::-webkit-scrollbar-thumb {
-    background: #a87c8d;
+    background: var(--bg-scrollbar-thumb);
     transition: all 0.5s ease;
 }
 
-.tabs::-webkit-scrollbar-thumb:hover{
-    background: rgb(177, 165, 172);
+.tabs::-webkit-scrollbar-thumb:hover {
+    background: var(--bg-scrollbar-thumb-hover);
 }
 
 .tab .close {
-    color: #402831;
+    color: var(--text-close);
 }
 
 .tab .close:hover {
-    color: #ee87af;
-    background-color: #33333381;
+    color: var(--text-close-hover);
+    background-color: rgba(51, 51, 51, 0.506);
 }
 
-
 .shdw-left {
-    left: 0; /* Сдвигаем тень влево */
-    width: 20px; /* Ширина тени */
-    background: linear-gradient(to right, rgba(82, 61, 61, 0.8), transparent);
+    left: 0;
+    width: 20px;
+    background: var(--shadow-tab);
 }
 
 .shdw-right {
-    right: 0; /* Сдвигаем тень вправо */
-    width: 20px; /* Ширина тени */
-    background: linear-gradient(to left, rgba(82, 61, 61, 0.8), transparent);
+    right: 0;
+    width: 20px;
+    background: var(--shadow-tab-right);
 }
 
 .flash-message {
-    background-color: #ffffff;
-    color: #333;
+    background-color: var(--bg-submission);
+    color: var(--text-primary);
 }
 
 .flash-message.success {
@@ -101,19 +113,19 @@ header .user-name:hover{
 }
 
 .flash-message .close {
-    color: #402831;
+    color: var(--text-close);
 }
 
 .flash-message .close:hover {
-    color: #ee87af;
+    color: var(--text-close-hover);
 }
 
 .flash-message .expand-arrow {
-    color: #111b2e;
+    color: var(--text-link);
 }
 
 .flash-message .timer-bar {
-    background-color: #a87c8d;
+    background-color: var(--bg-scrollbar-thumb);
 }
 
 .flash-message.success .timer-bar {

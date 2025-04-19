@@ -1,6 +1,3 @@
-/* static/css/forms.css */
-
-/* Общие переменные */
 :root {
     --border-radius: 8px;
     --transition: all 0.3s ease;
@@ -9,7 +6,6 @@
     --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Светлая тема */
 :where(.light) {
     --bg-body: #f5f7fa;
     --bg-card: #ffffff;
@@ -26,7 +22,6 @@
     --shadow: var(--shadow-sm);
 }
 
-/* Темная тема */
 :where(.dark) {
     --bg-body: #1a202c;
     --bg-card: #2d3748;
@@ -81,6 +76,7 @@ body {
 
 .form-group {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .form-group label {
@@ -101,6 +97,10 @@ body {
     color: var(--text-primary);
     box-sizing: border-box;
     transition: var(--transition);
+}
+
+.form-group input.with-toggle {
+    padding-right: 48px;
 }
 
 .form-group input:focus {
@@ -146,7 +146,6 @@ body {
     text-decoration: underline;
 }
 
-/* Адаптивность */
 @media (max-width: 480px) {
     .form-card {
         padding: 24px;
@@ -190,12 +189,4 @@ body {
 
 :where(.dark) .password-toggle:hover {
     fill: #63b3ed;
-}
-
-.form-group {
-    position: relative;
-}
-
-.form-group input.with-toggle {
-    padding-right: 48px;
 }
