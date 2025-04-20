@@ -1,6 +1,4 @@
 :root {
-    --primary-color: #007bff;
-    --primary-hover: #0056b3;
     --danger-color: #ff4444;
     --danger-hover: #cc0000;
     --background-light: #ffffff;
@@ -16,6 +14,9 @@
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
     --border-radius: 4px;
     --transition: all 0.2s;
+    --spinner-color: #007bff; /* Цвет стрелок по умолчанию */
+    --spinner-hover: #003087; /* Более контрастный цвет при наведении */
+    --link-color: #007bff;
 }
 
 .dark {
@@ -24,6 +25,10 @@
     --border: var(--border-dark);
     --input-bg: var(--input-bg-dark);
     --table-header-bg: var(--table-header-bg-dark);
+    --primary-color: #1d3a58;
+    --primary-hover: #1d4a7a;
+    --spinner-color: #4a90e2; /* Цвет стрелок для темной темы */
+    --spinner-hover: #2a6db0; /* Более контрастный цвет при наведении */
 }
 
 .light {
@@ -32,6 +37,10 @@
     --border: var(--border-light);
     --input-bg: var(--input-bg-light);
     --table-header-bg: var(--table-header-bg-light);
+    --primary-color: #62aaf8;
+    --primary-hover: #c8e1fc;
+    --spinner-color: #007bff; /* Цвет стрелок для светлой темы */
+    --spinner-hover: #003087; /* Более контрастный цвет при наведении */
 }
 
 .container {
@@ -70,6 +79,17 @@ textarea {
     color: var(--text);
     font-size: 1rem;
     transition: var(--transition);
+}
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: inner-spin-button;
+    opacity: 1;
 }
 
 input:focus,
@@ -198,7 +218,7 @@ textarea:focus {
 .back-link {
     display: inline-block;
     margin-top: 1rem;
-    color: var(--primary-color);
+    color: var(--link-color);
     text-decoration: none;
 }
 
@@ -207,8 +227,8 @@ textarea:focus {
 }
 
 .custom-button {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--input-bg);
+    color: var(--text);
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
