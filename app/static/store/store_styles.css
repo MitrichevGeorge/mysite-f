@@ -25,6 +25,8 @@
     --btn-text: #333333;
     --btn-hover-bg: #d0d0d0;
     --sidebar-bg: #f9fafb;
+    --favorite-color: #ccc;
+    --favorite-filled-color: #ffd700;
 }
 
 :where(.dark) {
@@ -45,6 +47,8 @@
     --btn-text: #e6e6e6;
     --btn-hover-bg: #2c3f5b;
     --sidebar-bg: #1e1e1e;
+    --favorite-color: #666;
+    --favorite-filled-color: #ffd700;
 }
 
 body {
@@ -128,6 +132,7 @@ body {
     box-shadow: var(--shadow-md);
     cursor: pointer;
     transition: background-color var(--transition), transform 0.2s;
+    position: relative;
 }
 
 .package-card:hover {
@@ -145,6 +150,20 @@ body {
 .package-description {
     font-size: 0.875rem;
     color: var(--text-body);
+}
+
+.favorite-star {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.25rem;
+    color: var(--favorite-color);
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+.favorite-star.filled {
+    color: var(--favorite-filled-color);
 }
 
 .modal {
@@ -200,6 +219,24 @@ body {
     background-color: var(--btn-hover-bg);
 }
 
+.favorite-btn {
+    position: absolute;
+    top: 1rem;
+    right: 11rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color var(--transition);
+}
+
+.favorite-btn:hover {
+    background-color: var(--btn-hover-bg);
+}
+
 #code-editor {
     width: 100%;
     min-height: 300px;
@@ -214,14 +251,14 @@ body {
     border-radius: var(--border-radius);
     background-color: var(--bg-card);
     color: var(--text-body);
-    font-size: 14px; /* Consistent font size */
+    font-size: 14px;
 }
 
 /* Fix line number overlap */
 .CodeMirror-linenumbers {
-    width: 40px !important; /* Increase gutter width for up to 3-digit line numbers */
+    width: 40px !important;
     min-width: 40px !important;
-    padding-right: 10px !important; /* Add space between line numbers and code */
+    padding-right: 10px !important;
     background-color: var(--bg-card);
     text-align: right;
 }
@@ -231,5 +268,5 @@ body {
 }
 
 .CodeMirror-code {
-    margin-left: 50px; /* Ensure code content is offset from line numbers */
+    margin-left: 50px;
 }

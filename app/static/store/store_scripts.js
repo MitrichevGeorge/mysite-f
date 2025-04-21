@@ -12,6 +12,35 @@ function showTab(tabId) {
 
 let codeMirrorInstance = null;
 
+function toggleFavorite(event, filename) {
+    event.stopPropagation();
+    fetch(`/api/toggle-favorite/${encodeURIComponent(filename)}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            const star = document.querySelector(`.favorite-star[data-filename="${filename}"]`);
+            if (star) {
+                star.classList.toggle('filled', data.is_favorite);
+            }
+            // Optionally refresh favorites tab
+            if (document.getElementById('favorites-tab').style.display === 'block') {
+                location.reload();
+            }
+        } else {
+            alert('Ошибка при изменении статуса избранного.');
+        }
+    })
+    .catch(error => {
+        console.error('Error toggling favorite:', error);
+        alert('Ошибка при изменении статуса избранного.');
+    });
+}
+
 function openPackageModal(filename, package) {
     try {
         console.log('Opening modal with package:', package);
@@ -38,8 +67,8 @@ function openPackageModal(filename, package) {
                 theme: 'material',
                 lineNumbers: true,
                 readOnly: true,
-                gutters: ['CodeMirror-linenumbers'], /* Explicitly define line number gutter */
-                lineWrapping: true /* Prevent horizontal overflow */
+                gutters: ['CodeMirror-linenumbers'],
+                lineWrapping: true
             });
             document.getElementById('codemirror-error').style.display = 'none';
         } else {
@@ -66,9 +95,52 @@ function openPackageModal(filename, package) {
                     alert('Ошибка при применении пакета дизайна.');
                 }
             })
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Пакет дизайна успешно применён!');
+                    location.reload();
+                } else {
+                    alert('Ошибка при применении пакета дизайна.');
+                }
+            })
             .catch(error => {
                 console.error('Error applying package:', error);
                 alert('Ошибка при применении пакета дизайна.');
+            });
+        };
+
+        const favoriteBtn = document.getElementById('favorite-btn');
+        favoriteBtn.textContent = package.is_favorite ? 'Убрать из избранного' : 'Добавить в избранное';
+        favoriteBtn.onclick = () => {
+            fetch(`/api/toggle-favorite/${encodeURIComponent(filename)}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    favoriteBtn.textContent = data.is_favorite ? 'Убрать из избранного' : 'Добавить в избранное';
+                    const star = document.querySelector(`.favorite-star[data-filename="${filename}"]`);
+                    if (star) {
+                        star.classList.toggle('filled', data.is_favorite);
+                    }
+                    if (data.is_favorite) {
+                        alert('Пакет добавлен в избранное!');
+                    } else {
+                        alert('Пакет убран из избранного!');
+                    }
+                    if (document.getElementById('favorites-tab').style.display === 'block') {
+                        location.reload();
+                    }
+                } else {
+                    alert('Ошибка при изменении статуса избранного.');
+                }
+            })
+            .catch(error => {
+                console.error('Error toggling favorite:', error);
+                alert('Ошибка при изменении статуса избранного.');
             });
         };
 
@@ -87,6 +159,8 @@ function closePackageModal() {
             codeMirrorInstance.toTextArea();
             codeMirrorInstance = null;
         }
+        const favoriteBtn = document.getElementById('favorite-btn');
+        favoriteBtn.onclick = null;
     } catch (error) {
         console.error('Error in closePackageModal:', error);
     }

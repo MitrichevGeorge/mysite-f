@@ -1,4 +1,3 @@
-# models.py
 import os
 import json
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -70,8 +69,10 @@ class User(UserMixin):
     def toggle_favorite_package(self, filename):
         if filename in self.favorite_packages:
             self.favorite_packages.remove(filename)
+            return False
         else:
             self.favorite_packages.append(filename)
+            return True
 
     def to_dict(self):
         return {

@@ -1,4 +1,3 @@
-# app/views.py
 import os
 import json
 import re
@@ -113,6 +112,10 @@ def profile():
 def store():
     # Получаем список всех пакетов дизайна с метаданными
     packages = []
+    users = load_users()
+    user = users.get(current_user.id)
+    favorite_packages = user.favorite_packages if user else []
+    
     if os.path.exists(PACKAGES_DIR):
         for filename in os.listdir(PACKAGES_DIR):
             if filename.endswith('.css'):
@@ -122,12 +125,13 @@ def store():
                     with open(file_path, 'r', encoding='utf-8') as f:
                         code = f.read()
                     metadata['code'] = code
+                    metadata['is_favorite'] = filename in favorite_packages
                     packages.append(metadata)
                     logging.debug(f"Added package: {metadata['filename']}, code length: {len(code)}")
                 else:
                     logging.warning(f"Skipping {filename} due to invalid metadata")
     logging.debug(f"Found {len(packages)} valid packages")
-    return render_template("store.html", packages=packages)
+    return render_template("store.html", packages=packages, favorite_packages=favorite_packages)
 
 @views_bp.route('/api/package/<filename>')
 @login_required
@@ -143,12 +147,31 @@ def get_package(filename):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             code = f.read()
+        users = load_users()
+        user = users.get(current_user.id)
         metadata['code'] = code
+        metadata['is_favorite'] = filename in user.favorite_packages if user else False
         logging.debug(f"Fetched package: {filename}, code length: {len(code)}")
         return jsonify(metadata)
     except Exception as e:
         logging.error(f"Error reading package {filename}: {e}")
         return jsonify({"error": "Ошибка при чтении пакета"}), 500
+
+@views_bp.route('/api/toggle-favorite/<filename>', methods=['POST'])
+@login_required
+def toggle_favorite(filename):
+    users = load_users()
+    user = users.get(current_user.id)
+    if not user:
+        return jsonify({"error": "Пользователь не найден"}), 404
+    
+    file_path = os.path.join(PACKAGES_DIR, filename)
+    if not os.path.exists(file_path) or not filename.endswith('.css'):
+        return jsonify({"error": "Пакет не найден"}), 404
+        
+    is_favorite = user.toggle_favorite_package(filename)
+    save_users(users)
+    return jsonify({"status": "success", "is_favorite": is_favorite})
 
 @views_bp.route('/api/submissions', methods=['GET'])
 @login_required
