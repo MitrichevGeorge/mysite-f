@@ -26,9 +26,7 @@
                                 <div class="package-card" data-filename="{{ package.filename }}">
                                     <span class="favorite-star {{ 'filled' if package.is_favorite else '' }}"
                                           data-filename="{{ package.filename }}"
-                                          onclick="toggleFavorite(event, '{{ package.filename }}')">
-                                        ★
-                                    </span>
+                                          onclick="toggleFavorite(event, '{{ package.filename }}')">★</span>
                                     <h3 class="package-title">{{ package.name }}</h3>
                                     <p class="package-description">{{ package.description }}</p>
                                 </div>
@@ -75,26 +73,20 @@
     </div>
 
     <script>
-        // Attach click handlers to package cards
         document.querySelectorAll('.package-card').forEach(card => {
             card.addEventListener('click', (event) => {
-                // Prevent card click when star is clicked
                 if (event.target.classList.contains('favorite-star')) return;
                 const filename = card.dataset.filename;
-                console.log('Fetching package:', filename);
                 fetch(`/api/package/${encodeURIComponent(filename)}`)
                     .then(response => response.json())
                     .then(data => {
                         if (data.error) {
-                            console.error('Error fetching package:', data.error);
                             alert('Ошибка: ' + data.error);
                             return;
                         }
-                        console.log('Fetched package data:', data);
                         openPackageModal(filename, data);
                     })
                     .catch(error => {
-                        console.error('Error fetching package:', error);
                         alert('Ошибка при загрузке пакета дизайна.');
                     });
             });
