@@ -2,6 +2,7 @@ import os
 import json
 import re
 import logging
+import cssutils
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from flask_login import login_required, current_user
 from .models import load_users, save_users
@@ -43,6 +44,15 @@ def parse_package_metadata(file_path):
     except Exception as e:
         logging.error(f"Error parsing {file_path}: {e}")
         return None
+
+def validate_css_content(content):
+    """Validate CSS syntax using cssutils."""
+    try:
+        parser = cssutils.CSSParser()
+        stylesheet = parser.parseString(content)
+        return True, None
+    except Exception as e:
+        return False, str(e)
 
 @views_bp.route('/')
 def index():
@@ -115,6 +125,7 @@ def store():
     users = load_users()
     user = users.get(current_user.id)
     favorite_packages = user.favorite_packages if user else []
+    created_packages = user.created_packages if user else []
     
     if os.path.exists(PACKAGES_DIR):
         for filename in os.listdir(PACKAGES_DIR):
@@ -131,7 +142,7 @@ def store():
                 else:
                     logging.warning(f"Skipping {filename} due to invalid metadata")
     logging.debug(f"Found {len(packages)} valid packages")
-    return render_template("store.html", packages=packages, favorite_packages=favorite_packages)
+    return render_template("store.html", packages=packages, favorite_packages=favorite_packages, is_creator=user.is_creator, created_packages=created_packages)
 
 @views_bp.route('/api/package/<filename>')
 @login_required
@@ -172,6 +183,70 @@ def toggle_favorite(filename):
     is_favorite = user.toggle_favorite_package(filename)
     save_users(users)
     return jsonify({"status": "success", "is_favorite": is_favorite})
+
+@views_bp.route('/api/upload-package', methods=['POST'])
+@login_required
+def upload_package():
+    users = load_users()
+    user = users.get(current_user.id)
+    if not user or not user.is_creator:
+        return jsonify({"error": "Только создатели могут загружать пакеты"}), 403
+
+    if 'file' not in request.files:
+        return jsonify({"error": "Файл не предоставлен"}), 400
+
+    file = request.files['file']
+    if not file.filename.endswith('.css'):
+        return jsonify({"error": "Файл должен быть в формате CSS"}), 400
+
+    try:
+        content = file.read().decode('utf-8')
+        # Validate XML metadata
+        match = re.match(r'/\*(.*?)\*/', content, re.DOTALL)
+        if not match:
+            return jsonify({"error": "Отсутствует XML-комментарий в начале файла"}), 400
+        comment = match.group(1).strip()
+        xml_match = re.search(r'<\?xml.*?</package\s*>', comment, re.DOTALL)
+        if not xml_match:
+            return jsonify({"error": "XML-метаданные не найдены"}), 400
+        xml_content = xml_match.group(0)
+        name_match = re.search(r'<name\s*>(.*?)</name\s*>', xml_content, re.DOTALL | re.IGNORECASE)
+        desc_match = re.search(r'<description\s*>(.*?)</description\s*>', xml_content, re.DOTALL | re.IGNORECASE)
+        if not name_match or not desc_match:
+            return jsonify({"error": "XML-метаданные должны содержать <name> и <description>"}), 400
+
+        # Validate CSS syntax
+        is_valid, error = validate_css_content(content)
+        if not is_valid:
+            return jsonify({"error": f"Ошибка синтаксиса CSS: {error}"}), 400
+
+        # Generate unique filename
+        base_filename = re.sub(r'[^a-zA-Z0-9]', '_', name_match.group(1).strip()).lower()
+        filename = f"{base_filename}.css"
+        counter = 1
+        while os.path.exists(os.path.join(PACKAGES_DIR, filename)):
+            filename = f"{base_filename}_{counter}.css"
+            counter += 1
+
+        # Save file
+        file.seek(0)
+        file.save(os.path.join(PACKAGES_DIR, filename))
+
+        # Update user's created packages
+        user.add_created_package(filename)
+        save_users(users)
+
+        # Return metadata for preview
+        metadata = {
+            "name": name_match.group(1).strip(),
+            "description": desc_match.group(1).strip(),
+            "filename": filename,
+            "code": content
+        }
+        return jsonify({"status": "success", "metadata": metadata})
+    except Exception as e:
+        logging.error(f"Error uploading package: {e}")
+        return jsonify({"error": f"Ошибка при загрузке пакета: {str(e)}"}), 500
 
 @views_bp.route('/api/submissions', methods=['GET'])
 @login_required

@@ -53,7 +53,30 @@
                     {% endif %}
                 </div>
                 <div class="tab-content" id="my-packages-tab" style="display: none;">
-                    <p>Ваши пакеты скоро появятся!</p>
+                    {% if is_creator %}
+                        <button class="add-package-btn" onclick="openUploadOverlay()">Добавить новый пакет</button>
+                        {% if created_packages %}
+                            <div class="packages-grid">
+                                {% for filename in created_packages %}
+                                    {% for package in packages if package.filename == filename %}
+                                        <div class="package-card" data-filename="{{ package.filename }}">
+                                            <span class="favorite-star {{ 'filled' if package.is_favorite else '' }}"
+                                                  data-filename="{{ package.filename }}"
+                                                  onclick="toggleFavorite(event, '{{ package.filename }}')">★</span>
+                                            <h3 class="package-title">{{ package.name }}</h3>
+                                            <p class="package-description">{{ package.description }}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p>Вы пока не создали ни одного пакета.</p>
+                        {% endif %}
+                    {% else %}
+                        <p>Вы не являетесь создателем.</p>
+                        <p>Вы можете запросить права создателя в своём профиле.</p>
+                        <a href="{{ url_for('views.profile') }}" class="profile-link">Перейти в профиль</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -69,6 +92,29 @@
             <button class="apply-btn" id="apply-btn">Применить</button>
             <textarea id="code-editor">Загрузка...</textarea>
             <p id="codemirror-error" style="color: red; display: none;">Не удалось загрузить CodeMirror. Проверьте настройки блокировщика контента.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="upload-overlay" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeUploadOverlay()">×</span>
+            <h2>Загрузка нового пакета</h2>
+            <div class="drop-zone" id="drop-zone">
+                <p>Перетащите CSS файл сюда или кликните для выбора</p>
+                <input type="file" id="file-input" accept=".css" style="display: none;">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="preview-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closePreviewModal()">×</span>
+            <h2 id="preview-title"></h2>
+            <p id="preview-description"></p>
+            <p><strong>Файл:</strong> <span id="preview-filename"></span></p>
+            <button class="publish-btn" id="publish-btn">Опубликовать</button>
+            <textarea id="preview-code-editor">Загрузка...</textarea>
+            <p id="preview-codemirror-error" style="color: red; display: none;">Не удалось загрузить CodeMirror. Проверьте настройки блокировщика контента.</p>
         </div>
     </div>
 

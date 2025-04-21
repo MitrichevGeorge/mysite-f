@@ -26,6 +26,9 @@
     --sidebar-bg: #f9fafb;
     --favorite-color: #ccc;
     --favorite-filled-color: #ffd700;
+    --drop-zone-bg: #f0f0f0;
+    --drop-zone-border: #ccc;
+    --drop-zone-hover-bg: #e0e0e0;
 }
 
 :where(.dark) {
@@ -48,6 +51,9 @@
     --sidebar-bg: #1e1e1e;
     --favorite-color: #666;
     --favorite-filled-color: #ffd700;
+    --drop-zone-bg: #2d3748;
+    --drop-zone-border: #4b5563;
+    --drop-zone-hover-bg: #4b5563;
 }
 
 body {
@@ -233,7 +239,70 @@ body {
     background: var(--btn-hover-bg);
 }
 
-#code-editor {
+.publish-btn {
+    position: absolute;
+    top: 1rem;
+    right: 3rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color var(--transition);
+}
+
+.publish-btn:hover {
+    background: var(--btn-hover-bg);
+}
+
+.add-package-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: background-color var(--transition);
+}
+
+.add-package-btn:hover {
+    background: var(--btn-hover-bg);
+}
+
+.profile-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    text-decoration: none;
+    margin-top: 0.5rem;
+    transition: background-color var(--transition);
+}
+
+.profile-link:hover {
+    background: var(--btn-hover-bg);
+}
+
+.drop-zone {
+    border: 2px dashed var(--drop-zone-border);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    background: var(--drop-zone-bg);
+    cursor: pointer;
+    transition: background-color var(--transition);
+}
+
+.drop-zone.dragover {
+    background: var(--drop-zone-hover-bg);
+}
+
+#code-editor, #preview-code-editor {
     width: 100%;
     min-height: 300px;
     margin-top: 1rem;
@@ -243,7 +312,7 @@ body {
     background: var(--bg-card);
 }
 
-#code-editor.loading::after {
+#code-editor.loading::after, #preview-code-editor.loading::after {
     content: 'Загрузка...';
     position: absolute;
     top: 50%;
@@ -281,4 +350,4 @@ body {
 
 .CodeMirror-code {
     margin-left: 50px;
-}
+} 

@@ -817,7 +817,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": 2,
@@ -837,7 +838,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": 3,
@@ -857,7 +859,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": 4,
@@ -1170,90 +1173,6 @@
             }
         ],
         "login_history": [
-            {
-                "timestamp": "2025-04-20 12:53:15",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 12:53:16",
-                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
-            },
-            {
-                "timestamp": "2025-04-20 12:53:26",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-20 12:53:28",
-                "url": "http://127.0.0.1:5000/task/task1"
-            },
-            {
-                "timestamp": "2025-04-20 12:55:44",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 12:55:45",
-                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
-            },
-            {
-                "timestamp": "2025-04-20 13:16:51",
-                "url": "http://127.0.0.1:5000/api/update-custom-package"
-            },
-            {
-                "timestamp": "2025-04-20 13:16:52",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 13:16:54",
-                "url": "http://127.0.0.1:5000/logout"
-            },
-            {
-                "timestamp": "2025-04-20 13:17:15",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-20 13:17:16",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-04-20 13:17:17",
-                "url": "http://127.0.0.1:5000/api/submissions"
-            },
-            {
-                "timestamp": "2025-04-20 13:17:19",
-                "url": "http://127.0.0.1:5000/api/update-custom-package"
-            },
-            {
-                "timestamp": "2025-04-20 13:17:19",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-04-20 13:17:19",
-                "url": "http://127.0.0.1:5000/api/submissions"
-            },
-            {
-                "timestamp": "2025-04-20 13:40:46",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 13:40:55",
-                "url": "http://127.0.0.1:5000/api/package/neon_pulse.css"
-            },
-            {
-                "timestamp": "2025-04-20 13:45:15",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 17:56:50",
-                "url": "http://127.0.0.1:5000/edit_task/task2"
-            },
-            {
-                "timestamp": "2025-04-20 18:31:55",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 18:32:02",
-                "url": "http://127.0.0.1:5000/api/package/neon_pulse.css"
-            },
             {
                 "timestamp": "2025-04-20 18:32:57",
                 "url": "http://127.0.0.1:5000/store"
@@ -1569,30 +1488,94 @@
             {
                 "timestamp": "2025-04-21 20:55:05",
                 "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
+            },
+            {
+                "timestamp": "2025-04-21 21:18:41",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-21 21:19:57",
+                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
+            },
+            {
+                "timestamp": "2025-04-21 21:40:01",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-21 21:40:05",
+                "url": "http://127.0.0.1:5000/api/package/neon_pulse.css"
+            },
+            {
+                "timestamp": "2025-04-21 21:42:06",
+                "url": "http://127.0.0.1:5000/api/upload-package"
+            },
+            {
+                "timestamp": "2025-04-21 21:42:26",
+                "url": "http://127.0.0.1:5000/api/upload-package"
+            },
+            {
+                "timestamp": "2025-04-21 21:43:27",
+                "url": "http://127.0.0.1:5000/api/upload-package"
+            },
+            {
+                "timestamp": "2025-04-21 21:44:13",
+                "url": "http://127.0.0.1:5000/api/upload-package"
+            },
+            {
+                "timestamp": "2025-04-21 21:44:34",
+                "url": "http://127.0.0.1:5000/api/upload-package"
+            },
+            {
+                "timestamp": "2025-04-21 21:44:40",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-21 21:44:42",
+                "url": "http://127.0.0.1:5000/api/package/newer.css"
+            },
+            {
+                "timestamp": "2025-04-21 21:44:48",
+                "url": "http://127.0.0.1:5000/api/package/newer_1.css"
+            },
+            {
+                "timestamp": "2025-04-21 21:46:53",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-21 21:50:12",
+                "url": "http://127.0.0.1:5000/api/upload-package"
+            },
+            {
+                "timestamp": "2025-04-21 21:50:22",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-21 21:50:32",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-21 21:50:39",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-21 21:50:58",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-04-21 21:51:00",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-21 21:51:01",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-21 21:51:01",
+                "url": "http://127.0.0.1:5000/store"
             }
         ],
-        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAAAAAAAAAAAADYAAACjAAAAFQAAAKIAAAA2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAAAAAAAAAAAADYAAACjAAAAFQAAAKIAAABLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "tabs": [
-            {
-                "url": "http://127.0.0.1:5000/login",
-                "name": "Contest"
-            },
-            {
-                "url": "http://127.0.0.1:5000/profile",
-                "name": "Contest"
-            },
-            {
-                "url": "http://127.0.0.1:5000/api/submissions",
-                "name": "Contest"
-            },
-            {
-                "url": "http://127.0.0.1:5000/",
-                "name": "Contest"
-            },
-            {
-                "url": "http://127.0.0.1:5000/task/task1",
-                "name": "Contest"
-            },
             {
                 "url": "http://127.0.0.1:5000/logout",
                 "name": "Contest"
@@ -1652,6 +1635,26 @@
             {
                 "url": "http://127.0.0.1:5000/api/package/serenity_glow.css",
                 "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/api/upload-package",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/api/package/newer.css",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/api/package/newer_1.css",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/profile",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/api/submissions",
+                "name": "Contest"
             }
         ],
         "theme": "dark",
@@ -1665,6 +1668,10 @@
         "custom_package": null,
         "favorite_packages": [
             "cosmic_horizon.css"
+        ],
+        "created_packages": [
+            "newer.css",
+            "newer_1.css"
         ]
     },
     {
@@ -1703,7 +1710,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": 6,
@@ -2165,7 +2173,8 @@
         "one_time_code_expiration": null,
         "is_creator": true,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": "be94af5b-e941-42f8-b235-11df631fd400",
@@ -2185,7 +2194,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": "35564412-8caf-404e-8211-b7f1224a88e9",
@@ -2205,7 +2215,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": "1a970328-34ab-4334-9e47-93bcef05bcae",
@@ -2225,7 +2236,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": "f18d458d-7d1b-4e38-8b0f-661bc1c45348",
@@ -2245,7 +2257,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": "33ab94c2-9412-4a7b-89a9-943c32e3f8b7",
@@ -2265,7 +2278,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": "96546a12-411e-4f8a-8de1-9bdba1cfdb6e",
@@ -2285,7 +2299,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": "8adce1de-4b46-4316-9021-bdebf56c388e",
@@ -2305,7 +2320,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": 14,
@@ -2325,7 +2341,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": 15,
@@ -2345,7 +2362,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": 16,
@@ -2365,7 +2383,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": 17,
@@ -2385,7 +2404,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": 18,
@@ -2405,7 +2425,8 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     },
     {
         "id": 19,
@@ -2425,6 +2446,7 @@
         "one_time_code_expiration": null,
         "is_creator": false,
         "custom_package": null,
-        "favorite_packages": []
+        "favorite_packages": [],
+        "created_packages": []
     }
 ]

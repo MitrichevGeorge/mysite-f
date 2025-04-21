@@ -1,0 +1,19 @@
+/*
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+    <name>Newer2</name>
+    <description>My description</description>
+</package>
+*/
+:root {
+    --background-light: #a4aee9; /* Light Blue */
+    --background-dark: #0f1335; /* Deep Navy */
+}
+
+:where(.dark) {
+    --background: var(--background-dark);
+}
+
+:where(.light) {
+    --background: var(--background-light);
+}
