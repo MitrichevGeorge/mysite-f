@@ -1,14 +1,49 @@
 # app/views.py
 import os
 import json
+import re
+import logging
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from flask_login import login_required, current_user
 from .models import load_users, save_users
 from werkzeug.security import generate_password_hash
 
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+
 views_bp = Blueprint('views', __name__)
 
 TASKS_DIR = "tasks/"
+PACKAGES_DIR = "app/static/packages/"
+
+def parse_package_metadata(file_path):
+    """Parse XML metadata from the top comment of a CSS file."""
+    logging.debug(f"Parsing metadata for {file_path}")
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            # Find the first multi-line comment
+            match = re.match(r'/\*(.*?)\*/', content, re.DOTALL)
+            if not match:
+                logging.warning(f"No comment found in {file_path}")
+                return None
+            comment = match.group(1).strip()
+            # Look for XML within the comment
+            xml_match = re.search(r'<\?xml.*?</package\s*>', comment, re.DOTALL)
+            if not xml_match:
+                logging.warning(f"No XML found in comment of {file_path}")
+                return None
+            xml_content = xml_match.group(0)
+            # Parse XML-like structure with more flexible regex
+            name_match = re.search(r'<name\s*>(.*?)</name\s*>', xml_content, re.DOTALL | re.IGNORECASE)
+            desc_match = re.search(r'<description\s*>(.*?)</description\s*>', xml_content, re.DOTALL | re.IGNORECASE)
+            name = name_match.group(1).strip() if name_match else "Unnamed Package"
+            description = desc_match.group(1).strip() if desc_match else "No description available."
+            logging.debug(f"Parsed metadata: name={name}, description={description}, filename={os.path.basename(file_path)}")
+            return {"name": name, "description": description, "filename": os.path.basename(file_path)}
+    except Exception as e:
+        logging.error(f"Error parsing {file_path}: {e}")
+        return None
 
 @views_bp.route('/')
 def index():
@@ -65,21 +100,65 @@ def profile():
                     "title": config.get("title", task_name)
                 })
 
+    # Получаем список доступных пакетов дизайна
+    packages = []
+    if os.path.exists(PACKAGES_DIR):
+        packages = [f for f in os.listdir(PACKAGES_DIR) if f.endswith('.css')]
+
     daily_requests = user.daily_requests
-    return render_template("profile.html", current_user=current_user, submissions=sbm, daily_requests=daily_requests, tabs=user.tabs, my_tasks=my_tasks)
+    return render_template("profile.html", current_user=current_user, submissions=sbm, daily_requests=daily_requests, tabs=user.tabs, my_tasks=my_tasks, packages=packages)
+
+@views_bp.route('/store')
+@login_required
+def store():
+    # Получаем список всех пакетов дизайна с метаданными
+    packages = []
+    if os.path.exists(PACKAGES_DIR):
+        for filename in os.listdir(PACKAGES_DIR):
+            if filename.endswith('.css'):
+                file_path = os.path.join(PACKAGES_DIR, filename)
+                metadata = parse_package_metadata(file_path)
+                if metadata:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        code = f.read()
+                    metadata['code'] = code
+                    packages.append(metadata)
+                    logging.debug(f"Added package: {metadata['filename']}, code length: {len(code)}")
+                else:
+                    logging.warning(f"Skipping {filename} due to invalid metadata")
+    logging.debug(f"Found {len(packages)} valid packages")
+    return render_template("store.html", packages=packages)
+
+@views_bp.route('/api/package/<filename>')
+@login_required
+def get_package(filename):
+    file_path = os.path.join(PACKAGES_DIR, filename)
+    if not os.path.exists(file_path) or not filename.endswith('.css'):
+        logging.error(f"Package not found: {filename}")
+        return jsonify({"error": "Пакет не найден"}), 404
+    metadata = parse_package_metadata(file_path)
+    if not metadata:
+        logging.error(f"Invalid metadata for package: {filename}")
+        return jsonify({"error": "Неверные метаданные пакета"}), 400
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            code = f.read()
+        metadata['code'] = code
+        logging.debug(f"Fetched package: {filename}, code length: {len(code)}")
+        return jsonify(metadata)
+    except Exception as e:
+        logging.error(f"Error reading package {filename}: {e}")
+        return jsonify({"error": "Ошибка при чтении пакета"}), 500
 
 @views_bp.route('/api/submissions', methods=['GET'])
 @login_required
 def get_submissions():
-
-    # Получаем данные текущего пользователя
     users = load_users()
     user = users.get(current_user.id)
 
     if not user:
         return jsonify({"error": "Пользователь не найден"}), 404
 
-    # Формируем список посылок с фильтрацией скрытых тестов
     sbm = []
     for submission in user.submissions:    
         task_path = os.path.join(TASKS_DIR, submission["task_name"])
@@ -115,7 +194,6 @@ def get_task_tests(task_name):
         with open(config_path, 'r') as f:
             config = json.load(f)
 
-        # Возвращаем список отображаемых и скрытых тестов
         return jsonify({
             "visible_tests": config.get("visible_tests", []),
             "hidden_tests": config.get("hidden_tests", [])
@@ -126,14 +204,12 @@ def get_task_tests(task_name):
 @views_bp.route('/api/user/requests', methods=['GET'])
 @login_required
 def get_user_requests():
-    # Получаем данные текущего пользователя
     users = load_users()
     user = users.get(current_user.id)
 
     if not user:
         return jsonify({"error": "Пользователь не найден"}), 404
 
-    # Возвращаем количество запросов за каждый день
     return jsonify({"daily_requests": user.daily_requests})
 
 @views_bp.route('/api/del_tab/<n>', methods=['POST'])
@@ -163,6 +239,24 @@ def update_theme():
             return jsonify({'status': 'success'})
     return jsonify({'status': 'error'}), 400
 
+@views_bp.route('/api/update-custom-package', methods=['POST'])
+@login_required
+def update_custom_package():
+    data = request.get_json()
+    enable = data.get('enable', False)
+    package = data.get('package', None)
+
+    users = load_users()
+    user = users.get(current_user.id)
+    if user:
+        if enable and package and os.path.exists(os.path.join(PACKAGES_DIR, package)):
+            user.custom_package = package
+        else:
+            user.custom_package = None
+        save_users(users)
+        return jsonify({'status': 'success'})
+    return jsonify({'status': 'error', 'message': 'Пользователь не найден'}), 400
+
 @views_bp.route('/change-username', methods=['GET', 'POST'])
 @login_required
 def change_username():
@@ -172,7 +266,6 @@ def change_username():
             flash('Имя пользователя должно содержать минимум 3 символа.', 'error')
             return redirect(url_for('views.change_username'))
         users = load_users()
-        # Проверяем, не занято ли имя
         for user_id, user in users.items():
             if user.username == new_username and user_id != current_user.id:
                 flash('Это имя пользователя уже занято.', 'error')
@@ -212,7 +305,6 @@ def change_password():
             flash('Пароль должен содержать минимум 6 символов.', 'error')
             return redirect(url_for('views.change_password'))
         
-
         try:
             user.set_password(new_password)
             save_users(users)

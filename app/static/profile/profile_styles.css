@@ -338,7 +338,7 @@ header {
 }
 
 .verdict-badge {
-    padding: 0.25rem 0.75rem;
+    padding: 0 каза.25rem 0.75rem;
     border-radius: 9999px;
     font-size: 0.875rem;
     font-weight: 500;
@@ -388,6 +388,7 @@ header {
     margin-bottom: 15px;
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .settings-item.buttons {
@@ -416,7 +417,7 @@ header {
     font-size: 1em;
 }
 
-#theme-toggle {
+#theme-toggle, #custom-package-select {
     padding: 5px;
     font-size: 1em;
     border-radius: 4px;
@@ -424,6 +425,12 @@ header {
     border: 1px solid var(--input-border);
     background-color: var(--input-bg);
     color: var(--text-body);
+}
+
+#custom-package-toggle {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 .form-card {

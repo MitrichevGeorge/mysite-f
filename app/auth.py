@@ -57,7 +57,7 @@ def send_verification_email(to_email, username, verification_code):
     </body>
     </html>
     """
-    return send_email(to_email, "Подтверждение регистрации", html_body)
+    return send_email(to_email, "Подтверждение email", html_body)
 
 def send_one_time_code(to_email, username, code):
     print(f"DEBUG: One-time code for {username} ({to_email}): {code}")
@@ -85,21 +85,17 @@ def register():
         password = request.form['password']
         confirm_password = request.form['confirm_password']
 
-        # Проверка паролей
         if password != confirm_password:
             return jsonify({'status': 'error', 'message': 'Пароли не совпадают'}), 400
 
-        # Проверка имени пользователя
         if not re.match(r'^[a-zA-Z0-9_-]{3,15}$', username):
             return jsonify({'status': 'error', 'message': 'Имя пользователя должно быть от 3 до 15 символов и содержать только английские буквы, цифры, - или _'}), 400
 
         users = load_users()
 
-        # Проверка, не занято ли имя пользователя
         if any(user.username == username for user in users.values()):
             return jsonify({'status': 'error', 'message': 'Имя пользователя уже занято'}), 400
 
-        # Создаем нового пользователя
         new_user_id = len(users) + 1
         verification_code = str(uuid.uuid4())
         new_user = User(
@@ -108,13 +104,13 @@ def register():
             username=username,
             password_hash=generate_password_hash(password),
             is_verified=False,
-            verification_code=verification_code
+            verification_code=verification_code,
+            custom_package=None  # Initialize custom_package
         )
 
         users[new_user_id] = new_user
         save_users(users)
 
-        # Отправка письма
         if not send_verification_email(email, username, verification_code):
             return jsonify({'status': 'error', 'message': 'Ошибка отправки письма. Пожалуйста, попробуйте снова.'}), 500
 
@@ -184,13 +180,11 @@ def login():
                 if not user_by_username.is_verified:
                     print("User email not verified")
                     return jsonify({'status': 'error', 'message': 'Пожалуйста, подтвердите ваш email перед входом.'}), 400
-                # Генерируем одноразовый код
                 one_time_code = ''.join(random.choices(string.digits, k=6))
                 user_by_username.one_time_code = one_time_code
                 user_by_username.one_time_code_expiration = datetime.now() + timedelta(minutes=10)
                 save_users(users)
                 print(f"Generated one-time code {one_time_code} for {user_by_username.email}")
-                # Отправляем код на email
                 if not send_one_time_code(user_by_username.email, user_by_username.username, one_time_code):
                     return jsonify({'status': 'error', 'message': 'Ошибка отправки кода. Пожалуйста, попробуйте снова.'}), 500
                 print("Called send_one_time_code")
@@ -209,13 +203,11 @@ def login():
                     return jsonify({'status': 'error', 'message': 'Все аккаунты с этим email не подтверждены.'}), 400
                 if len(valid_users) == 1:
                     user = valid_users[0]
-                    # Генерируем одноразовый код
                     one_time_code = ''.join(random.choices(string.digits, k=6))
                     user.one_time_code = one_time_code
                     user.one_time_code_expiration = datetime.now() + timedelta(minutes=10)
                     save_users(users)
                     print(f"Generated one-time code {one_time_code} for {user.email}")
-                    # Отправляем код на email
                     if not send_one_time_code(user.email, user.username, one_time_code):
                         return jsonify({'status': 'error', 'message': 'Ошибка отправки кода. Пожалуйста, попробуйте снова.'}), 500
                     print("Called send_one_time_code")

@@ -75,6 +75,16 @@
                     <option value="dark" {% if current_user.theme == 'dark' %}selected{% endif %}>Тёмная</option>
                 </select>
             </div>
+            <div class="settings-item">
+                <label for="custom-package-toggle">Использовать свой пакет дизайна:</label>
+                <input type="checkbox" id="custom-package-toggle" {% if current_user.custom_package %}checked{% endif %}>
+                <select id="custom-package-select" {% if not current_user.custom_package %}disabled{% endif %}>
+                    <option value="">Выберите пакет</option>
+                    {% for package in packages %}
+                        <option value="{{ package }}" {% if current_user.custom_package == package %}selected{% endif %}>{{ package }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
 
         <div class="tasks-section">
@@ -124,4 +134,39 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Handle custom package toggle and selection
+        document.getElementById('custom-package-toggle').addEventListener('change', function() {
+            const select = document.getElementById('custom-package-select');
+            select.disabled = !this.checked;
+            updateCustomPackage();
+        });
+
+        document.getElementById('custom-package-select').addEventListener('change', updateCustomPackage);
+
+        function updateCustomPackage() {
+            const toggle = document.getElementById('custom-package-toggle').checked;
+            const package = document.getElementById('custom-package-select').value;
+            fetch('/api/update-custom-package', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ enable: toggle, package: package }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    location.reload(); // Reload to apply new CSS
+                } else {
+                    alert('Ошибка при сохранении настроек пакета дизайна.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ошибка при сохранении настроек пакета дизайна.');
+            });
+        }
+    </script>
 {% endblock %}

@@ -1,0 +1,265 @@
+/*
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+    <name>Cosmic Horizon</name>
+    <description>Ideology: Ethereal and expansive, inspired by space and celestial themes, with deep blues, purples, and glowing accents.</description>
+</package>
+*/
+
+:root {
+    --primary-color: #3f51b5; /* Deep Indigo */
+    --primary-hover: #283593; /* Darker Indigo */
+    --secondary-color: #ab47bc; /* Vibrant Purple */
+    --secondary-hover: #7b1fa2; /* Darker Purple */
+    --danger-color: #d81b60; /* Deep Pink */
+    --danger-hover: #ad1457; /* Darker Pink */
+    --background-light: #e8eaf6; /* Light Blue */
+    --background-dark: #1a237e; /* Deep Navy */
+    --text-light: #311b92; /* Dark Indigo */
+    --text-dark: #e8eaf6; /* Light Blue */
+    --border-light: #c5cae9; /* Light Border */
+    --border-dark: #3949ab; /* Dark Border */
+    --input-bg-light: #ffffff; /* White */
+    --input-bg-dark: #3949ab; /* Dark Indigo */
+    --card-bg-light: #ffffff; /* White */
+    --card-bg-dark: #3949ab; /* Dark Indigo */
+    --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.3);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+:where(.dark) {
+    --background: var(--background-dark);
+    --text: var(--text-dark);
+    --border: var(--border-dark);
+    --input-bg: var(--input-bg-dark);
+    --card-bg: var(--card-bg-dark);
+}
+
+:where(.light) {
+    --background: var(--background-light);
+    --text: var(--text-light);
+    --border: var(--border-light);
+    --input-bg: var(--input-bg-light);
+    --card-bg: var(--card-bg-light);
+}
+
+/* General overrides for consistency */
+body {
+    background-color: var(--background);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+.container,
+.form-card,
+.profile-card,
+.card,
+.submission,
+.submission-header,
+.tab,
+.tab-list,
+.tab-button,
+.login-entry,
+.task-entry,
+.account-container,
+.settings-section,
+.tasks-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+/* Input and textarea styles */
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea,
+.input-field,
+.form-group input {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+input:focus,
+textarea:focus,
+.input-field:focus,
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(63, 81, 181, 0.4);
+}
+
+/* Button styles with cosmic gradient */
+.btn,
+.button1,
+.btn-primary,
+.settings-btn,
+.login-option-btn,
+.tab-button.active,
+.task-actions .btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: #ffffff;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn:hover,
+.button1:hover,
+.btn-primary:hover,
+.settings-btn:hover,
+.login-option-btn:hover,
+.tab-button.active:hover,
+.task-actions .btn:hover {
+    background: linear-gradient(45deg, var(--primary-hover), var(--secondary-hover));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn:active,
+.button1:active,
+.btn-primary:active,
+.settings-btn:active,
+.login-option-btn:active,
+.task-actions .btn:active {
+    transform: translateY(0);
+}
+
+/* Danger buttons */
+.remove-test-btn,
+.button3 {
+    background: linear-gradient(45deg, var(--danger-color), #f06292);
+    color: #ffffff;
+}
+
+.remove-test-btn:hover,
+.button3:hover {
+    background: linear-gradient(45deg, var(--danger-hover), #c2185b);
+    transform: translateY(-2px);
+}
+
+/* Links */
+a,
+.back-link,
+.task-link,
+.login-url {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover,
+.back-link:hover,
+.task-link:hover,
+.login-url:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Table styles */
+.test-table th,
+.results-table th,
+.test-table td,
+.results-table td {
+    border: 1px solid var(--border);
+    background-color: var(--card-bg);
+    color: var(--text);
+}
+
+.test-table th,
+.results-table th {
+    background-color: var(--input-bg);
+    font-weight: 600;
+}
+
+/* Checkbox and toggle enhancements */
+.form-groupcheck label:before,
+.password-toggle {
+    border-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.form-groupcheck input:checked + label:after {
+    border-color: var(--primary-color);
+}
+
+.password-toggle:hover {
+    fill: var(--primary-hover);
+}
+
+/* Subtle animation for interactive elements */
+.tab-button,
+.cell,
+.account-card {
+    transition: transform var(--transition), background-color var(--transition);
+}
+
+.tab-button:hover,
+.cell:hover,
+.account-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Flash messages */
+.flash-message {
+    background-color: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.flash-message.success {
+    background-color: #e8f5e9; /* Light Green */
+}
+
+.flash-message.error {
+    background-color: #ffccbc; /* Light Peach */
+}
+
+.flash-message.info {
+    background-color: #e8eaf6; /* Light Blue */
+}
+
+:where(.dark) .flash-message.success {
+    background-color: #2e7d32; /* Dark Green */
+}
+
+:where(.dark) .flash-message.error {
+    background-color: #ad1457; /* Dark Pink */
+}
+
+:where(.dark) .flash-message.info {
+    background-color: #283593; /* Dark Indigo */
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--border);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
+}

@@ -1,0 +1,265 @@
+/*
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+    <name>Neon Pulse</name>
+    <description>Ideology: Futuristic and vibrant, with bold neon colors and glowing effects, evoking a cyberpunk aesthetic.</description>
+</package>
+*/
+
+:root {
+    --primary-color: #00e676; /* Neon Green */
+    --primary-hover: #00c853; /* Darker Neon Green */
+    --secondary-color: #e91e63; /* Neon Pink */
+    --secondary-hover: #c2185b; /* Darker Neon Pink */
+    --danger-color: #ff1744; /* Neon Red */
+    --danger-hover: #d81b60; /* Darker Neon Red */
+    --background-light: #1e1e1e; /* Dark Gray */
+    --background-dark: #0d0d0d; /* Near Black */
+    --text-light: #e0e0e0; /* Light Gray */
+    --text-dark: #ffffff; /* White */
+    --border-light: #424242; /* Medium Gray */
+    --border-dark: #212121; /* Dark Gray */
+    --input-bg-light: #2e2e2e; /* Darker Gray */
+    --input-bg-dark: #1e1e1e; /* Dark Gray */
+    --card-bg-light: #2e2e2e; /* Darker Gray */
+    --card-bg-dark: #1e1e1e; /* Dark Gray */
+    --shadow-sm: 0 0 8px rgba(0, 230, 118, 0.2);
+    --shadow-md: 0 0 12px rgba(0, 230, 118, 0.3);
+    --border-radius: 6px;
+    --transition: all 0.3s ease;
+}
+
+:where(.dark) {
+    --background: var(--background-dark);
+    --text: var(--text-dark);
+    --border: var(--border-dark);
+    --input-bg: var(--input-bg-dark);
+    --card-bg: var(--card-bg-dark);
+}
+
+:where(.light) {
+    --background: var(--background-light);
+    --text: var(--text-light);
+    --border: var(--border-light);
+    --input-bg: var(--input-bg-light);
+    --card-bg: var(--card-bg-light);
+}
+
+/* General overrides for consistency */
+body {
+    background-color: var(--background);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+.container,
+.form-card,
+.profile-card,
+.card,
+.submission,
+.submission-header,
+.tab,
+.tab-list,
+.tab-button,
+.login-entry,
+.task-entry,
+.account-container,
+.settings-section,
+.tasks-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+/* Input and textarea styles with neon glow */
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea,
+.input-field,
+.form-group input {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+input:focus,
+textarea:focus,
+.input-field:focus,
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
+}
+
+/* Button styles with neon gradient */
+.btn,
+.button1,
+.btn-primary,
+.settings-btn,
+.login-option-btn,
+.tab-button.active,
+.task-actions .btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: #ffffff;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn:hover,
+.button1:hover,
+.btn-primary:hover,
+.settings-btn:hover,
+.login-option-btn:hover,
+.tab-button.active:hover,
+.task-actions .btn:hover {
+    background: linear-gradient(45deg, var(--primary-hover), var(--secondary-hover));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn:active,
+.button1:active,
+.btn-primary:active,
+.settings-btn:active,
+.login-option-btn:active,
+.task-actions .btn:active {
+    transform: translateY(0);
+}
+
+/* Danger buttons */
+.remove-test-btn,
+.button3 {
+    background: linear-gradient(45deg, var(--danger-color), #f50057);
+    color: #ffffff;
+}
+
+.remove-test-btn:hover,
+.button3:hover {
+    background: linear-gradient(45deg, var(--danger-hover), #c51162);
+    transform: translateY(-2px);
+}
+
+/* Links with neon effect */
+a,
+.back-link,
+.task-link,
+.login-url {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover,
+.back-link:hover,
+.task-link:hover,
+.login-url:hover {
+    color: var(--primary-hover);
+    text-shadow: 0 0 8px rgba(0, 230, 118, 0.5);
+}
+
+/* Table styles */
+.test-table th,
+.results-table th,
+.test-table td,
+.results-table td {
+    border: 1px solid var(--border);
+    background-color: var(--card-bg);
+    color: var(--text);
+}
+
+.test-table th,
+.results-table th {
+    background-color: var(--input-bg);
+    font-weight: 600;
+}
+
+/* Checkbox and toggle enhancements */
+.form-groupcheck label:before,
+.password-toggle {
+    border-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.form-groupcheck input:checked + label:after {
+    border-color: var(--primary-color);
+}
+
+.password-toggle:hover {
+    fill: var(--primary-hover);
+}
+
+/* Subtle animation for interactive elements */
+.tab-button,
+.cell,
+.account-card {
+    transition: transform var(--transition), background-color var(--transition);
+}
+
+.tab-button:hover,
+.cell:hover,
+.account-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Flash messages */
+.flash-message {
+    background-color: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.flash-message.success {
+    background-color: #1b5e20; /* Dark Green */
+}
+
+.flash-message.error {
+    background-color: #b71c1c; /* Dark Red */
+}
+
+.flash-message.info {
+    background-color: #006064; /* Dark Cyan */
+}
+
+:where(.light) .flash-message.success {
+    background-color: #c8e6c9; /* Light Green */
+}
+
+:where(.light) .flash-message.error {
+    background-color: #ffcdd2; /* Light Red */
+}
+
+:where(.light) .flash-message.info {
+    background-color: #b2ebf2; /* Light Cyan */
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--border);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
+}

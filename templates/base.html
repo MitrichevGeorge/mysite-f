@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='base_styles_light.css') }}">
     {% endif %}
     <link rel="stylesheet" href="{{ url_for('static', filename='base_styles.css') }}">
+    {% if current_user.is_authenticated and current_user.custom_package %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='packages/' + current_user.custom_package) }}">
+    {% endif %}
     
     <script>
         window.onscroll = function() {
@@ -39,6 +42,7 @@
     <div class="flash-container" id="flash-container"></div>
     <header id="header">
         <a href="/" class="logo">Главная</a>
+        <a href="/store" class="logo">Магазин дизайна</a>
         <div class="tabs" id="tabs">
             <div class="shdw-left" id="noscroll"></div>
             {% for tab in tabs %}
@@ -70,9 +74,9 @@
     <script>
         document.querySelectorAll('.close').forEach(button => {
             button.addEventListener('click', function(event) {
-                event.stopPropagation(); // Prevent the tab click event
-                const tabName = this.previousElementSibling.textContent; // Get the tab title
-                removeTab(tabName); // Call the function to remove the tab
+                event.stopPropagation();
+                const tabName = this.previousElementSibling.textContent;
+                removeTab(tabName);
             });
         });
 
@@ -150,17 +154,16 @@
 
         userName.addEventListener('click', function() {
             userDropdown.style.display = userDropdown.style.display === 'none' ? 'block' : 'none';
-            userDropdown.style.left = `${userName.offsetLeft-100}px`; // Позиционируем по горизонтали
-            userDropdown.style.top = `${userName.offsetTop + userName.offsetHeight}px`; // Позиционируем по вертикали
+            userDropdown.style.left = `${userName.offsetLeft-100}px`;
+            userDropdown.style.top = `${userName.offsetTop + userName.offsetHeight}px`;
         });
 
-        // Скрываем выпадающий список при уходе курсора с шапки или списка
         userName.addEventListener('mouseleave', function() {
             setTimeout(() => {
                 if (!userDropdown.matches(':hover')) {
                     userDropdown.style.display = 'none';
                 }
-            }, 100); // Задержка для предотвращения мгновенного исчезновения
+            }, 100);
         });
 
         userDropdown.addEventListener('mouseleave', function() {
@@ -196,20 +199,17 @@
             
             flashContainer.prepend(flashDiv);
             
-            // Проверка на многострочность
             const lineHeight = parseInt(getComputedStyle(contentDiv).lineHeight);
             const contentHeight = contentDiv.offsetHeight;
             if (contentHeight > lineHeight * 4) {
                 flashDiv.classList.add('show-arrow');
             }
             
-            // Обработчик клика по стрелке
             expandArrow.addEventListener('click', () => {
                 flashDiv.classList.toggle('expanded');
                 expandArrow.innerHTML = flashDiv.classList.contains('expanded') ? '↑' : '↓';
             });
             
-            // Обработчик закрытия
             closeBtn.addEventListener('click', () => {
                 flashDiv.style.animation = 'slideUp 0.3s ease';
                 setTimeout(() => {
@@ -217,7 +217,6 @@
                 }, 300);
             });
             
-            // Таймер исчезновения (5 секунд)
             setTimeout(() => {
                 if (flashDiv.parentNode) {
                     flashDiv.style.animation = 'slideUp 0.3s ease';

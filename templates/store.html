@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Магазин пакетов дизайна{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='store/store_styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/theme/material.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/css/css.min.js"></script>
+    <script src="{{ url_for('static', filename='store/store_scripts.js') }}"></script>
+
+    <div class="container">
+        <h1 class="store-title">Магазин пакетов дизайна</h1>
+        <div class="store-layout">
+            <div class="sidebar">
+                <div class="tabs">
+                    <button class="tab-button active" onclick="showTab('main')">Главная</button>
+                    <button class="tab-button" onclick="showTab('favorites')">Избранные</button>
+                    <button class="tab-button" onclick="showTab('my-packages')">Мои пакеты</button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="tab-content" id="main-tab">
+                    {% if packages %}
+                        <div class="packages-grid">
+                            {% for package in packages %}
+                                <div class="package-card" data-filename="{{ package.filename }}">
+                                    <h3 class="package-title">{{ package.name }}</h3>
+                                    <p class="package-description">{{ package.description }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>Пакеты дизайна отсутствуют. Добавьте CSS файлы с правильным XML-форматом в папку app/static/packages/.</p>
+                    {% endif %}
+                </div>
+                <div class="tab-content" id="favorites-tab" style="display: none;">
+                    <p>Избранные пакеты скоро появятся!</p>
+                </div>
+                <div class="tab-content" id="my-packages-tab" style="display: none;">
+                    <p>Ваши пакеты скоро появятся!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="package-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closePackageModal()">×</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+            <p><strong>Файл:</strong> <span id="modal-filename"></span></p>
+            <button class="apply-btn" id="apply-btn">Применить</button>
+            <textarea id="code-editor"></textarea>
+            <p id="codemirror-error" style="color: red; display: none;">Не удалось загрузить CodeMirror. Проверьте настройки блокировщика контента.</p>
+        </div>
+    </div>
+
+    <script>
+        // Attach click handlers to package cards
+        document.querySelectorAll('.package-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const filename = card.dataset.filename;
+                console.log('Fetching package:', filename);
+                fetch(`/api/package/${encodeURIComponent(filename)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error fetching package:', data.error);
+                            alert('Ошибка: ' + data.error);
+                            return;
+                        }
+                        console.log('Fetched package data:', data);
+                        openPackageModal(filename, data);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching package:', error);
+                        alert('Ошибка при загрузке пакета дизайна.');
+                    });
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,235 @@
+/* static/store/store_styles.css */
+:root {
+    --border-radius: 0.5rem;
+    --transition: 0.3s;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-dark: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+:where(.light) {
+    --bg-body: #ffffff;
+    --text-body: #000000;
+    --bg-card: #ffffff;
+    --shadow-card: var(--shadow-md);
+    --title-color: rgb(17, 24, 39);
+    --tab-bg: rgb(249, 250, 251);
+    --tab-border: rgb(229, 231, 235);
+    --tab-active-bg: #ffffff;
+    --tab-active-border: rgb(79, 70, 229);
+    --tab-active-color: rgb(79, 70, 229);
+    --card-bg: #f9fafb;
+    --card-hover-bg: #e5e7eb;
+    --modal-bg: #ffffff;
+    --btn-bg: #e0e0e0;
+    --btn-text: #333333;
+    --btn-hover-bg: #d0d0d0;
+    --sidebar-bg: #f9fafb;
+}
+
+:where(.dark) {
+    --bg-body: #121212;
+    --text-body: #ffffff;
+    --bg-card: #1e1e1e;
+    --shadow-card: var(--shadow-dark);
+    --title-color: rgb(229, 231, 235);
+    --tab-bg: rgb(31, 41, 55);
+    --tab-border: rgb(55, 65, 81);
+    --tab-active-bg: #2d3748;
+    --tab-active-border: rgb(129, 140, 248);
+    --tab-active-color: rgb(129, 140, 248);
+    --card-bg: #2d3748;
+    --card-hover-bg: #4b5563;
+    --modal-bg: #1e1e1e;
+    --btn-bg: #1f2937;
+    --btn-text: #e6e6e6;
+    --btn-hover-bg: #2c3f5b;
+    --sidebar-bg: #1e1e1e;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-body);
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.store-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: var(--title-color);
+}
+
+.store-layout {
+    display: flex;
+    gap: 1rem;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: var(--sidebar-bg);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tab-button {
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    background-color: var(--tab-bg);
+    border: 1px solid var(--tab-border);
+    color: var(--text-body);
+    font-size: 1rem;
+    text-align: left;
+    transition: all var(--transition);
+}
+
+.tab-button.active {
+    background-color: var(--tab-active-bg);
+    border-color: var(--tab-active-border);
+    color: var(--tab-active-color);
+}
+
+.content {
+    flex: 1;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-card);
+}
+
+.tab-content {
+    min-height: 200px;
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.package-card {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: background-color var(--transition), transform 0.2s;
+}
+
+.package-card:hover {
+    background-color: var(--card-hover-bg);
+    transform: translateY(-2px);
+}
+
+.package-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--title-color);
+}
+
+.package-description {
+    font-size: 0.875rem;
+    color: var(--text-body);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 1rem;
+    background-color: var(--modal-bg);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    max-height: 90%;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: var(--shadow-dark);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-body);
+}
+
+.apply-btn {
+    position: absolute;
+    top: 1rem;
+    right: 3rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color var(--transition);
+}
+
+.apply-btn:hover {
+    background-color: var(--btn-hover-bg);
+}
+
+#code-editor {
+    width: 100%;
+    min-height: 300px;
+    margin-top: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.CodeMirror {
+    height: auto;
+    min-height: 300px;
+    border: 1px solid var(--tab-border);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-card);
+    color: var(--text-body);
+    font-size: 14px; /* Consistent font size */
+}
+
+/* Fix line number overlap */
+.CodeMirror-linenumbers {
+    width: 40px !important; /* Increase gutter width for up to 3-digit line numbers */
+    min-width: 40px !important;
+    padding-right: 10px !important; /* Add space between line numbers and code */
+    background-color: var(--bg-card);
+    text-align: right;
+}
+
+.CodeMirror-gutter {
+    background-color: var(--bg-card);
+}
+
+.CodeMirror-code {
+    margin-left: 50px; /* Ensure code content is offset from line numbers */
+}

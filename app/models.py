@@ -24,7 +24,7 @@ def getTabName(url):
     return "Contest"
 
 class User(UserMixin):
-    def __init__(self, id, email, username, password_hash, submissions=None, login_history=None, daily_requests=None, tabs=None, theme='light', reset_code=None, reset_code_expiration=None, is_verified=False, verification_code=None, one_time_code=None, one_time_code_expiration=None, is_creator=False):
+    def __init__(self, id, email, username, password_hash, submissions=None, login_history=None, daily_requests=None, tabs=None, theme='light', reset_code=None, reset_code_expiration=None, is_verified=False, verification_code=None, one_time_code=None, one_time_code_expiration=None, is_creator=False, custom_package=None, favorite_packages=None):
         self.id = id
         self.email = email
         self.username = username
@@ -40,7 +40,9 @@ class User(UserMixin):
         self.verification_code = verification_code
         self.one_time_code = one_time_code
         self.one_time_code_expiration = one_time_code_expiration
-        self.is_creator = is_creator  # Новый параметр
+        self.is_creator = is_creator
+        self.custom_package = custom_package
+        self.favorite_packages = favorite_packages if favorite_packages else []
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -65,15 +67,20 @@ class User(UserMixin):
                 if len(self.tabs) > 20:
                     self.tabs.pop(0)
 
+    def toggle_favorite_package(self, filename):
+        if filename in self.favorite_packages:
+            self.favorite_packages.remove(filename)
+        else:
+            self.favorite_packages.append(filename)
+
     def to_dict(self):
         return {
             'id': self.id,
             'username': self.username,
-            'submissions': self.submissions
+            'submissions': self.submissions,
+            'custom_package': self.custom_package,
+            'favorite_packages': self.favorite_packages
         }
-
-    def __iter__(self):
-        return iter(self.to_dict().items())
 
     def set_recovery_code(self, code):
         self.recovery_code = code
@@ -111,7 +118,9 @@ def load_users():
                     verification_code=user_data.get('verification_code', None),
                     one_time_code=user_data.get('one_time_code', None),
                     one_time_code_expiration=one_time_expiration,
-                    is_creator=user_data.get('is_creator', False)  # Новый параметр
+                    is_creator=user_data.get('is_creator', False),
+                    custom_package=user_data.get('custom_package', None),
+                    favorite_packages=user_data.get('favorite_packages', [])
                 )
             return users
     return {}
@@ -139,7 +148,9 @@ def save_users(users):
             "verification_code": user.verification_code,
             "one_time_code": user.one_time_code,
             "one_time_code_expiration": one_time_expiration_str,
-            "is_creator": user.is_creator  # Новый параметр
+            "is_creator": user.is_creator,
+            "custom_package": user.custom_package,
+            "favorite_packages": user.favorite_packages
         })
     with open(USERS_FILE, 'w') as f:
         json.dump(users_data, f, ensure_ascii=True, indent=4)
