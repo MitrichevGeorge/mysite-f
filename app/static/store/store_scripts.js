@@ -8,6 +8,14 @@ function showTab(tabId) {
     });
     document.getElementById(`${tabId}-tab`).style.display = 'block';
     document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+
+    // Update URL hash based on tab
+    const tabMap = {
+        'main': 'tab-1',
+        'favorites': 'tab-2',
+        'my-packages': 'tab-3'
+    };
+    window.location.hash = tabMap[tabId];
 }
 
 let codeMirrorInstance = null;
@@ -56,25 +64,31 @@ function openPackageModal(filename, package) {
         document.getElementById('modal-filename').textContent = package.filename || 'Unknown file';
 
         const textarea = document.getElementById('code-editor');
-        textarea.value = package.code || '';
+        textarea.classList.add('loading'); // Add loading class
 
-        if (typeof CodeMirror !== 'undefined') {
-            if (codeMirrorInstance) {
-                codeMirrorInstance.toTextArea();
+        // Simulate async code loading (since fetch is already async)
+        setTimeout(() => {
+            textarea.value = package.code || '';
+            textarea.classList.remove('loading'); // Remove loading class
+
+            if (typeof CodeMirror !== 'undefined') {
+                if (codeMirrorInstance) {
+                    codeMirrorInstance.toTextArea();
+                }
+                codeMirrorInstance = CodeMirror.fromTextArea(textarea, {
+                    mode: 'css',
+                    theme: 'material',
+                    lineNumbers: true,
+                    readOnly: true,
+                    gutters: ['CodeMirror-linenumbers'],
+                    lineWrapping: true
+                });
+                document.getElementById('codemirror-error').style.display = 'none';
+            } else {
+                console.error('CodeMirror is not loaded');
+                document.getElementById('codemirror-error').style.display = 'block';
             }
-            codeMirrorInstance = CodeMirror.fromTextArea(textarea, {
-                mode: 'css',
-                theme: 'material',
-                lineNumbers: true,
-                readOnly: true,
-                gutters: ['CodeMirror-linenumbers'],
-                lineWrapping: true
-            });
-            document.getElementById('codemirror-error').style.display = 'none';
-        } else {
-            console.error('CodeMirror is not loaded');
-            document.getElementById('codemirror-error').style.display = 'block';
-        }
+        }, 100); // Small delay to ensure loading animation is visible
 
         const applyBtn = document.getElementById('apply-btn');
         applyBtn.onclick = () => {
@@ -87,14 +101,6 @@ function openPackageModal(filename, package) {
                 body: JSON.stringify({ enable: true, package: filename }),
             })
             .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('Пакет дизайна успешно применён!');
-                    location.reload();
-                } else {
-                    alert('Ошибка при применении пакета дизайна.');
-                }
-            })
             .then(data => {
                 if (data.status === 'success') {
                     alert('Пакет дизайна успешно применён!');
@@ -155,6 +161,9 @@ function closePackageModal() {
     try {
         const modal = document.getElementById('package-modal');
         modal.style.display = 'none';
+        const textarea = document.getElementById('code-editor');
+        textarea.classList.remove('loading');
+        textarea.value = 'Загрузка...';
         if (codeMirrorInstance) {
             codeMirrorInstance.toTextArea();
             codeMirrorInstance = null;
@@ -167,5 +176,13 @@ function closePackageModal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    showTab('main');
+    // Check URL hash to select initial tab
+    const hash = window.location.hash.replace('#', '');
+    const tabMap = {
+        'tab-1': 'main',
+        'tab-2': 'favorites',
+        'tab-3': 'my-packages'
+    };
+    const initialTab = tabMap[hash] || 'main';
+    showTab(initialTab);
 });
