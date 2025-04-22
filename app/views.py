@@ -22,19 +22,16 @@ def parse_package_metadata(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
-            # Find the first multi-line comment
             match = re.match(r'/\*(.*?)\*/', content, re.DOTALL)
             if not match:
                 logging.warning(f"No comment found in {file_path}")
                 return None
             comment = match.group(1).strip()
-            # Look for XML within the comment
             xml_match = re.search(r'<\?xml.*?</package\s*>', comment, re.DOTALL)
             if not xml_match:
                 logging.warning(f"No XML found in comment of {file_path}")
                 return None
             xml_content = xml_match.group(0)
-            # Parse XML-like structure with more flexible regex
             name_match = re.search(r'<name\s*>(.*?)</name\s*>', xml_content, re.DOTALL | re.IGNORECASE)
             desc_match = re.search(r'<description\s*>(.*?)</description\s*>', xml_content, re.DOTALL | re.IGNORECASE)
             name = name_match.group(1).strip() if name_match else "Unnamed Package"
@@ -54,6 +51,19 @@ def validate_css_content(content):
     except Exception as e:
         return False, str(e)
 
+def check_duplicate_package(name, filename, exclude_filename=None):
+    """Check if a package with the same name or filename already exists."""
+    if not os.path.exists(PACKAGES_DIR):
+        return False
+    for existing_filename in os.listdir(PACKAGES_DIR):
+        if existing_filename == exclude_filename:
+            continue
+        if existing_filename.endswith('.css'):
+            metadata = parse_package_metadata(os.path.join(PACKAGES_DIR, existing_filename))
+            if metadata and (metadata['name'].strip().lower() == name.strip().lower() or existing_filename == filename):
+                return True
+    return False
+
 @views_bp.route('/')
 def index():
     tasks = os.listdir(TASKS_DIR)
@@ -71,7 +81,6 @@ def profile():
     if not user:
         return jsonify({"error": "Пользователь не найден"}), 404
 
-    # Формируем список посылок с фильтрацией скрытых тестов
     sbm = []
     for submission in user.submissions:    
         task_path = os.path.join(TASKS_DIR, submission["task_name"])
@@ -96,7 +105,6 @@ def profile():
         }
         sbm.append(filtered_submission)
 
-    # Получаем список задач, созданных пользователем
     my_tasks = []
     for task_name in os.listdir(TASKS_DIR):
         config_path = os.path.join(TASKS_DIR, task_name, "config.json")
@@ -109,7 +117,6 @@ def profile():
                     "title": config.get("title", task_name)
                 })
 
-    # Получаем список доступных пакетов дизайна
     packages = []
     if os.path.exists(PACKAGES_DIR):
         packages = [f for f in os.listdir(PACKAGES_DIR) if f.endswith('.css')]
@@ -120,7 +127,6 @@ def profile():
 @views_bp.route('/store')
 @login_required
 def store():
-    # Получаем список всех пакетов дизайна с метаданными
     packages = []
     users = load_users()
     user = users.get(current_user.id)
@@ -162,6 +168,7 @@ def get_package(filename):
         user = users.get(current_user.id)
         metadata['code'] = code
         metadata['is_favorite'] = filename in user.favorite_packages if user else False
+        metadata['is_creator'] = filename in user.created_packages if user else False
         logging.debug(f"Fetched package: {filename}, code length: {len(code)}")
         return jsonify(metadata)
     except Exception as e:
@@ -199,9 +206,10 @@ def upload_package():
     if not file.filename.endswith('.css'):
         return jsonify({"error": "Файл должен быть в формате CSS"}), 400
 
+    existing_filename = request.form.get('existing_filename')
+
     try:
         content = file.read().decode('utf-8')
-        # Validate XML metadata
         match = re.match(r'/\*(.*?)\*/', content, re.DOTALL)
         if not match:
             return jsonify({"error": "Отсутствует XML-комментарий в начале файла"}), 400
@@ -215,30 +223,33 @@ def upload_package():
         if not name_match or not desc_match:
             return jsonify({"error": "XML-метаданные должны содержать <name> и <description>"}), 400
 
-        # Validate CSS syntax
+        name = name_match.group(1).strip()
+        if check_duplicate_package(name, file.filename, exclude_filename=existing_filename):
+            return jsonify({"error": "Пакет с таким именем или именем файла уже существует"}), 400
+
         is_valid, error = validate_css_content(content)
         if not is_valid:
             return jsonify({"error": f"Ошибка синтаксиса CSS: {error}"}), 400
 
-        # Generate unique filename
-        base_filename = re.sub(r'[^a-zA-Z0-9]', '_', name_match.group(1).strip()).lower()
-        filename = f"{base_filename}.css"
-        counter = 1
-        while os.path.exists(os.path.join(PACKAGES_DIR, filename)):
-            filename = f"{base_filename}_{counter}.css"
-            counter += 1
+        if existing_filename:
+            filename = existing_filename
+        else:
+            base_filename = re.sub(r'[^a-zA-Z0-9]', '_', name.lower())
+            filename = f"{base_filename}.css"
+            counter = 1
+            while os.path.exists(os.path.join(PACKAGES_DIR, filename)):
+                filename = f"{base_filename}_{counter}.css"
+                counter += 1
 
-        # Save file
         file.seek(0)
         file.save(os.path.join(PACKAGES_DIR, filename))
 
-        # Update user's created packages
-        user.add_created_package(filename)
-        save_users(users)
+        if not existing_filename:
+            user.add_created_package(filename)
+            save_users(users)
 
-        # Return metadata for preview
         metadata = {
-            "name": name_match.group(1).strip(),
+            "name": name,
             "description": desc_match.group(1).strip(),
             "filename": filename,
             "code": content
@@ -247,6 +258,54 @@ def upload_package():
     except Exception as e:
         logging.error(f"Error uploading package: {e}")
         return jsonify({"error": f"Ошибка при загрузке пакета: {str(e)}"}), 500
+
+@views_bp.route('/api/update-package/<filename>', methods=['POST'])
+@login_required
+def update_package(filename):
+    users = load_users()
+    user = users.get(current_user.id)
+    if not user or not user.is_creator or filename not in user.created_packages:
+        return jsonify({"error": "Только создатель пакета может его редактировать"}), 403
+
+    data = request.get_json()
+    content = data.get('code')
+    if not content:
+        return jsonify({"error": "Код не предоставлен"}), 400
+
+    match = re.match(r'/\*(.*?)\*/', content, re.DOTALL)
+    if not match:
+        return jsonify({"error": "Отсутствует XML-комментарий в начале файла"}), 400
+    comment = match.group(1).strip()
+    xml_match = re.search(r'<\?xml.*?</package\s*>', comment, re.DOTALL)
+    if not xml_match:
+        return jsonify({"error": "XML-метаданные не найдены"}), 400
+    xml_content = xml_match.group(0)
+    name_match = re.search(r'<name\s*>(.*?)</name\s*>', xml_content, re.DOTALL | re.IGNORECASE)
+    desc_match = re.search(r'<description\s*>(.*?)</description\s*>', xml_content, re.DOTALL | re.IGNORECASE)
+    if not name_match or not desc_match:
+        return jsonify({"error": "XML-метаданные должны содержать <name> и <description>"}), 400
+
+    name = name_match.group(1).strip()
+    if check_duplicate_package(name, filename, exclude_filename=filename):
+        return jsonify({"error": "Пакет с таким именем уже существует"}), 400
+
+    is_valid, error = validate_css_content(content)
+    if not is_valid:
+        return jsonify({"error": f"Ошибка синтаксиса CSS: {error}"}), 400
+
+    try:
+        with open(os.path.join(PACKAGES_DIR, filename), 'w', encoding='utf-8') as f:
+            f.write(content)
+        metadata = {
+            "name": name,
+            "description": desc_match.group(1).strip(),
+            "filename": filename,
+            "code": content
+        }
+        return jsonify({"status": "success", "metadata": metadata})
+    except Exception as e:
+        logging.error(f"Error updating package {filename}: {e}")
+        return jsonify({"error": f"Ошибка при обновлении пакета: {str(e)}"}), 500
 
 @views_bp.route('/api/submissions', methods=['GET'])
 @login_required

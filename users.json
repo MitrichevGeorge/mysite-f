@@ -1177,142 +1177,6 @@
         ],
         "login_history": [
             {
-                "timestamp": "2025-04-20 20:44:30",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:45:09",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:45:18",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:45:39",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:45:50",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:46:09",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:46:19",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:46:34",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:46:49",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:47:24",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:47:34",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:47:45",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:47:51",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:47:57",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:48:03",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:48:13",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 21:38:50",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 21:41:32",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 21:41:37",
-                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
-            },
-            {
-                "timestamp": "2025-04-21 13:29:07",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-04-21 13:29:09",
-                "url": "http://127.0.0.1:5000/api/submissions"
-            },
-            {
-                "timestamp": "2025-04-21 13:29:11",
-                "url": "http://127.0.0.1:5000/edit_task/task2"
-            },
-            {
-                "timestamp": "2025-04-21 13:29:18",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 14:53:34",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 14:53:36",
-                "url": "http://127.0.0.1:5000/api/toggle-favorite/cosmic_horizon.css"
-            },
-            {
-                "timestamp": "2025-04-21 14:53:39",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 14:53:42",
-                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
-            },
-            {
-                "timestamp": "2025-04-21 14:57:30",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 14:57:35",
-                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
-            },
-            {
-                "timestamp": "2025-04-21 15:09:12",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 15:09:18",
-                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
-            },
-            {
-                "timestamp": "2025-04-21 15:09:35",
-                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
-            },
-            {
-                "timestamp": "2025-04-21 15:14:01",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 15:14:03",
-                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
-            },
-            {
                 "timestamp": "2025-04-21 15:14:09",
                 "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
             },
@@ -1575,22 +1439,146 @@
             {
                 "timestamp": "2025-04-22 20:18:29",
                 "url": "http://127.0.0.1:5000/logout"
+            },
+            {
+                "timestamp": "2025-04-22 20:56:02",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-04-22 20:56:04",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:56:04",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:56:10",
+                "url": "http://127.0.0.1:5000/api/update-custom-package"
+            },
+            {
+                "timestamp": "2025-04-22 20:56:10",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:56:10",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:56:12",
+                "url": "http://127.0.0.1:5000/api/update-custom-package"
+            },
+            {
+                "timestamp": "2025-04-22 20:56:12",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:56:13",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:56:18",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-22 20:59:20",
+                "url": "http://127.0.0.1:5000/api/upload-package"
+            },
+            {
+                "timestamp": "2025-04-22 20:59:27",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-22 20:59:28",
+                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
+            },
+            {
+                "timestamp": "2025-04-22 21:18:07",
+                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
+            },
+            {
+                "timestamp": "2025-04-22 21:18:13",
+                "url": "http://127.0.0.1:5000/api/update-custom-package"
+            },
+            {
+                "timestamp": "2025-04-22 21:18:14",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-22 21:18:29",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 21:18:29",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 21:18:33",
+                "url": "http://127.0.0.1:5000/api/update-custom-package"
+            },
+            {
+                "timestamp": "2025-04-22 21:18:33",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 21:18:33",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 21:18:37",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-22 21:21:07",
+                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
+            },
+            {
+                "timestamp": "2025-04-22 21:21:09",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-22 21:21:11",
+                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
+            },
+            {
+                "timestamp": "2025-04-22 21:21:18",
+                "url": "http://127.0.0.1:5000/api/update-package/tech_edge.css"
+            },
+            {
+                "timestamp": "2025-04-22 21:21:29",
+                "url": "http://127.0.0.1:5000/api/update-package/tech_edge.css"
+            },
+            {
+                "timestamp": "2025-04-22 21:27:33",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-22 21:27:34",
+                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
+            },
+            {
+                "timestamp": "2025-04-22 21:29:03",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-22 21:29:04",
+                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
+            },
+            {
+                "timestamp": "2025-04-22 21:29:29",
+                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
+            },
+            {
+                "timestamp": "2025-04-22 21:39:52",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-22 21:39:53",
+                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
             }
         ],
-        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAAAAAAAAAAAADYAAACjAAAAFQAAAKIAAABMAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAAAAAAAAAAAADYAAACjAAAAFQAAAKIAAABMAAAAJwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "tabs": [
-            {
-                "url": "http://127.0.0.1:5000/logout",
-                "name": "Contest"
-            },
-            {
-                "url": "http://127.0.0.1:5000/register",
-                "name": "Contest"
-            },
-            {
-                "url": "http://127.0.0.1:5000/update-theme",
-                "name": "Contest"
-            },
             {
                 "url": "http://127.0.0.1:5000/create_task",
                 "name": "Contest"
@@ -1658,6 +1646,18 @@
             {
                 "url": "http://127.0.0.1:5000/api/submissions",
                 "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/api/package/tech_edge.css",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/api/update-package/tech_edge.css",
+                "name": "Contest"
             }
         ],
         "theme": "dark",
@@ -1674,7 +1674,8 @@
         ],
         "created_packages": [
             "newer.css",
-            "newer_1.css"
+            "newer_1.css",
+            "tech_edge.css"
         ],
         "creator_request_status": "none"
     },
@@ -1800,9 +1801,13 @@
             {
                 "timestamp": "2025-04-22 20:54:20",
                 "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:55:06",
+                "url": "http://127.0.0.1:5000/logout"
             }
         ],
-        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "tabs": [
             {
                 "url": "http://127.0.0.1:5000/",

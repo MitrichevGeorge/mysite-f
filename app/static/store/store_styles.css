@@ -239,6 +239,49 @@ body {
     background: var(--btn-hover-bg);
 }
 
+.edit-btn, .upload-btn {
+    position: absolute;
+    top: 1rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color var(--transition);
+}
+
+.edit-btn {
+    right: 23.8rem;
+}
+
+.upload-btn {
+    right: 26.3rem;
+}
+
+.edit-btn:hover, .upload-btn:hover {
+    background: var(--btn-hover-bg);
+}
+
+.save-btn {
+    position: absolute;
+    top: 1rem;
+    right: 3rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color var(--transition);
+}
+
+.save-btn:hover {
+    background: var(--btn-hover-bg);
+}
+
 .publish-btn {
     position: absolute;
     top: 1rem;
@@ -312,6 +355,10 @@ body {
     background: var(--bg-card);
 }
 
+#edit-mode #code-editor {
+    margin-top: 3rem;
+}
+
 #code-editor.loading::after, #preview-code-editor.loading::after {
     content: 'Загрузка...';
     position: absolute;
@@ -350,4 +397,4 @@ body {
 
 .CodeMirror-code {
     margin-left: 50px;
-} 
+}

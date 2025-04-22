@@ -8,6 +8,7 @@ function showTab(tabId) {
 
 let codeMirrorInstance = null;
 let previewCodeMirrorInstance = null;
+let isEditMode = false;
 
 function toggleFavorite(event, filename) {
     event.stopPropagation();
@@ -38,6 +39,15 @@ function openPackageModal(filename, package) {
     document.getElementById('modal-title').textContent = package.name || 'Unnamed Package';
     document.getElementById('modal-description').textContent = package.description || 'No description available';
     document.getElementById('modal-filename').textContent = package.filename || 'Unknown file';
+
+    const creatorButtons = document.getElementById('creator-buttons');
+    creatorButtons.style.display = package.is_creator ? 'block' : 'none';
+
+    const viewMode = document.getElementById('view-mode');
+    const editMode = document.getElementById('edit-mode');
+    viewMode.style.display = 'block';
+    editMode.style.display = 'none';
+    isEditMode = false;
 
     const textarea = document.getElementById('code-editor');
     textarea.classList.add('loading');
@@ -113,6 +123,44 @@ function openPackageModal(filename, package) {
         .catch(() => alert('Ошибка при изменении статуса избранного.'));
     };
 
+    const editBtn = document.getElementById('edit-btn');
+    editBtn.onclick = () => {
+        if (codeMirrorInstance) {
+            viewMode.style.display = 'none';
+            editMode.style.display = 'block';
+            creatorButtons.style.display = 'none';
+            isEditMode = true;
+            codeMirrorInstance.setOption('readOnly', false);
+            codeMirrorInstance.refresh();
+        }
+    };
+
+    const saveBtn = document.getElementById('save-btn');
+    saveBtn.onclick = () => {
+        const updatedCode = codeMirrorInstance.getValue();
+        fetch(`/api/update-package/${encodeURIComponent(filename)}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: updatedCode })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('Пакет успешно обновлён!');
+                openPreviewModal(data.metadata);
+                closePackageModal();
+            } else {
+                alert(`Ошибка: ${data.error}`);
+            }
+        })
+        .catch(() => alert('Ошибка при обновлении пакета.'));
+    };
+
+    const uploadBtn = document.getElementById('upload-btn');
+    uploadBtn.onclick = () => {
+        openUploadOverlay(filename);
+    };
+
     modal.style.display = 'flex';
 }
 
@@ -127,38 +175,57 @@ function closePackageModal() {
         codeMirrorInstance.toTextArea();
         codeMirrorInstance = null;
     }
+    document.getElementById('view-mode').style.display = 'block';
+    document.getElementById('edit-mode').style.display = 'none';
+    document.getElementById('creator-buttons').style.display = 'none';
     document.getElementById('favorite-btn').onclick = null;
+    document.getElementById('edit-btn').onclick = null;
+    document.getElementById('upload-btn').onclick = null;
+    document.getElementById('save-btn').onclick = null;
+    isEditMode = false;
 }
 
-function openUploadOverlay() {
+function openUploadOverlay(existingFilename = null) {
     const overlay = document.getElementById('upload-overlay');
     overlay.style.display = 'flex';
 
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('file-input');
 
-    dropZone.addEventListener('click', () => fileInput.click());
+    const clearListeners = () => {
+        dropZone.removeEventListener('click', clickHandler);
+        dropZone.removeEventListener('dragover', dragoverHandler);
+        dropZone.removeEventListener('dragleave', dragleaveHandler);
+        dropZone.removeEventListener('drop', dropHandler);
+        fileInput.removeEventListener('change', changeHandler);
+    };
 
-    dropZone.addEventListener('dragover', (e) => {
+    const clickHandler = () => fileInput.click();
+    const dragoverHandler = (e) => {
         e.preventDefault();
         dropZone.classList.add('dragover');
-    });
-
-    dropZone.addEventListener('dragleave', () => {
+    };
+    const dragleaveHandler = () => {
         dropZone.classList.remove('dragover');
-    });
-
-    dropZone.addEventListener('drop', (e) => {
+    };
+    const dropHandler = (e) => {
         e.preventDefault();
         dropZone.classList.remove('dragover');
         const file = e.dataTransfer.files[0];
-        handleFile(file);
-    });
-
-    fileInput.addEventListener('change', () => {
+        clearListeners();
+        handleFile(file, existingFilename);
+    };
+    const changeHandler = () => {
         const file = fileInput.files[0];
-        handleFile(file);
-    });
+        clearListeners();
+        handleFile(file, existingFilename);
+    };
+
+    dropZone.addEventListener('click', clickHandler);
+    dropZone.addEventListener('dragover', dragoverHandler);
+    dropZone.addEventListener('dragleave', dragleaveHandler);
+    dropZone.addEventListener('drop', dropHandler);
+    fileInput.addEventListener('change', changeHandler);
 }
 
 function closeUploadOverlay() {
@@ -215,6 +282,7 @@ function openPreviewModal(package) {
         alert('Пакет успешно опубликован!');
         closePreviewModal();
         closeUploadOverlay();
+        closePackageModal();
         location.reload();
     };
 
@@ -234,7 +302,7 @@ function closePreviewModal() {
     }
 }
 
-function handleFile(file) {
+function handleFile(file, existingFilename = null) {
     if (!file) {
         alert('Файл не выбран.');
         return;
@@ -248,16 +316,17 @@ function handleFile(file) {
     const reader = new FileReader();
     reader.onload = (e) => {
         const content = e.target.result;
-        // Client-side validation for XML comment
         const xmlRegex = /\/\*[\s\S]*?<\?xml[\s\S]*?<package[\s\S]*?<name>[\s\S]*?<\/name>[\s\S]*?<description>[\s\S]*?<\/description>[\s\S]*?<\/package>[\s\S]*?\*\//;
         if (!xmlRegex.test(content)) {
             alert('Файл должен содержать XML-комментарий с метаданными (<name> и <description>) в начале.');
             return;
         }
 
-        // Send file to server for further validation and storage
         const formData = new FormData();
         formData.append('file', file);
+        if (existingFilename) {
+            formData.append('existing_filename', existingFilename);
+        }
 
         fetch('/api/upload-package', {
             method: 'POST',
