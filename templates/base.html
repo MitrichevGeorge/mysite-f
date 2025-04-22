@@ -41,8 +41,25 @@
 <body>
     <div class="flash-container" id="flash-container"></div>
     <header id="header">
-        <a href="/" class="logo">Главная</a>
-        <a href="/store" class="logo">Магазин дизайна</a>
+        <div class="home-menu">
+            {% if current_user.is_authenticated %}
+                <svg id="home-arrow" class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M9.5 5L15.7929 11.2929C16.1834 11.6834 16.1834 12.3166 15.7929 12.7071L9.5 19" stroke="var(--text-link)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="--darkreader-inline-stroke: var(--darkreader-text-link, #a8c0e0);" data-darkreader-inline-stroke=""></path>
+                    </g>
+                </svg>
+            {% endif %}
+            <a href="/" class="logo">Главная</a>
+            {% if current_user.is_authenticated %}
+                <div class="dropdown home-dropdown" id="home-dropdown" style="display: none;">
+                    {% for item in menu_items %}
+                        <a href="{{ item.url }}">{{ item.name }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
         <div class="tabs" id="tabs">
             <div class="shdw-left" id="noscroll"></div>
             {% for tab in tabs %}
@@ -112,6 +129,33 @@
                     console.error('Error removing tab:', error);
                 });
             }
+        }
+
+        const homeArrow = document.getElementById('home-arrow');
+        const homeDropdown = document.getElementById('home-dropdown');
+
+        if (homeArrow && homeDropdown) {
+            homeArrow.addEventListener('click', function() {
+                const isOpen = homeDropdown.style.display === 'block';
+                homeDropdown.style.display = isOpen ? 'none' : 'block';
+                homeArrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+                homeDropdown.style.left = '0px';
+                homeDropdown.style.top = `${homeArrow.offsetTop + homeArrow.offsetHeight + 10}px`;
+            });
+
+            homeArrow.addEventListener('mouseleave', function() {
+                setTimeout(() => {
+                    if (!homeDropdown.matches(':hover')) {
+                        homeDropdown.style.display = 'none';
+                        homeArrow.style.transform = 'rotate(0deg)';
+                    }
+                }, 100);
+            });
+
+            homeDropdown.addEventListener('mouseleave', function() {
+                homeDropdown.style.display = 'none';
+                homeArrow.style.transform = 'rotate(0deg)';
+            });
         }
     </script>
     <script>
@@ -236,5 +280,5 @@
             {% endif %}
         {% endwith %}
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9347417cfa9dbd58',t:'MTc0NTM0NzI5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

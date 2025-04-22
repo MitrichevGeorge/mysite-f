@@ -272,6 +272,49 @@ header .user-name {
     animation: timer 5s linear forwards;
 }
 
+.home-menu {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.arrow-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: absolute;
+}
+
+.home-menu .logo {
+    margin-left: 36px; /* Space for arrow (24px) + margin-right (5px) + extra space */
+    position: relative;
+    z-index: 1;
+}
+
+.home-dropdown {
+    background-color: var(--bg-dropdown);
+    border: 1px solid var(--bg-scrollbar-thumb);
+    border-radius: var(--border-radius-lg);
+    z-index: var(--z-index-high);
+    margin-top: 5px;
+    left: 0;
+    width: 200px; /* Fixed width for consistency */
+}
+
+.home-dropdown a {
+    color: var(--text-link);
+    padding: var(--padding-sm);
+    display: block;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.home-dropdown a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 @keyframes slideIn {
     from { transform: translateX(100%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }

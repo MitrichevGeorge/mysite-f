@@ -15,6 +15,7 @@ views_bp = Blueprint('views', __name__)
 
 TASKS_DIR = "tasks/"
 PACKAGES_DIR = "app/static/packages/"
+MENU_FILE = "menu.json"
 
 def parse_package_metadata(file_path):
     """Parse XML metadata from the top comment of a CSS file."""
@@ -64,19 +65,32 @@ def check_duplicate_package(name, filename, exclude_filename=None):
                 return True
     return False
 
+def load_menu_items():
+    """Load menu items from menu.json."""
+    try:
+        if os.path.exists(MENU_FILE):
+            with open(MENU_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        return []
+    except Exception as e:
+        logging.error(f"Error loading menu.json: {e}")
+        return []
+
 @views_bp.route('/')
 def index():
     tasks = os.listdir(TASKS_DIR)
+    menu_items = load_menu_items()
     if current_user.is_authenticated:
-        return render_template('index.html', tasks=tasks, current_user=current_user, tabs=current_user.tabs)
+        return render_template('index.html', tasks=tasks, current_user=current_user, tabs=current_user.tabs, menu_items=menu_items)
     else:
-        return render_template('index.html', tasks=tasks, current_user=current_user, tabs=[])
+        return render_template('index.html', tasks=tasks, current_user=current_user, tabs=[], menu_items=menu_items)
 
 @views_bp.route('/profile')
 @login_required
 def profile():
     users = load_users()
     user = users.get(current_user.id)
+    menu_items = load_menu_items()
 
     if not user:
         return jsonify({"error": "Пользователь не найден"}), 404
@@ -122,7 +136,7 @@ def profile():
         packages = [f for f in os.listdir(PACKAGES_DIR) if f.endswith('.css')]
 
     daily_requests = user.daily_requests
-    return render_template("profile.html", current_user=current_user, submissions=sbm, daily_requests=daily_requests, tabs=user.tabs, my_tasks=my_tasks, packages=packages)
+    return render_template("profile.html", current_user=current_user, submissions=sbm, daily_requests=daily_requests, tabs=user.tabs, my_tasks=my_tasks, packages=packages, menu_items=menu_items)
 
 @views_bp.route('/store')
 @login_required
@@ -130,6 +144,7 @@ def store():
     packages = []
     users = load_users()
     user = users.get(current_user.id)
+    menu_items = load_menu_items()
     favorite_packages = user.favorite_packages if user else []
     created_packages = user.created_packages if user else []
     
@@ -148,7 +163,7 @@ def store():
                 else:
                     logging.warning(f"Skipping {filename} due to invalid metadata")
     logging.debug(f"Found {len(packages)} valid packages")
-    return render_template("store.html", packages=packages, favorite_packages=favorite_packages, is_creator=user.is_creator, created_packages=created_packages)
+    return render_template("store.html", packages=packages, favorite_packages=favorite_packages, is_creator=user.is_creator, created_packages=created_packages, menu_items=menu_items)
 
 @views_bp.route('/api/package/<filename>')
 @login_required
@@ -417,6 +432,7 @@ def update_custom_package():
 @views_bp.route('/change-username', methods=['GET', 'POST'])
 @login_required
 def change_username():
+    menu_items = load_menu_items()
     if request.method == 'POST':
         new_username = request.form.get('username')
         if not new_username or len(new_username) < 3:
@@ -433,11 +449,12 @@ def change_username():
             save_users(users)
             flash('Имя пользователя успешно изменено.', 'success')
             return redirect(url_for('views.profile'))
-    return render_template('change_username.html')
+    return render_template('change_username.html', menu_items=menu_items)
 
 @views_bp.route('/change-password', methods=['GET', 'POST'])
 @login_required
 def change_password():
+    menu_items = load_menu_items()
     if request.method == 'POST':
         current_password = request.form.get('current_password')
         new_password = request.form.get('new_password')
@@ -473,4 +490,4 @@ def change_password():
             flash('Ошибка при сохранении нового пароля.', 'error')
             return redirect(url_for('views.change_password'))
 
-    return render_template('change_password.html')
+    return render_template('change_password.html', menu_items=menu_items)
