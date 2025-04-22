@@ -818,7 +818,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": 2,
@@ -839,7 +840,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": 3,
@@ -860,7 +862,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": 4,
@@ -1173,30 +1176,6 @@
             }
         ],
         "login_history": [
-            {
-                "timestamp": "2025-04-20 18:32:57",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 18:33:11",
-                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
-            },
-            {
-                "timestamp": "2025-04-20 19:02:06",
-                "url": "http://127.0.0.1:5000/api/package/cosmic_horizon.css"
-            },
-            {
-                "timestamp": "2025-04-20 19:02:51",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-20 20:43:13",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-20 20:43:15",
-                "url": "http://127.0.0.1:5000/store"
-            },
             {
                 "timestamp": "2025-04-20 20:44:30",
                 "url": "http://127.0.0.1:5000/store"
@@ -1572,9 +1551,33 @@
             {
                 "timestamp": "2025-04-21 21:51:01",
                 "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-21 21:56:15",
+                "url": "http://127.0.0.1:5000/store"
+            },
+            {
+                "timestamp": "2025-04-22 19:29:42",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 19:29:43",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:18:23",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:18:24",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:18:29",
+                "url": "http://127.0.0.1:5000/logout"
             }
         ],
-        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAAAAAAAAAAAADYAAACjAAAAFQAAAKIAAABLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAAAAAAAAAAAADYAAACjAAAAFQAAAKIAAABMAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "tabs": [
             {
                 "url": "http://127.0.0.1:5000/logout",
@@ -1672,7 +1675,8 @@
         "created_packages": [
             "newer.css",
             "newer_1.css"
-        ]
+        ],
+        "creator_request_status": "none"
     },
     {
         "id": 5,
@@ -1688,9 +1692,117 @@
             {
                 "timestamp": "2025-04-12 19:58:07",
                 "url": "http://127.0.0.1:5000/logout"
+            },
+            {
+                "timestamp": "2025-04-22 20:18:57",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-04-22 20:18:59",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:18:59",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:19:01",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-22 20:19:01",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:19:02",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:19:19",
+                "url": "http://127.0.0.1:5000/request-creator"
+            },
+            {
+                "timestamp": "2025-04-22 20:19:20",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:19:20",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:28:23",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:28:25",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:29:53",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:29:53",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:30:15",
+                "url": "http://127.0.0.1:5000/request-creator"
+            },
+            {
+                "timestamp": "2025-04-22 20:30:17",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:30:18",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:33:03",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:33:03",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:34:18",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:34:19",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:34:36",
+                "url": "http://127.0.0.1:5000/request-creator"
+            },
+            {
+                "timestamp": "2025-04-22 20:34:38",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:34:39",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:34:56",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:34:56",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-22 20:54:20",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-22 20:54:20",
+                "url": "http://127.0.0.1:5000/api/submissions"
             }
         ],
-        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "tabs": [
             {
                 "url": "http://127.0.0.1:5000/",
@@ -1699,9 +1811,25 @@
             {
                 "url": "http://127.0.0.1:5000/logout",
                 "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/profile",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/api/submissions",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/update-theme",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/request-creator",
+                "name": "Contest"
             }
         ],
-        "theme": "light",
+        "theme": "dark",
         "recovery_code": null,
         "recovery_code_expiration": null,
         "is_verified": true,
@@ -1711,7 +1839,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "rejected"
     },
     {
         "id": 6,
@@ -2174,7 +2303,8 @@
         "is_creator": true,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": "be94af5b-e941-42f8-b235-11df631fd400",
@@ -2195,7 +2325,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": "35564412-8caf-404e-8211-b7f1224a88e9",
@@ -2216,7 +2347,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": "1a970328-34ab-4334-9e47-93bcef05bcae",
@@ -2237,7 +2369,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": "f18d458d-7d1b-4e38-8b0f-661bc1c45348",
@@ -2258,7 +2391,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": "33ab94c2-9412-4a7b-89a9-943c32e3f8b7",
@@ -2279,7 +2413,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": "96546a12-411e-4f8a-8de1-9bdba1cfdb6e",
@@ -2300,7 +2435,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": "8adce1de-4b46-4316-9021-bdebf56c388e",
@@ -2321,7 +2457,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": 14,
@@ -2342,7 +2479,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": 15,
@@ -2363,7 +2501,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": 16,
@@ -2384,7 +2523,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": 17,
@@ -2405,7 +2545,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": 18,
@@ -2426,7 +2567,8 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     },
     {
         "id": 19,
@@ -2447,6 +2589,7 @@
         "is_creator": false,
         "custom_package": null,
         "favorite_packages": [],
-        "created_packages": []
+        "created_packages": [],
+        "creator_request_status": "none"
     }
 ]

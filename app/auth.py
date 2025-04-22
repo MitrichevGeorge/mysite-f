@@ -14,6 +14,7 @@ from .models import User, load_users, save_users
 from werkzeug.security import generate_password_hash
 import uuid
 from datetime import datetime, timedelta
+import requests
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -23,6 +24,7 @@ SMTP_SERVER = "smtp.mail.ru"
 SMTP_PORT = 465
 USERNAME = "infsolvy@bk.ru"
 PASSWORD = "CThDRiNKVM9TkRVswFVF"
+ADMIN_EMAIL = "yegorim@mail.ru"
 
 def send_email(to_email, subject, html_body):
     """Send email and return True if successful, False otherwise."""
@@ -77,6 +79,27 @@ def send_one_time_code(to_email, username, code):
     """
     return send_email(to_email, "Вход по одноразовому коду", html_body)
 
+def send_creator_request_email(username, email, reason, request_code):
+    """Send creator request email to admin with accept/decline links."""
+    accept_link = url_for('auth.approve_creator', code=request_code, _external=True)
+    decline_link = url_for('auth.reject_creator', code=request_code, _external=True)
+    html_body = f"""
+    <!DOCTYPE html>
+    <html>
+    <body>
+        <h1>Запрос прав создателя</h1>
+        <p>Пользователь <strong>{username}</strong> (email: {email}) запрашивает права создателя.</p>
+        <p><strong>Причина запроса:</strong></p>
+        <p>{reason}</p>
+        <p>Для принятия запроса перейдите по ссылке:</p>
+        <a href="{accept_link}">Принять запрос</a>
+        <p>Для отклонения запроса перейдите по ссылке:</p>
+        <a href="{decline_link}">Отклонить запрос</a>
+    </body>
+    </html>
+    """
+    return send_email(ADMIN_EMAIL, "Запрос прав создателя", html_body)
+
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -105,7 +128,7 @@ def register():
             password_hash=generate_password_hash(password),
             is_verified=False,
             verification_code=verification_code,
-            custom_package=None  # Initialize custom_package
+            custom_package=None
         )
 
         users[new_user_id] = new_user
@@ -347,3 +370,100 @@ def update_password():
 def logout():
     logout_user()
     return redirect(url_for("views.index"))
+
+@auth_bp.route('/request-creator', methods=['POST'])
+@login_required
+def request_creator():
+    if current_user.is_creator:
+        flash('Вы уже являетесь создателем.', 'error')
+        return redirect(url_for('views.profile'))
+
+    if current_user.creator_request_status == 'pending':
+        flash('Ваш запрос уже на рассмотрении.', 'error')
+        return redirect(url_for('views.profile'))
+
+    reason = request.form.get('reason')
+    agreement = request.form.get('agreement')
+    token = request.form.get('cf-turnstile-response')
+
+    if not reason or not agreement:
+        flash('Пожалуйста, заполните все поля и подтвердите согласие.', 'error')
+        return redirect(url_for('views.profile'))
+
+    # Verify CAPTCHA
+    response = requests.post(
+        'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        data={'secret': '0x4AAAAAABRQkVXmPfu99urFb80xmVf6YJ8', 'response': token}
+    )
+    if not response.json().get('success', False):
+        flash('Неверная капча.', 'error')
+        return redirect(url_for('views.profile'))
+
+    users = load_users()
+    user = users.get(current_user.id)
+    if not user:
+        flash('Пользователь не найден.', 'error')
+        return redirect(url_for('views.profile'))
+
+    request_code = str(uuid.uuid4())
+    user.creator_request_status = 'pending'
+    user.verification_code = request_code  # Reuse verification_code for creator request
+    save_users(users)
+
+    if not send_creator_request_email(user.username, user.email, reason, request_code):
+        flash('Ошибка отправки запроса. Пожалуйста, попробуйте снова.', 'error')
+        return redirect(url_for('views.profile'))
+
+    flash('Запрос на получение прав создателя отправлен.', 'success')
+    return redirect(url_for('views.profile'))
+
+@auth_bp.route('/approve-creator/<code>')
+def approve_creator(code):
+    users = load_users()
+    user = next((u for u in users.values() if u.verification_code == code and u.creator_request_status == 'pending'), None)
+    if user:
+        user.is_creator = True
+        user.creator_request_status = 'approved'
+        user.verification_code = None
+        save_users(users)
+        flash('Запрос на права создателя одобрен.')
+        # Notify user
+        send_email(user.email, "Права создателя одобрены", f"""
+        <!DOCTYPE html>
+        <html>
+        <body>
+            <h1>Права создателя одобрены</h1>
+            <p>Здравствуйте, {user.username}!</p>
+            <p>Ваш запрос на получение прав создателя был одобрен. Теперь вы можете создавать задачи.</p>
+        </body>
+        </html>
+        """)
+        return redirect(url_for('views.index'))
+    else:
+        flash('Неверная или устаревшая ссылка.')
+        return redirect(url_for('views.index'))
+
+@auth_bp.route('/reject-creator/<code>')
+def reject_creator(code):
+    users = load_users()
+    user = next((u for u in users.values() if u.verification_code == code and u.creator_request_status == 'pending'), None)
+    if user:
+        user.creator_request_status = 'rejected'
+        user.verification_code = None
+        save_users(users)
+        flash('Запрос на права создателя отклонён.')
+        # Notify user
+        send_email(user.email, "Права создателя отклонены", f"""
+        <!DOCTYPE html>
+        <html>
+        <body>
+            <h1>Права создателя отклонены</h1>
+            <p>Здравствуйте, {user.username}!</p>
+            <p>Ваш запрос на получение прав создателя был отклонён. Для уточнения причин свяжитесь с администратором.</p>
+        </body>
+        </html>
+        """)
+        return redirect(url_for('views.index'))
+    else:
+        flash('Неверная или устаревшая ссылка.')
+        return redirect(url_for('views.index'))

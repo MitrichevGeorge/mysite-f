@@ -44,6 +44,7 @@
     --link-hover: #0056b3;
     --input-border: #ccc;
     --input-bg: #ffffff;
+    --overlay-bg: rgba(0, 0, 0, 0.5);
 }
 
 /* Цвета для темной темы */
@@ -79,6 +80,7 @@
     --link-hover: #29a341;
     --input-border: #444;
     --input-bg: #2d2d2d;
+    --overlay-bg: rgba(0, 0, 0, 0.7);
 }
 
 body {
@@ -338,7 +340,7 @@ header {
 }
 
 .verdict-badge {
-    padding: 0 каза.25rem 0.75rem;
+    padding: 0.25rem 0.75rem;
     border-radius: 9999px;
     font-size: 0.875rem;
     font-weight: 500;
@@ -437,7 +439,7 @@ header {
     max-width: 400px;
     margin: 40px auto;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     background-color: var(--bg-card);
     box-shadow: var(--shadow-card);
 }
@@ -458,7 +460,7 @@ header {
     font-size: 1em;
 }
 
-.form-group input {
+.form-group input, .form-group textarea {
     width: 100%;
     padding: 10px;
     border-radius: 4px;
@@ -467,6 +469,33 @@ header {
     border: 1px solid var(--input-border);
     background-color: var(--input-bg);
     color: var(--text-body);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.form-group.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.checkbox-group label {
+    margin: 0;
+    font-size: 1em;
 }
 
 .btn {
@@ -539,4 +568,35 @@ header {
 .task-link:hover {
     color: var(--link-hover);
     text-decoration: underline;
+}
+
+.creator-request-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.request-status {
+    font-size: 1em;
+    color: var(--label-color);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-bg);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity var(--transition);
+}
+
+.overlay.hidden {
+    display: none;
 }

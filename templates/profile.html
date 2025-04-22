@@ -3,6 +3,7 @@
 {% block content %}
     <link rel="stylesheet" href="{{ url_for('static', filename='profile/profile_styles.css') }}">
     <script src="{{ url_for('static', filename='profile/profile_scripts.js') }}"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script>
         const dailyRequests = {{ daily_requests|tojson }};
         const yearStartOffset = 2;
@@ -105,8 +106,40 @@
                     <p>У вас пока нет созданных задач.</p>
                 {% endif %}
             {% else %}
-                <p>Вы не являетесь создателем. Вы можете попросить у администраторов сделать Вас создателем.</p>
+                <div class="creator-request-section">
+                    <p>Вы не являетесь создателем. Вы можете запросить права создателя.</p>
+                    <button id="request-creator-btn" class="settings-btn" {% if current_user.creator_request_status == 'pending' %}disabled{% endif %}>Запросить права создателя</button>
+                    <p class="request-status">
+                        Статус запроса: 
+                        {% if current_user.creator_request_status == 'none' %}Не подан{% endif %}
+                        {% if current_user.creator_request_status == 'pending' %}На рассмотрении{% endif %}
+                        {% if current_user.creator_request_status == 'rejected' %}Отклонён{% endif %}
+                    </p>
+                </div>
             {% endif %}
+        </div>
+
+        <div id="creator-request-overlay" class="overlay" style="display: none;">
+            <div id="creator-request-form" class="form-card">
+                <h2 class="form-title">Запрос прав создателя</h2>
+                <form id="creator-request-submit" method="POST" action="{{ url_for('auth.request_creator') }}">
+                    <div class="form-group">
+                        <label for="reason">Почему вам нужны права создателя?</label>
+                        <textarea id="reason" name="reason" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAABRQkc9VON6ORoHN"></div>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="agreement" name="agreement" required>
+                        <label for="agreement">Я обязуюсь не использовать права создателя во вред системе</label>
+                    </div>
+                    <div class="form-group buttons">
+                        <button type="submit" class="btn">Отправить запрос</button>
+                        <button type="button" id="cancel-creator-request" class="btn">Отмена</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div class="tabsq">

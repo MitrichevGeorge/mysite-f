@@ -78,6 +78,30 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Обработчик кнопки запроса прав создателя
+    const requestCreatorBtn = document.getElementById('request-creator-btn');
+    const creatorRequestOverlay = document.getElementById('creator-request-overlay');
+    const cancelCreatorRequestBtn = document.getElementById('cancel-creator-request');
+
+    if (requestCreatorBtn) {
+        requestCreatorBtn.addEventListener('click', function () {
+            creatorRequestOverlay.style.display = 'flex';
+        });
+    }
+
+    if (cancelCreatorRequestBtn) {
+        cancelCreatorRequestBtn.addEventListener('click', function () {
+            creatorRequestOverlay.style.display = 'none';
+        });
+    }
+
+    // Закрытие оверлея при клике вне формы
+    creatorRequestOverlay.addEventListener('click', function (event) {
+        if (event.target === creatorRequestOverlay) {
+            creatorRequestOverlay.style.display = 'none';
+        }
+    });
+
     loadSubmissions();
 });
 

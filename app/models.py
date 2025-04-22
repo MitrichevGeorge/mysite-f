@@ -23,7 +23,7 @@ def getTabName(url):
     return "Contest"
 
 class User(UserMixin):
-    def __init__(self, id, email, username, password_hash, submissions=None, login_history=None, daily_requests=None, tabs=None, theme='light', reset_code=None, reset_code_expiration=None, is_verified=False, verification_code=None, one_time_code=None, one_time_code_expiration=None, is_creator=False, custom_package=None, favorite_packages=None, created_packages=None):
+    def __init__(self, id, email, username, password_hash, submissions=None, login_history=None, daily_requests=None, tabs=None, theme='light', reset_code=None, reset_code_expiration=None, is_verified=False, verification_code=None, one_time_code=None, one_time_code_expiration=None, is_creator=False, custom_package=None, favorite_packages=None, created_packages=None, creator_request_status='none'):
         self.id = id
         self.email = email
         self.username = username
@@ -43,6 +43,7 @@ class User(UserMixin):
         self.custom_package = custom_package
         self.favorite_packages = favorite_packages if favorite_packages else []
         self.created_packages = created_packages if created_packages else []
+        self.creator_request_status = creator_request_status
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -128,7 +129,8 @@ def load_users():
                     is_creator=user_data.get('is_creator', False),
                     custom_package=user_data.get('custom_package', None),
                     favorite_packages=user_data.get('favorite_packages', []),
-                    created_packages=user_data.get('created_packages', [])
+                    created_packages=user_data.get('created_packages', []),
+                    creator_request_status=user_data.get('creator_request_status', 'none')
                 )
             return users
     return {}
@@ -159,7 +161,8 @@ def save_users(users):
             "is_creator": user.is_creator,
             "custom_package": user.custom_package,
             "favorite_packages": user.favorite_packages,
-            "created_packages": user.created_packages
+            "created_packages": user.created_packages,
+            "creator_request_status": user.creator_request_status
         })
     with open(USERS_FILE, 'w') as f:
         json.dump(users_data, f, ensure_ascii=True, indent=4)
