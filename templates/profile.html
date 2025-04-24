@@ -5,9 +5,9 @@
     <script src="{{ url_for('static', filename='profile/profile_scripts.js') }}"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script>
-        const dailyRequests = {{ daily_requests|tojson }};
+        const dailyRequests = {{ dailyRequests|tojson }};
         const yearStartOffset = 2;
-        const isDarkTheme = {{ is_dark_theme|tojson }};
+        const isDarkTheme = {{ isDarkTheme|tojson }};
     </script>
 
     <div class="container">
@@ -85,26 +85,49 @@
                         <option value="{{ package }}" {% if current_user.custom_package == package %}selected{% endif %}>{{ package }}</option>
                     {% endfor %}
                 </select>
+                <a href="/store" class="task-link">Перейти в магазин пакетов</a>
             </div>
         </div>
 
         <div class="tasks-section">
             <h2 class="settings-title">Мои задачи</h2>
             {% if current_user.is_creator %}
-                <a href="{{ url_for('tasks.create_task') }}" class="settings-btn">Создать новую задачу</a>
-                {% if my_tasks %}
-                    {% for task in my_tasks %}
-                        <div class="task-entry">
-                            <span>{{ task.title }}</span>
-                            <div class="task-actions">
-                                <a href="{{ url_for('tasks.task', task_name=task.name) }}" class="settings-btn">Решить</a>
-                                <a href="{{ url_for('tasks.edit_task', task_name=task.name) }}" class="settings-btn">Редактировать</a>
+                <div class="tab-list">
+                    <button class="tab-button active" onclick="showTab('tasks')">Задачи</button>
+                    <button class="tab-button" onclick="showTab('events')">События</button>
+                </div>
+                <div id="tasks-tab" class="tab-content">
+                    <a href="{{ url_for('tasks.create_task') }}" class="settings-btn">Создать новую задачу</a>
+                    {% if my_tasks %}
+                        {% for task in my_tasks %}
+                            <div class="task-entry">
+                                <span>{{ task.title }}</span>
+                                <div class="task-actions">
+                                    <a href="{{ url_for('tasks.task', task_name=task.name) }}" class="settings-btn">Решить</a>
+                                    <a href="{{ url_for('tasks.edit_task', task_name=task.name) }}" class="settings-btn">Редактировать</a>
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>У вас пока нет созданных задач.</p>
-                {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p>У вас пока нет созданных задач.</p>
+                    {% endif %}
+                </div>
+                <div id="events-tab" class="tab-content" style="display: none;">
+                    <a href="{{ url_for('views.create_event') }}" class="settings-btn">Создать новое событие</a>
+                    {% if my_events %}
+                        {% for event in my_events %}
+                            <div class="task-entry">
+                                <span>{{ event.title }}</span>
+                                <div class="task-actions">
+                                    <a href="{{ url_for('views.event', event_id=event.id) }}" class="settings-btn">Просмотреть</a>
+                                    <a href="{{ url_for('views.edit_event', event_id=event.id) }}" class="settings-btn">Редактировать</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>У вас пока нет созданных событий.</p>
+                    {% endif %}
+                </div>
             {% else %}
                 <div class="creator-request-section">
                     <p>Вы не являетесь создателем. Вы можете запросить права создателя.</p>
