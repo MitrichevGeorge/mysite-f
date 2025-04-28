@@ -14,8 +14,6 @@ logging.basicConfig(level=logging.DEBUG)
 views_bp = Blueprint('views', __name__)
 
 TASKS_DIR = "tasks/"
-EVENTS_DIR = "events/"
-EVENTS_JSON = "events.json"
 PACKAGES_DIR = "app/static/packages/"
 MENU_FILE = "menu.json"
 
@@ -78,36 +76,14 @@ def load_menu_items():
         logging.error(f"Error loading menu.json: {e}")
         return []
 
-def load_events():
-    """Load events from events.json."""
-    try:
-        if os.path.exists(EVENTS_JSON):
-            with open(EVENTS_JSON, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-                return data.get('events', [])
-        return []
-    except Exception as e:
-        logging.error(f"Error loading events.json: {e}")
-        return []
-
 @views_bp.route('/')
 def index():
     tasks = os.listdir(TASKS_DIR)
-    raw_events = load_events()
-    # Normalize events to ensure 'id' is used for linking
-    events = []
-    for event in raw_events:
-        event_data = {
-            'id': event.get('id', event.get('name', '')),  # Fallback to 'name' if 'id' is missing
-            'title': event.get('title', 'Без названия'),
-            'description': event.get('description', '')
-        }
-        events.append(event_data)
     menu_items = load_menu_items()
     if current_user.is_authenticated:
-        return render_template('index.html', tasks=tasks, events=events, current_user=current_user, tabs=current_user.tabs, menu_items=menu_items)
+        return render_template('index.html', tasks=tasks, current_user=current_user, tabs=current_user.tabs, menu_items=menu_items)
     else:
-        return render_template('index.html', tasks=tasks, events=events, current_user=current_user, tabs=[], menu_items=menu_items)
+        return render_template('index.html', tasks=tasks, current_user=current_user, tabs=[], menu_items=menu_items)
 
 @views_bp.route('/task/<task_name>')
 def task(task_name):
@@ -142,32 +118,6 @@ def task(task_name):
         menu_items=menu_items,
         is_dark_theme=current_user.theme == 'dark' if current_user.is_authenticated else False
     )
-
-@views_bp.route('/event/<event_id>')
-def event(event_id):
-    events = load_events()
-    event = next((e for e in events if e.get('id', e.get('name', '')) == event_id), None)
-    if not event:
-        return jsonify({"error": "Мероприятие не найдено"}), 404
-    menu_items = load_menu_items()
-    md_file = os.path.join(EVENTS_DIR, f"{event_id}.md")
-    description = ""
-    if os.path.exists(md_file):
-        with open(md_file, 'r', encoding='utf-8') as f:
-            description = f.read()
-    return render_template('events.html', event_title=event['title'], description=description, menu_items=menu_items, is_dark_theme=current_user.theme == 'dark' if current_user.is_authenticated else False)
-
-@views_bp.route('/create_event')
-@login_required
-def create_event():
-    # Placeholder route to prevent BuildError
-    return jsonify({"error": "Создание событий пока не реализовано"}), 501
-
-@views_bp.route('/edit_event/<event_id>')
-@login_required
-def edit_event(event_id):
-    # Placeholder route to prevent BuildError
-    return jsonify({"error": "Редактирование событий пока не реализовано"}), 501
 
 @views_bp.route('/profile')
 @login_required
@@ -215,16 +165,6 @@ def profile():
                     "title": config.get("title", task_name)
                 })
 
-    # Load events created by the user
-    my_events = []
-    events = load_events()
-    for event in events:
-        if event.get('creator_id') == user.id:
-            my_events.append({
-                "id": event.get('id', event.get('name', '')),
-                "title": event['title']
-            })
-
     packages = []
     if os.path.exists(PACKAGES_DIR):
         packages = [f for f in os.listdir(PACKAGES_DIR) if f.endswith('.css')]
@@ -239,7 +179,6 @@ def profile():
         dailyRequests=daily_requests,
         tabs=user.tabs,
         my_tasks=my_tasks,
-        my_events=my_events,
         packages=packages,
         menu_items=menu_items,
         isDarkTheme=is_dark_theme

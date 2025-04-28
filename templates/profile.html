@@ -112,22 +112,6 @@
                         <p>У вас пока нет созданных задач.</p>
                     {% endif %}
                 </div>
-                <div id="events-tab" class="tab-content" style="display: none;">
-                    <a href="{{ url_for('views.create_event') }}" class="settings-btn">Создать новое событие</a>
-                    {% if my_events %}
-                        {% for event in my_events %}
-                            <div class="task-entry">
-                                <span>{{ event.title }}</span>
-                                <div class="task-actions">
-                                    <a href="{{ url_for('views.event', event_id=event.id) }}" class="settings-btn">Просмотреть</a>
-                                    <a href="{{ url_for('views.edit_event', event_id=event.id) }}" class="settings-btn">Редактировать</a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>У вас пока нет созданных событий.</p>
-                    {% endif %}
-                </div>
             {% else %}
                 <div class="creator-request-section">
                     <p>Вы не являетесь создателем. Вы можете запросить права создателя.</p>
