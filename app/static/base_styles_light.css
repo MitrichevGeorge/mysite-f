@@ -1,6 +1,7 @@
 :root {
     --bg-body: #f0f4f8;
     --bg-header: #e7bacb;
+    --bg-header-scroled: #e7bacb40;
     --bg-tab: #f0e5df;
     --bg-submission: #ffffff;
     --bg-table-header: #f2f2f2;
@@ -16,6 +17,7 @@
     --shadow-hover: 0 0 3px 5px rgba(46, 46, 46, 0.223);
     --shadow-tab: linear-gradient(to right, rgba(82, 61, 61, 0.8), transparent);
     --shadow-tab-right: linear-gradient(to left, rgba(82, 61, 61, 0.8), transparent);
+    --scrolbar-th: #e87ca580;
 }
 
 body {

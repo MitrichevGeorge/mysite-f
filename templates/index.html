@@ -2,19 +2,68 @@
 {% extends "base.html" %}
 {% block content %}
 <style>
-    h1{
-        color: #fdf5e6;
+    h1 {
+        color: var(--text-primary);
+        margin-bottom: 20px;
     }
-    .container{
+    .container {
         padding: 30px;
     }
+    .section-title {
+        color: var(--text-primary);
+        margin: 30px 0 15px;
+    }
+    .card-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+    .card {
+        background-color: var(--bg-submission);
+        border-radius: var(--border-radius-md);
+        padding: 20px;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        text-decoration: none;
+        color: var(--text-primary);
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-hover);
+    }
+    .card-title {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        color: var(--text-link);
+    }
+    .card-description {
+        font-size: 0.9em;
+        color: var(--text-primary);
+        opacity: 0.8;
+    }
 </style>
+
 <div class="container">
     <h1>Список задач</h1>
-    <ul>
+    <div class="section-title">Задачи</div>
+    <div class="card-list">
         {% for task in tasks %}
-            <li><a href="{{ url_for('tasks.task', task_name=task) }}">{{ task }}</a></li>
+            <a href="{{ url_for('views.task', task_name=task) }}" class="card">
+                <div class="card-title">{{ task }}</div>
+                <div class="card-description">Решите эту задачу и проверьте свои навыки программирования</div>
+            </a>
         {% endfor %}
-    </ul>
+    </div>
+
+    <div class="section-title">Мероприятия</div>
+    <div class="card-list">
+        {% for event in events %}
+            <a href="{{ url_for('views.event', event_name=event.name) }}" class="card">
+                <div class="card-title">{{ event.title }}</div>
+                <div class="card-description">{{ event.description }}</div>
+            </a>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

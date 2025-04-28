@@ -1,6 +1,7 @@
 :root {
-    --bg-body: #1a1a1a;
-    --bg-header: #2c2c2c;
+    --bg-body: #141516;
+    --bg-header: #212425;
+    --bg-header-scroled: #21242520;
     --bg-tab: #2a2a2a;
     --bg-submission: #333333;
     --bg-table-header: #444444;
@@ -15,6 +16,7 @@
     --shadow-hover: 0  cabelos 3px 5px rgba(255, 255, 255, 0.2);
     --shadow-tab: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
     --shadow-tab-right: linear-gradient(to left, rgba(255, 255, 255, 0.1), transparent);
+    --scrolbar-th: #373a3b80;
 }
 
 body {

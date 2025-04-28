@@ -40,6 +40,7 @@
 </head>
 <body>
     <div class="flash-container" id="flash-container"></div>
+    <div class="hoverlay"></div>
     <header id="header">
         <div class="home-menu">
             {% if current_user.is_authenticated %}
@@ -191,6 +192,9 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+    <footer>
+        <p>Этот сайт лучше открывать в <strong>firefox</strong></p>
+    </footer>
     {% if current_user.is_authenticated %}
     <script>
         const userName = document.getElementById('user-name');

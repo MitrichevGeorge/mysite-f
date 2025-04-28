@@ -192,7 +192,6 @@
     </div>
 
     <script>
-        // Handle custom package toggle and selection
         document.getElementById('custom-package-toggle').addEventListener('change', function() {
             const select = document.getElementById('custom-package-select');
             select.disabled = !this.checked;
@@ -214,7 +213,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    location.reload(); // Reload to apply new CSS
+                    location.reload();
                 } else {
                     alert('Ошибка при сохранении настроек пакета дизайна.');
                 }

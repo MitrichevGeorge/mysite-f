@@ -1177,416 +1177,408 @@
         ],
         "login_history": [
             {
-                "timestamp": "2025-04-21 21:42:26",
-                "url": "http://127.0.0.1:5000/api/upload-package"
-            },
-            {
-                "timestamp": "2025-04-21 21:43:27",
-                "url": "http://127.0.0.1:5000/api/upload-package"
-            },
-            {
-                "timestamp": "2025-04-21 21:44:13",
-                "url": "http://127.0.0.1:5000/api/upload-package"
-            },
-            {
-                "timestamp": "2025-04-21 21:44:34",
-                "url": "http://127.0.0.1:5000/api/upload-package"
-            },
-            {
-                "timestamp": "2025-04-21 21:44:40",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 21:44:42",
-                "url": "http://127.0.0.1:5000/api/package/newer.css"
-            },
-            {
-                "timestamp": "2025-04-21 21:44:48",
-                "url": "http://127.0.0.1:5000/api/package/newer_1.css"
-            },
-            {
-                "timestamp": "2025-04-21 21:46:53",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 21:50:12",
-                "url": "http://127.0.0.1:5000/api/upload-package"
-            },
-            {
-                "timestamp": "2025-04-21 21:50:22",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 21:50:32",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 21:50:39",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 21:50:58",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-21 21:51:00",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-04-21 21:51:01",
+                "timestamp": "2025-04-27 14:20:34",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-21 21:51:01",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-21 21:56:15",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 19:29:42",
+                "timestamp": "2025-04-27 14:21:59",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 19:29:43",
+                "timestamp": "2025-04-27 14:21:59",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 20:18:23",
+                "timestamp": "2025-04-27 14:22:37",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 20:18:24",
+                "timestamp": "2025-04-27 14:22:38",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 20:18:29",
-                "url": "http://127.0.0.1:5000/logout"
-            },
-            {
-                "timestamp": "2025-04-22 20:56:02",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-22 20:56:04",
+                "timestamp": "2025-04-27 14:25:31",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 20:56:04",
+                "timestamp": "2025-04-27 14:25:32",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 20:56:10",
-                "url": "http://127.0.0.1:5000/api/update-custom-package"
-            },
-            {
-                "timestamp": "2025-04-22 20:56:10",
+                "timestamp": "2025-04-27 14:25:46",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 20:56:10",
+                "timestamp": "2025-04-27 14:25:46",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 20:56:12",
-                "url": "http://127.0.0.1:5000/api/update-custom-package"
-            },
-            {
-                "timestamp": "2025-04-22 20:56:12",
+                "timestamp": "2025-04-27 14:28:33",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 20:56:13",
+                "timestamp": "2025-04-27 14:28:33",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 20:56:18",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 20:59:20",
-                "url": "http://127.0.0.1:5000/api/upload-package"
-            },
-            {
-                "timestamp": "2025-04-22 20:59:27",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 20:59:28",
-                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
-            },
-            {
-                "timestamp": "2025-04-22 21:18:07",
-                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
-            },
-            {
-                "timestamp": "2025-04-22 21:18:13",
-                "url": "http://127.0.0.1:5000/api/update-custom-package"
-            },
-            {
-                "timestamp": "2025-04-22 21:18:14",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 21:18:29",
+                "timestamp": "2025-04-27 14:32:54",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 21:18:29",
+                "timestamp": "2025-04-27 14:32:54",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 21:18:33",
-                "url": "http://127.0.0.1:5000/api/update-custom-package"
-            },
-            {
-                "timestamp": "2025-04-22 21:18:33",
+                "timestamp": "2025-04-27 14:33:38",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 21:18:33",
+                "timestamp": "2025-04-27 14:33:39",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 21:18:37",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 21:21:07",
-                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
-            },
-            {
-                "timestamp": "2025-04-22 21:21:09",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 21:21:11",
-                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
-            },
-            {
-                "timestamp": "2025-04-22 21:21:18",
-                "url": "http://127.0.0.1:5000/api/update-package/tech_edge.css"
-            },
-            {
-                "timestamp": "2025-04-22 21:21:29",
-                "url": "http://127.0.0.1:5000/api/update-package/tech_edge.css"
-            },
-            {
-                "timestamp": "2025-04-22 21:27:33",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 21:27:34",
-                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
-            },
-            {
-                "timestamp": "2025-04-22 21:29:03",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 21:29:04",
-                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
-            },
-            {
-                "timestamp": "2025-04-22 21:29:29",
-                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
-            },
-            {
-                "timestamp": "2025-04-22 21:39:52",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 21:39:53",
-                "url": "http://127.0.0.1:5000/api/package/tech_edge.css"
-            },
-            {
-                "timestamp": "2025-04-22 21:45:01",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 21:45:11",
+                "timestamp": "2025-04-27 14:40:40",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 21:45:12",
+                "timestamp": "2025-04-27 14:40:40",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 21:45:14",
+                "timestamp": "2025-04-27 14:41:01",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 14:41:01",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 14:41:24",
                 "url": "http://127.0.0.1:5000/update-theme"
             },
             {
-                "timestamp": "2025-04-22 21:45:14",
+                "timestamp": "2025-04-27 14:41:24",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 21:45:14",
+                "timestamp": "2025-04-27 14:41:25",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 21:45:16",
+                "timestamp": "2025-04-27 14:42:22",
                 "url": "http://127.0.0.1:5000/update-theme"
             },
             {
-                "timestamp": "2025-04-22 21:45:16",
+                "timestamp": "2025-04-27 14:42:22",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 21:45:17",
+                "timestamp": "2025-04-27 14:42:23",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 22:05:13",
+                "timestamp": "2025-04-27 14:45:39",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-22 22:05:14",
+                "timestamp": "2025-04-27 14:45:39",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-22 22:05:18",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-22 22:06:17",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-22 22:07:43",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-22 22:07:45",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-22 22:08:07",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-22 22:08:11",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 22:08:54",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 22:09:21",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 22:09:31",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-22 22:09:39",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-23 10:36:07",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-04-23 10:36:07",
-                "url": "http://127.0.0.1:5000/api/submissions"
-            },
-            {
-                "timestamp": "2025-04-23 10:36:28",
+                "timestamp": "2025-04-27 14:45:44",
                 "url": "http://127.0.0.1:5000/update-theme"
             },
             {
-                "timestamp": "2025-04-23 10:36:28",
+                "timestamp": "2025-04-27 14:45:44",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-23 10:36:29",
+                "timestamp": "2025-04-27 14:45:44",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-23 10:36:31",
+                "timestamp": "2025-04-27 14:46:24",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 14:46:25",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 14:47:02",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 14:47:03",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 14:47:22",
                 "url": "http://127.0.0.1:5000/update-theme"
             },
             {
-                "timestamp": "2025-04-23 10:36:32",
+                "timestamp": "2025-04-27 14:47:22",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-23 10:36:32",
+                "timestamp": "2025-04-27 14:47:23",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-23 10:36:35",
-                "url": "http://127.0.0.1:5000/store"
+                "timestamp": "2025-04-27 14:47:41",
+                "url": "http://127.0.0.1:5000/update-theme"
             },
             {
-                "timestamp": "2025-04-23 10:36:44",
-                "url": "http://127.0.0.1:5000/api/package/neon_pulse.css"
-            },
-            {
-                "timestamp": "2025-04-23 10:36:52",
-                "url": "http://127.0.0.1:5000/api/update-custom-package"
-            },
-            {
-                "timestamp": "2025-04-23 10:36:55",
-                "url": "http://127.0.0.1:5000/store"
-            },
-            {
-                "timestamp": "2025-04-23 10:37:03",
+                "timestamp": "2025-04-27 14:47:41",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-23 10:37:03",
+                "timestamp": "2025-04-27 14:47:42",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-23 10:37:06",
-                "url": "http://127.0.0.1:5000/api/update-custom-package"
-            },
-            {
-                "timestamp": "2025-04-23 10:37:06",
+                "timestamp": "2025-04-27 14:48:22",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-23 10:37:07",
+                "timestamp": "2025-04-27 14:48:22",
                 "url": "http://127.0.0.1:5000/api/submissions"
             },
             {
-                "timestamp": "2025-04-23 10:37:29",
-                "url": "http://127.0.0.1:5000/login"
+                "timestamp": "2025-04-27 14:48:28",
+                "url": "http://127.0.0.1:5000/update-theme"
             },
             {
-                "timestamp": "2025-04-23 10:37:29",
+                "timestamp": "2025-04-27 14:48:29",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 14:48:29",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 14:52:59",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 14:52:59",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 14:54:25",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 14:54:25",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 14:56:57",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 14:56:57",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 14:58:35",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 14:58:36",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 14:59:32",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 14:59:32",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:03",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:03",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:04",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:10",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:10",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:11",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:34",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:35",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:35",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:39",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:39",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:00:40",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:02:47",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:02:48",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:03:01",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-27 15:03:02",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:03:02",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:03:06",
+                "url": "http://127.0.0.1:5000/update-theme"
+            },
+            {
+                "timestamp": "2025-04-27 15:03:06",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:03:07",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:16:26",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:16:26",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:16:34",
                 "url": "http://127.0.0.1:5000/"
             },
             {
-                "timestamp": "2025-04-23 10:37:31",
-                "url": "http://127.0.0.1:5000/logout"
-            },
-            {
-                "timestamp": "2025-04-23 10:40:17",
-                "url": "http://127.0.0.1:5000/"
-            },
-            {
-                "timestamp": "2025-04-23 10:40:19",
+                "timestamp": "2025-04-27 15:16:36",
                 "url": "http://127.0.0.1:5000/profile"
             },
             {
-                "timestamp": "2025-04-23 10:40:19",
+                "timestamp": "2025-04-27 15:16:36",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:17:12",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:17:13",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:17:44",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:17:45",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:18:44",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:18:45",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:20:21",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:20:22",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:20:25",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:01",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:04",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:05",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:34",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:34",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:37",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:40",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:41",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:44",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:46",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-04-27 15:22:46",
                 "url": "http://127.0.0.1:5000/api/submissions"
             }
         ],
-        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAAAAAAAAAAAADYAAACjAAAAFQAAAKIAAABMAAAAPAAAABcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAAAAAAAAAAAADYAAACjAAAAFQAAAKIAAABMAAAAPAAAABcAAAAAAAAACgAAABsAAABuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "tabs": [
-            {
-                "url": "http://127.0.0.1:5000/change-password",
-                "name": "Contest"
-            },
-            {
-                "url": "http://127.0.0.1:5000/change-username",
-                "name": "Contest"
-            },
             {
                 "url": "http://127.0.0.1:5000/api/update-custom-package",
                 "name": "Contest"
@@ -1657,6 +1649,14 @@
             },
             {
                 "url": "http://127.0.0.1:5000/logout",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/task/task1",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/event/hackathon_2025",
                 "name": "Contest"
             }
         ],
