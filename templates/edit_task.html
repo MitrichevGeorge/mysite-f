@@ -1,135 +1,126 @@
-<!-- templates/edit_task.html -->
 {% extends "base.html" %}
 {% block content %}
-    <div class="container">
-        <div class="form-card">
-            <h1 class="form-title">Редактировать задачу</h1>
-            <form method="POST" enctype="multipart/form-data" id="edit-task-form">
-                <div class="form-group">
-                    <label for="title">Название задачи:</label>
-                    <input type="text" id="title" name="title" value="{{ config.title }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Условие задачи (MD):</label>
-                    <textarea id="description" name="description">{{ description_content }}</textarea>
-                </div>
-                <div class="form-group">
-                    <label>Тесты:</label>
-                    <table id="test-table" class="test-table">
-                        <thead>
-                            <tr>
-                                <th>Ввод</th>
-                                <th>Вывод</th>
-                                <th class="hidden-column">Скрытый</th>
-                                <th>Действия</th>
-                            </tr>
-                        </thead>
-                        <tbody id="test-table-body">
-                            {% for test in tests %}
-                            <tr>
-                                <td><textarea name="test_input[]" class="test-textarea" required>{{ test.input }}</textarea></td>
-                                <td><textarea name="test_output[]" class="test-textarea" required>{{ test.output }}</textarea></td>
-                                <td class="hidden-column">
+<div class="container">
+    <div class="form-card">
+        <h1 class="form-title">Редактировать задачу</h1>
+        <form method="POST" enctype="multipart/form-data" id="edit-task-form">
+            <div class="form-group">
+                <label for="id">ID задачи (нельзя изменить):</label>
+                <input type="text" id="id" name="id" value="{{ config.id }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="title">Название задачи (до 100 символов):</label>
+                <input type="text" id="title" name="title" value="{{ config.title | safe }}" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Краткое описание (до 500 символов):</label>
+                <textarea id="description" name="description" maxlength="500" rows="4">{{ config.description | safe }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="condition">Условие задачи (MD):</label>
+                <textarea id="condition" name="condition">{{ condition_content }}</textarea>
+            </div>
+            <div class="form-group">
+                <label>Тесты:</label>
+                <table id="test-table" class="test-table">
+                    <thead>
+                        <tr>
+                            <th>Ввод</th>
+                            <th>Вывод</th>
+                            <th class="hidden-column">Скрытый</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="test-table-body">
+                        {% for test in tests %}
+                        <tr>
+                            <td><textarea name="test_input[]" class="test-textarea" required>{{ test.input }}</textarea></td>
+                            <td><textarea name="test_output[]" class="test-textarea" required>{{ test.output }}</textarea></td>
+                            <td class="hidden-column">
                                 <div class="form-groupcheck">
-                                    <input type="checkbox" name="test_hidden[]" id = "chb{{ loop.index0 }}" style="display: none;"
-                                        value="{{ loop.index0 }}" {% if test.hidden %}checked{% endif %}>
-                                    <!-- {{ test }} -->
+                                    <input type="checkbox" name="test_hidden[]" id="chb{{ loop.index0 }}" style="display: none;" value="{{ loop.index0 }}" {% if test.hidden %}checked{% endif %}>
                                     <label for="chb{{ loop.index0 }}"></label>
-                                 </div>
-                                </td>
-                                <td><button type="button" class="remove-test-btn">Удалить</button></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <button type="button" id="add-test-btn" class="btn btn-primary">Добавить тест</button>
+                                </div>
+                            </td>
+                            <td><button type="button" class="remove-test-btn">Удалить</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="button" id="add-test-btn" class="btn btn-primary">Добавить тест</button>
+            </div>
+            <div class="form-group">
+                <label for="tests">Или загрузить архив с тестами (ZIP, опционально):</label>
+                <div class="file-upload">
+                    <input type="file" id="tests" name="tests" accept=".zip" style="display: none;">
+                    <label for="tests" class="custom-button">Обзор</label>
+                    <span id="fileName">Не выбран файл</span>
                 </div>
-                <div class="form-group">
-                    <label for="tests">Или загрузить архив с тестами (ZIP, опционально):</label>
-                    <div class="file-upload">
-                        <input type="file" id="tests" name="tests" accept=".zip" style="display: none;">
-                        <label for="tests" class="custom-button">Обзор</label>
-                        <span id="fileName">Не выбран файл</span>
-                    </div>
-                    <script>
-                        const fileInput = document.getElementById('tests');
-                        const fileNameDisplay = document.getElementById('fileName');
-                
-                        fileInput.addEventListener('change', () => {
-                            if (fileInput.files.length > 0) {
-                                fileNameDisplay.textContent = fileInput.files[0].name;
-                            } else {
-                                fileNameDisplay.textContent = 'Не выбран файл';
-                            }
-                        });
-                    </script>
-                </div>
-                <script>function validateNumber(event) {return (event.charCode === 8 || event.charCode === 0 || (event.charCode >= 48 && event.charCode <= 57));}</script>
-                <div class="form-group">
-                    <label for="time_limit">Ограничение по времени (мс):</label>
-                    <input onkeypress="return validateNumber(event)" type="number" id="time_limit" name="time_limit" value="{{ config.time_limit }}" min="0" step="1" required>
-                </div>
-                <div class="form-group">
-                    <label for="memory_limit">Ограничение по памяти (МБ):</label>
-                    <input onkeypress="return validateNumber(event)" type="number" id="memory_limit" name="memory_limit" value="{{ config.memory_limit }}" min="0" step="1" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Сохранить изменения</button>
-            </form>
-            <a href="{{ url_for('views.profile') }}" class="back-link">Вернуться в профиль</a>
-        </div>
+            </div>
+            <script>function validateNumber(event) {return (event.charCode === 8 || event.charCode === 0 || (event.charCode >= 48 && event.charCode <= 57));}</script>
+            <div class="form-group">
+                <label for="time_limit">Ограничение по времени (мс):</label>
+                <input onkeypress="return validateNumber(event)" type="number" id="time_limit" name="time_limit" value="{{ config.time_limit }}" min="0" step="1" required>
+            </div>
+            <div class="form-group">
+                <label for="memory_limit">Ограничение по памяти (МБ):</label>
+                <input onkeypress="return validateNumber(event)" type="number" id="memory_limit" name="memory_limit" value="{{ config.memory_limit }}" min="0" step="1" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        </form>
+        <a href="{{ url_for('views.profile') }}" class="back-link">Вернуться в профиль</a>
     </div>
+</div>
 
-    <!-- Include EasyMDE -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
-    <!-- Include JSZip for ZIP file handling -->
-    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-    <!-- Link to external CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_task.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_task.css') }}">
 
-    <script>
-        // Initialize EasyMDE
-        const easyMDE = new EasyMDE({
-            element: document.getElementById('description'),
-            autoDownloadFontAwesome: true,
-            spellChecker: false,
-            placeholder: "Введите условие задачи в формате Markdown..."
-        });
+<script>
+    const easyMDE = new EasyMDE({
+        element: document.getElementById('condition'),
+        autoDownloadFontAwesome: true,
+        spellChecker: false,
+        placeholder: "Введите условие задачи в формате Markdown..."
+    });
 
-        // Function to adjust textarea height based on content
-        function adjustTextareaHeight(textarea) {
-            textarea.style.height = 'auto'; // Reset height
-            const lines = textarea.value.split('\n').length;
-            const height = Math.max(50, lines * 1.5 * 16); // 1.5em line height, 16px font size
-            textarea.style.height = `${height}px`;
-        }
+    function adjustTextareaHeight(textarea) {
+        textarea.style.height = 'auto';
+        const lines = textarea.value.split('\n').length;
+        const height = Math.max(50, lines * 1.5 * 16);
+        textarea.style.height = `${height}px`;
+    }
 
-        // Function to adjust all textareas
-        function adjustAllTextareaHeights() {
-            const textareas = document.querySelectorAll('.test-textarea');
-            textareas.forEach(adjustTextareaHeight);
-        }
+    function adjustAllTextareaHeights() {
+        const textareas = document.querySelectorAll('.test-textarea');
+        textareas.forEach(adjustTextareaHeight);
+    }
 
-        // Add test row
-        document.getElementById('add-test-btn').addEventListener('click', () => {
+    document.getElementById('add-test-btn').addEventListener('click', () => {
+        const tbody = document.getElementById('test-table-body');
+        const rowIndex = tbody.children.length;
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><textarea name="test_input[]" class="test-textarea" required></textarea></td>
+            <td><textarea name="test_output[]" class="test-textarea" required></textarea></td>
+            <td class="hidden-column">
+                <div class="form-groupcheck">
+                    <input type="checkbox" name="test_hidden[]" id="chb${rowIndex}" style="display: none;" value="${rowIndex}">
+                    <label for="chb${rowIndex}"></label>
+                </div>
+            </td>
+            <td><button type="button" class="remove-test-btn">Удалить</button></td>
+        `;
+        tbody.appendChild(row);
+        adjustAllTextareaHeights();
+    });
+
+    document.getElementById('test-table-body').addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-test-btn')) {
             const tbody = document.getElementById('test-table-body');
-            const row = document.createElement('tr');
-            const rowIndex = tbody.children.length;
-            row.innerHTML = `
-                <td><textarea name="test_input[]" class="test-textarea" required></textarea></td>
-                <td><textarea name="test_output[]" class="test-textarea" required></textarea></td>
-                <td class="hidden-column"><input type="checkbox" name="test_hidden[]" value="${rowIndex}"></td>
-                <td><button type="button" class="remove-test-btn">Удалить</button></td>
-            `;
-            tbody.appendChild(row);
-            adjustAllTextareaHeights();
-        });
-
-        // Remove test row
-        document.getElementById('test-table-body').addEventListener('click', (e) => {
-            if (e.target.classList.contains('remove-test-btn')) {
+            if (tbody.children.length > 1) {
                 e.target.closest('tr').remove();
-                // Update checkbox values to reflect new indices
                 const checkboxes = document.querySelectorAll('input[name="test_hidden[]"]');
                 checkboxes.forEach((checkbox, index) => {
                     checkbox.value = index;
@@ -137,83 +128,87 @@
                     checkbox.nextElementSibling.setAttribute('for', `chb${index}`);
                 });
                 adjustAllTextareaHeights();
+            } else {
+                alert('Нельзя удалить последний тест.');
             }
-        });
+        }
+    });
 
-        // Adjust textarea heights on input
-        document.getElementById('test-table-body').addEventListener('input', (e) => {
-            if (e.target.classList.contains('test-textarea')) {
-                adjustTextareaHeight(e.target);
-            }
-        });
+    document.getElementById('test-table-body').addEventListener('input', (e) => {
+        if (e.target.classList.contains('test-textarea')) {
+            adjustTextareaHeight(e.target);
+        }
+    });
 
-        // Handle ZIP file upload
-        document.getElementById('tests').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
+    const fileInput = document.getElementById('tests');
+    const fileNameDisplay = document.getElementById('fileName');
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            fileNameDisplay.textContent = fileInput.files[0].name;
+        } else {
+            fileNameDisplay.textContent = 'Не выбран файл';
+        }
+    });
 
-            try {
-                const zip = await JSZip.loadAsync(file);
-                const tests = [];
-                const promises = [];
-
-                // Read all input and output files
-                zip.forEach((relativePath, zipEntry) => {
-                    if (zipEntry.name.match(/input\d+\.txt$/)) {
-                        const testNum = zipEntry.name.match(/\d+/)[0];
-                        const inputPromise = zipEntry.async('text').then(content => ({
-                            testNum,
-                            input: content
-                        }));
-                        promises.push(inputPromise);
-                    } else if (zipEntry.name.match(/output\d+\.txt$/)) {
-                        const testNum = zipEntry.name.match(/\d+/)[0];
-                        const outputPromise = zipEntry.async('text').then(content => ({
-                            testNum,
-                            output: content
-                        }));
-                        promises.push(outputPromise);
-                    }
-                });
-
-                const results = await Promise.all(promises);
-                const inputs = results.filter(r => r.input).sort((a, b) => a.testNum - b.testNum);
-                const outputs = results.filter(r => r.output).sort((a, b) => a.testNum - b.testNum);
-
-                // Pair inputs and outputs
-                for (let i = 0; i < Math.min(inputs.length, outputs.length); i++) {
-                    if (inputs[i].testNum === outputs[i].testNum) {
-                        tests.push({
-                            input: inputs[i].input,
-                            output: outputs[i].output,
-                            hidden: false // Default to visible
-                        });
-                    }
+    document.getElementById('tests').addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        try {
+            const zip = await JSZip.loadAsync(file);
+            const tests = [];
+            const promises = [];
+            zip.forEach((relativePath, zipEntry) => {
+                if (zipEntry.name.match(/input\d+\.txt$/)) {
+                    const testNum = zipEntry.name.match(/\d+/)[0];
+                    const inputPromise = zipEntry.async('text').then(content => ({
+                        testNum,
+                        input: content
+                    }));
+                    promises.push(inputPromise);
+                } else if (zipEntry.name.match(/output\d+\.txt$/)) {
+                    const testNum = zipEntry.name.match(/\d+/)[0];
+                    const outputPromise = zipEntry.async('text').then(content => ({
+                        testNum,
+                        output: content
+                    }));
+                    promises.push(outputPromise);
                 }
-
-                // Clear existing table rows
-                const tbody = document.getElementById('test-table-body');
-                tbody.innerHTML = '';
-
-                // Populate table with tests
-                tests.forEach((test, index) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td><textarea name="test_input[]" class="test-textarea" required>${test.input}</textarea></td>
-                        <td><textarea name="test_output[]" class="test-textarea" required>${test.output}</textarea></td>
-                        <td class="hidden-column"><input type="checkbox" name="test_hidden[]" value="${index}" ${test.hidden ? 'checked' : ''}></td>
-                        <td><button type="button" class="remove-test-btn">Удалить</button></td>
-                    `;
-                    tbody.appendChild(row);
-                });
-
-                adjustAllTextareaHeights();
-            } catch (err) {
-                alert('Ошибка при обработке ZIP-файла: ' + err.message);
+            });
+            const results = await Promise.all(promises);
+            const inputs = results.filter(r => r.input).sort((a, b) => a.testNum - b.testNum);
+            const outputs = results.filter(r => r.output).sort((a, b) => a.testNum - b.testNum);
+            for (let i = 0; i < Math.min(inputs.length, outputs.length); i++) {
+                if (inputs[i].testNum === outputs[i].testNum) {
+                    tests.push({
+                        input: inputs[i].input,
+                        output: outputs[i].output,
+                        hidden: false
+                    });
+                }
             }
-        });
+            const tbody = document.getElementById('test-table-body');
+            tbody.innerHTML = '';
+            tests.forEach((test, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><textarea name="test_input[]" class="test-textarea" required>${test.input}</textarea></td>
+                    <td><textarea name="test_output[]" class="test-textarea" required>${test.output}</textarea></td>
+                    <td class="hidden-column">
+                        <div class="form-groupcheck">
+                            <input type="checkbox" name="test_hidden[]" id="chb${index}" style="display: none;" value="${index}" ${test.hidden ? 'checked' : ''}>
+                            <label for="chb${index}"></label>
+                        </div>
+                    </td>
+                    <td><button type="button" class="remove-test-btn">Удалить</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+            adjustAllTextareaHeights();
+        } catch (err) {
+            alert('Ошибка при обработке ZIP-файла: ' + err.message);
+        }
+    });
 
-        // Initial textarea height adjustment
-        window.addEventListener('load', adjustAllTextareaHeights);
-    </script>
+    window.addEventListener('load', adjustAllTextareaHeights);
+</script>
 {% endblock %}

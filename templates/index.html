@@ -1,3 +1,4 @@
+# index.html
 {% extends "base.html" %}
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
@@ -7,9 +8,9 @@
     <div class="section-title">Задачи</div>
     <div class="card-list">
         {% for task in tasks %}
-            <a href="{{ url_for('views.task', task_name=task) }}" class="card">
-                <div class="card-title">{{ task }}</div>
-                <div class="card-description">Решите эту задачу и проверьте свои навыки программирования</div>
+            <a href="{{ url_for('views.task', task_id=task.id) }}" class="card">
+                <div class="card-title">{{ task.title | safe }}</div>
+                <div class="card-description">{{ task.description | safe }}</div>
             </a>
         {% endfor %}
     </div>

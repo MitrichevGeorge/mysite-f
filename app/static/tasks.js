@@ -13,14 +13,13 @@ if __name__ == "__main__":
 
 // Загрузка списка тестов через API
 function loadTaskTests() {
-    fetch(`/api/task/${taskName}/tests`)
+    fetch(`/api/task/${taskId}/tests`)
         .then(response => {
             if (!response.ok) throw new Error("Ошибка при загрузке тестов");
             return response.json();
         })
         .then(data => {
             console.log("Тесты загружены:", data);
-            // Если тесты нужны для отображения, можно добавить логику здесь
         })
         .catch(error => {
             console.error("Ошибка:", error);
@@ -38,7 +37,7 @@ function loadSubmissions() {
         .then(data => {
             const submissionsList = document.getElementById("submissions-list");
             submissionsList.innerHTML = "";
-            const filteredSubmissions = data.filter(submission => submission.task_name === taskName);
+            const filteredSubmissions = data.filter(submission => submission.task_id === taskId);
             if (filteredSubmissions.length === 0) {
                 submissionsList.innerHTML = '<p class="no-submissions">Нет посылок на эту задачу.</p>';
                 return;
@@ -110,7 +109,6 @@ function toggleDetails(id) {
 
 // Инициализация
 document.addEventListener("DOMContentLoaded", () => {
-    // Настройка CodeMirror
     const editor = CodeMirror.fromTextArea(document.getElementById("code-input"), {
         value: generateCodeTemplate(),
         mode: "python",
@@ -119,10 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
         indentUnit: 4
     });
 
-    // Загрузка тестов
-    if (typeof taskName !== "undefined") {
+    if (typeof taskId !== "undefined") {
         loadTaskTests();
     } else {
-        console.error("taskName не определен");
+        console.error("taskId не определен");
     }
 });

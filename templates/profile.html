@@ -103,8 +103,8 @@
                             <div class="task-entry">
                                 <span>{{ task.title }}</span>
                                 <div class="task-actions">
-                                    <a href="{{ url_for('tasks.task', task_name=task.name) }}" class="settings-btn">Решить</a>
-                                    <a href="{{ url_for('tasks.edit_task', task_name=task.name) }}" class="settings-btn">Редактировать</a>
+                                    <a href="{{ url_for('tasks.task', task_id=task.id) }}" class="settings-btn">Решить</a>
+                                    <a href="{{ url_for('tasks.edit_task', task_id=task.id) }}" class="settings-btn">Редактировать</a>
                                 </div>
                             </div>
                         {% endfor %}

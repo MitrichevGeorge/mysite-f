@@ -1,3 +1,4 @@
+# app/views.py
 import os
 import json
 import re
@@ -7,8 +8,8 @@ from flask import Blueprint, render_template, request, jsonify, redirect, url_fo
 from flask_login import login_required, current_user
 from .models import load_users, save_users
 from werkzeug.security import generate_password_hash
+import bleach
 
-# Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
 views_bp = Blueprint('views', __name__)
@@ -18,7 +19,6 @@ PACKAGES_DIR = "app/static/packages/"
 MENU_FILE = "menu.json"
 
 def parse_package_metadata(file_path):
-    """Parse XML metadata from the top comment of a CSS file."""
     logging.debug(f"Parsing metadata for {file_path}")
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -44,7 +44,6 @@ def parse_package_metadata(file_path):
         return None
 
 def validate_css_content(content):
-    """Validate CSS syntax using cssutils."""
     try:
         parser = cssutils.CSSParser()
         stylesheet = parser.parseString(content)
@@ -53,7 +52,6 @@ def validate_css_content(content):
         return False, str(e)
 
 def check_duplicate_package(name, filename, exclude_filename=None):
-    """Check if a package with the same name or filename already exists."""
     if not os.path.exists(PACKAGES_DIR):
         return False
     for existing_filename in os.listdir(PACKAGES_DIR):
@@ -66,7 +64,6 @@ def check_duplicate_package(name, filename, exclude_filename=None):
     return False
 
 def load_menu_items():
-    """Load menu items from menu.json."""
     try:
         if os.path.exists(MENU_FILE):
             with open(MENU_FILE, 'r', encoding='utf-8') as f:
@@ -78,42 +75,56 @@ def load_menu_items():
 
 @views_bp.route('/')
 def index():
-    tasks = os.listdir(TASKS_DIR)
+    tasks = []
+    for task_id in os.listdir(TASKS_DIR):
+        config_path = os.path.join(TASKS_DIR, task_id, "config.json")
+        if os.path.exists(config_path):
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+                tasks.append({
+                    "id": config.get("id", task_id),
+                    "title": config.get("title", task_id),
+                    "description": config.get("description", "")
+                })
     menu_items = load_menu_items()
     if current_user.is_authenticated:
         return render_template('index.html', tasks=tasks, current_user=current_user, tabs=current_user.tabs, menu_items=menu_items)
     else:
         return render_template('index.html', tasks=tasks, current_user=current_user, tabs=[], menu_items=menu_items)
 
-@views_bp.route('/task/<task_name>')
-def task(task_name):
-    if task_name not in os.listdir(TASKS_DIR):
+@views_bp.route('/task/<task_id>')
+def task(task_id):
+    task_path = os.path.join(TASKS_DIR, task_id)
+    if not os.path.exists(task_path):
         return jsonify({"error": "Задача не найдена"}), 404
     menu_items = load_menu_items()
-    config_path = os.path.join(TASKS_DIR, task_name, "config.json")
+    config_path = os.path.join(task_path, "config.json")
+    condition = ""
+    task_title = task_id
     description = ""
-    task_title = task_name
     if os.path.exists(config_path):
         with open(config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
-            task_title = config.get("title", task_name)
-    md_file = os.path.join(TASKS_DIR, task_name, "description.md")
+            task_title = config.get("title", task_id)
+            description = config.get("description", "")
+    md_file = os.path.join(task_path, "description.md")
     if os.path.exists(md_file):
         with open(md_file, 'r', encoding='utf-8') as f:
-            description = f.read()
+            condition = f.read()
     submissions = []
     if current_user.is_authenticated:
         users = load_users()
         user = users.get(current_user.id)
         if user:
             submissions = [
-                s for s in user.submissions if s['task_name'] == task_name
+                s for s in user.submissions if s['task_id'] == task_id
             ]
     return render_template(
         'task.html',
-        task_name=task_name,
-        taskn=task_title,
+        task_id=task_id,
+        task_title=task_title,
         description=description,
+        condition=condition,
         submissions=submissions,
         menu_items=menu_items,
         is_dark_theme=current_user.theme == 'dark' if current_user.is_authenticated else False
@@ -131,7 +142,7 @@ def profile():
 
     sbm = []
     for submission in user.submissions:    
-        task_path = os.path.join(TASKS_DIR, submission["task_name"])
+        task_path = os.path.join(TASKS_DIR, submission["task_id"])
         config_path = os.path.join(task_path, "config.json")
 
         with open(config_path, 'r') as f:
@@ -145,7 +156,7 @@ def profile():
                 filtered_results.append(test)
 
         filtered_submission = {
-            "task_name": submission['task_name'],
+            "task_id": submission['task_id'],
             "timestamp": submission['timestamp'],
             "score": submission['score'],
             "results": filtered_results,
@@ -154,15 +165,15 @@ def profile():
         sbm.append(filtered_submission)
 
     my_tasks = []
-    for task_name in os.listdir(TASKS_DIR):
-        config_path = os.path.join(TASKS_DIR, task_name, "config.json")
+    for task_id in os.listdir(TASKS_DIR):
+        config_path = os.path.join(TASKS_DIR, task_id, "config.json")
         if os.path.exists(config_path):
             with open(config_path, 'r') as f:
                 config = json.load(f)
             if config.get("creator_id") == user.id:
                 my_tasks.append({
-                    "name": task_name,
-                    "title": config.get("title", task_name)
+                    "id": task_id,
+                    "title": config.get("title", task_id)
                 })
 
     packages = []
@@ -379,7 +390,7 @@ def get_submissions():
 
     sbm = []
     for submission in user.submissions:    
-        task_path = os.path.join(TASKS_DIR, submission["task_name"])
+        task_path = os.path.join(TASKS_DIR, submission["task_id"])
         config_path = os.path.join(task_path, "config.json")
 
         with open(config_path, 'r') as f:
@@ -393,7 +404,7 @@ def get_submissions():
                 filtered_results.append(test)
 
         filtered_submission = {
-            "task_name": submission['task_name'],
+            "task_id": submission['task_id'],
             "timestamp": submission['timestamp'],
             "score": submission['score'],
             "results": filtered_results,
@@ -403,10 +414,10 @@ def get_submissions():
 
     return jsonify(sbm)
 
-@views_bp.route('/api/task/<task_name>/tests', methods=['GET'])
-def get_task_tests(task_name):
+@views_bp.route('/api/task/<task_id>/tests', methods=['GET'])
+def get_task_tests(task_id):
     try:
-        task_path = os.path.join(TASKS_DIR, task_name)
+        task_path = os.path.join(TASKS_DIR, task_id)
         config_path = os.path.join(task_path, "config.json")
 
         with open(config_path, 'r') as f:

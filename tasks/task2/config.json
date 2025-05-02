@@ -8,5 +8,7 @@
         "2"
     ],
     "time_limit": 2000,
-    "memory_limit": 1024
+    "memory_limit": 1024,
+    "id": "task2",
+    "description": "task2sw"
 }
