@@ -40,6 +40,42 @@ def generate_unique_task_id():
         counter += 1
     return f"{base_id}-{counter}"
 
+def run_solution_code(code_path, input_data, time_limit, memory_limit):
+    """Run solution code with input data and return output."""
+    try:
+        start_time = time.time()
+        process = subprocess.Popen(
+            ["python", code_path],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        
+        ps_process = psutil.Process(process.pid)
+        max_memory = 0
+        
+        try:
+            stdout, stderr = process.communicate(input=input_data, timeout=time_limit / 1000)
+            duration = (time.time() - start_time) * 1000
+            memory = max_memory / (1024 * 1024)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            return {"error": "Time Limit Exceeded"}
+        
+        try:
+            memory_info = ps_process.memory_info()
+            max_memory = max(max_memory, memory_info.rss)
+        except psutil.NoSuchProcess:
+            pass
+            
+        if process.returncode != 0:
+            return {"error": stderr.strip()}
+            
+        return {"output": stdout.strip()}
+    except Exception as e:
+        return {"error": str(e)}
+
 @tasks_bp.route('/task/<task_id>', methods=['GET', 'POST'])
 @login_required
 def task(task_id):
@@ -97,6 +133,34 @@ def task(task_id):
         error_traceback = traceback.format_exc()
         return render_template('error.html', error_message=error_message, error_traceback=error_traceback), 500
 
+@tasks_bp.route('/generate_test_output/<task_id>', methods=['POST'])
+@login_required
+def generate_test_output(task_id):
+    if not current_user.is_creator:
+        return jsonify({"error": "Только создатели могут генерировать выводы"}), 403
+
+    task_path = os.path.join(TASKS_DIR, task_id)
+    solution_path = os.path.join(task_path, "solution.py")
+    
+    if not os.path.exists(solution_path):
+        return jsonify({"error": "Файл решения не найден"}), 404
+
+    data = request.get_json()
+    input_data = data.get('input')
+    
+    if not input_data:
+        return jsonify({"error": "Входные данные не предоставлены"}), 400
+
+    config_path = os.path.join(task_path, "config.json")
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+    
+    time_limit = config.get("time_limit", 2000)
+    memory_limit = config.get("memory_limit", 1024)
+
+    result = run_solution_code(solution_path, input_data, time_limit, memory_limit)
+    return jsonify(result)
+
 @tasks_bp.route('/create_task', methods=['GET', 'POST'])
 @login_required
 def create_task():
@@ -117,6 +181,7 @@ def create_task():
         test_outputs = request.form.getlist('test_output[]')
         test_hidden = request.form.getlist('test_hidden[]')
         tests_zip = request.files.get('tests')
+        solution_file = request.files.get('solution')
 
         if not task_id or not title or not condition or not time_limit or not memory_limit:
             flash('Все обязательные поля должны быть заполнены.', 'error')
@@ -143,6 +208,11 @@ def create_task():
             condition_path = os.path.join(task_path, "description.md")
             with open(condition_path, 'w', encoding='utf-8') as f:
                 f.write(condition)
+
+            # Save solution file if provided
+            if solution_file and solution_file.filename.endswith('.py'):
+                solution_path = os.path.join(task_path, "solution.py")
+                solution_file.save(solution_path)
 
             # Handle tests
             if tests_zip:
@@ -206,6 +276,7 @@ def edit_task(task_id):
     config_path = os.path.join(task_path, "config.json")
     condition_path = os.path.join(task_path, "description.md")
     tests_dir = os.path.join(task_path, "tests")
+    solution_path = os.path.join(task_path, "solution.py")
 
     if not os.path.exists(task_path) or not os.path.exists(config_path):
         flash('Задача не найдена.', 'error')
@@ -236,6 +307,8 @@ def edit_task(task_id):
                             "hidden": test_num in config.get("hidden_tests", [])
                         })
 
+        solution_exists = os.path.exists(solution_path)
+
         if request.method == 'POST':
             title = request.form.get('title')
             description = request.form.get('description')
@@ -246,6 +319,7 @@ def edit_task(task_id):
             test_outputs = request.form.getlist('test_output[]')
             test_hidden = request.form.getlist('test_hidden[]')
             tests_zip = request.files.get('tests')
+            solution_file = request.files.get('solution')
 
             # Validate required fields
             if not title or time_limit is None or memory_limit is None:
@@ -277,6 +351,13 @@ def edit_task(task_id):
                     return redirect(url_for('tasks.edit_task', task_id=task_id))
             except IOError as e:
                 flash(f'Ошибка при сохранении условия задачи: {str(e)}', 'error')
+                return redirect(url_for('tasks.edit_task', task_id=task_id))
+
+            # Save solution file if provided
+            if solution_file and solution_file.filename.endswith('.py'):
+                solution_file.save(solution_path)
+            elif solution_file and solution_file.filename:
+                flash('Файл решения должен быть в формате .py', 'error')
                 return redirect(url_for('tasks.edit_task', task_id=task_id))
 
             # Handle tests
@@ -332,7 +413,7 @@ def edit_task(task_id):
             flash('Задача успешно отредактирована.', 'success')
             return redirect(url_for('views.profile'))
 
-        return render_template('edit_task.html', task_id=task_id, config=config, condition_content=condition_content, tests=tests)
+        return render_template('edit_task.html', task_id=task_id, config=config, condition_content=condition_content, tests=tests, solution_exists=solution_exists)
 
     except Exception as e:
         flash(f'Ошибка при редактировании задачи: {str(e)}', 'error')

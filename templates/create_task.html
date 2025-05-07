@@ -4,7 +4,7 @@
 <div class="container">
     <div class="form-card">
         <h1 class="form-title">Создать новую задачу</h1>
-        {% with id_value=suggested_id|safe, id_readonly=false, title_value='', description_value='', time_limit_value=2000, memory_limit_value=1024, condition_value='', tests=[], submit_text='Создать задачу', form_id='create-task-form' %}
+        {% with id_value=suggested_id|safe, id_readonly=false, title_value='', description_value='', time_limit_value=2000, memory_limit_value=1024, condition_value='', tests=[], submit_text='Создать задачу', form_id='create-task-form', solution_exists=false %}
             {% include 'task_form_fields.html' %}
         {% endwith %}
         <a href="{{ url_for('views.profile') }}" class="back-link">Вернуться в профиль</a>

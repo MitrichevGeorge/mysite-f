@@ -2,7 +2,9 @@
     "title": "task2",
     "creator_id": 4,
     "visible_tests": [
-        "1"
+        "1",
+        "3",
+        "4"
     ],
     "hidden_tests": [
         "2"

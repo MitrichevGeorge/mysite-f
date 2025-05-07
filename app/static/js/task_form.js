@@ -17,9 +17,19 @@ function adjustAllTextareaHeights() {
     textareas.forEach(adjustTextareaHeight);
 }
 
+function updateCheckboxIds() {
+    const checkboxes = document.querySelectorAll('input[name="test_hidden[]"]');
+    checkboxes.forEach((checkbox, index) => {
+        checkbox.value = index;
+        checkbox.id = `chb${index}`;
+        checkbox.nextElementSibling.setAttribute('for', `chb${index}`);
+    });
+}
+
 document.getElementById('add-test-btn').addEventListener('click', () => {
     const tbody = document.getElementById('test-table-body');
     const rowIndex = tbody.children.length;
+    const hasSolution = document.querySelector('.generate-test-btn') !== null;
     const row = document.createElement('tr');
     row.innerHTML = `
         <td><textarea name="test_input[]" class="test-textarea" required></textarea></td>
@@ -30,6 +40,7 @@ document.getElementById('add-test-btn').addEventListener('click', () => {
                 <label for="chb${rowIndex}"></label>
             </div>
         </td>
+        ${hasSolution ? '<td><button type="button" class="generate-test-btn btn btn-primary">Ген.</button></td>' : ''}
         <td><button type="button" class="remove-test-btn">Удалить</button></td>
     `;
     tbody.appendChild(row);
@@ -41,12 +52,7 @@ document.getElementById('test-table-body').addEventListener('click', (e) => {
         const tbody = document.getElementById('test-table-body');
         if (tbody.children.length > 1) {
             e.target.closest('tr').remove();
-            const checkboxes = document.querySelectorAll('input[name="test_hidden[]"]');
-            checkboxes.forEach((checkbox, index) => {
-                checkbox.value = index;
-                checkbox.id = `chb${index}`;
-                checkbox.nextElementSibling.setAttribute('for', `chb${index}`);
-            });
+            updateCheckboxIds();
             adjustAllTextareaHeights();
         } else {
             alert('Нельзя удалить последний тест.');
@@ -67,6 +73,16 @@ fileInput.addEventListener('change', () => {
         fileNameDisplay.textContent = fileInput.files[0].name;
     } else {
         fileNameDisplay.textContent = 'Не выбран файл';
+    }
+});
+
+const solutionInput = document.getElementById('solution');
+const solutionNameDisplay = document.getElementById('solutionName');
+solutionInput.addEventListener('change', () => {
+    if (solutionInput.files.length > 0) {
+        solutionNameDisplay.textContent = solutionInput.files[0].name;
+    } else {
+        solutionNameDisplay.textContent = 'Не выбран файл';
     }
 });
 
@@ -107,6 +123,7 @@ document.getElementById('tests').addEventListener('change', async (e) => {
             }
         }
         const tbody = document.getElementById('test-table-body');
+        const hasSolution = document.querySelector('.generate-test-btn') !== null;
         tbody.innerHTML = '';
         tests.forEach((test, index) => {
             const row = document.createElement('tr');
@@ -119,6 +136,7 @@ document.getElementById('tests').addEventListener('change', async (e) => {
                         <label for="chb${index}"></label>
                     </div>
                 </td>
+                ${hasSolution ? '<td><button type="button" class="generate-test-btn btn btn-primary">Ген.</button></td>' : ''}
                 <td><button type="button" class="remove-test-btn">Удалить</button></td>
             `;
             tbody.appendChild(row);
@@ -126,6 +144,78 @@ document.getElementById('tests').addEventListener('change', async (e) => {
         adjustAllTextareaHeights();
     } catch (err) {
         alert('Ошибка при обработке ZIP-файла: ' + err.message);
+    }
+});
+
+document.getElementById('test-table-body').addEventListener('click', async (e) => {
+    if (e.target.classList.contains('generate-test-btn')) {
+        const button = e.target;
+        const row = button.closest('tr');
+        const inputTextarea = row.querySelector('textarea[name="test_input[]"]');
+        const outputTextarea = row.querySelector('textarea[name="test_output[]"]');
+        const taskId = document.getElementById('id').value;
+
+        button.textContent = 'Генерируется...';
+        button.disabled = true;
+
+        try {
+            const response = await fetch(`/generate_test_output/${taskId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ input: inputTextarea.value })
+            });
+            const result = await response.json();
+            if (result.error) {
+                alert(`Ошибка: ${result.error}`);
+            } else {
+                outputTextarea.value = result.output;
+                adjustTextareaHeight(outputTextarea);
+            }
+        } catch (err) {
+            alert('Ошибка при генерации вывода: ' + err.message);
+        } finally {
+            button.textContent = 'Ген.';
+            button.disabled = false;
+        }
+    }
+});
+
+document.getElementById('generate-all-btn')?.addEventListener('click', async () => {
+    const buttons = document.querySelectorAll('.generate-test-btn');
+    for (const button of buttons) {
+        const row = button.closest('tr');
+        const inputTextarea = row.querySelector('textarea[name="test_input[]"]');
+        const outputTextarea = row.querySelector('textarea[name="test_output[]"]');
+        const taskId = document.getElementById('id').value;
+
+        if (!inputTextarea.value.trim()) continue;
+
+        button.textContent = 'Генерируется...';
+        button.disabled = true;
+
+        try {
+            const response = await fetch(`/generate_test_output/${taskId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ input: inputTextarea.value })
+            });
+            const result = await response.json();
+            if (result.error) {
+                alert(`Ошибка в тесте ${row.rowIndex}: ${result.error}`);
+            } else {
+                outputTextarea.value = result.output;
+                adjustTextareaHeight(outputTextarea);
+            }
+        } catch (err) {
+            alert(`Ошибка в тесте ${row.rowIndex}: ${err.message}`);
+        } finally {
+            button.textContent = 'Ген.';
+            button.disabled = false;
+        }
     }
 });
 

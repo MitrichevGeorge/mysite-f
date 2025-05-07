@@ -4,7 +4,7 @@
 <div class="container">
     <div class="form-card">
         <h1 class="form-title">Редактировать задачу</h1>
-        {% with id_value=config.id|safe, id_readonly=true, title_value=config.title|safe, description_value=config.description|safe, time_limit_value=config.time_limit, memory_limit_value=config.memory_limit, condition_value=condition_content|safe, tests=tests, submit_text='Сохранить изменения', form_id='edit-task-form' %}
+        {% with id_value=config.id|safe, id_readonly=true, title_value=config.title|safe, description_value=config.description|safe, time_limit_value=config.time_limit, memory_limit_value=config.memory_limit, condition_value=condition_content|safe, tests=tests, submit_text='Сохранить изменения', form_id='edit-task-form', solution_exists=solution_exists %}
             {% include 'task_form_fields.html' %}
         {% endwith %}
         <a href="{{ url_for('views.profile') }}" class="back-link">Вернуться в профиль</a>

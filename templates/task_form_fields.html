@@ -18,6 +18,14 @@
         <textarea id="condition" name="condition">{{ condition_value }}</textarea>
     </div>
     <div class="form-group">
+        <label for="solution">Файл решения (.py, опционально):</label>
+        <div class="file-upload">
+            <input type="file" id="solution" name="solution" accept=".py" style="display: none;">
+            <label for="solution" class="custom-button">Обзор</label>
+            <span id="solutionName">{{ 'solution.py' if solution_exists else 'Не выбран файл' }}</span>
+        </div>
+    </div>
+    <div class="form-group">
         <label>Тесты:</label>
         <table id="test-table" class="test-table">
             <thead>
@@ -25,6 +33,11 @@
                     <th>Ввод</th>
                     <th>Вывод</th>
                     <th class="hidden-column">Скрытый</th>
+                    {% if solution_exists %}
+                    <th>
+                        <button type="button" id="generate-all-btn" class="btn btn-primary">Ген. все</button>
+                    </th>
+                    {% endif %}
                     <th>Действия</th>
                 </tr>
             </thead>
@@ -40,6 +53,11 @@
                                 <label for="chb{{ loop.index0 }}"></label>
                             </div>
                         </td>
+                        {% if solution_exists %}
+                        <td>
+                            <button type="button" class="generate-test-btn btn btn-primary">Ген.</button>
+                        </td>
+                        {% endif %}
                         <td><button type="button" class="remove-test-btn">Удалить</button></td>
                     </tr>
                     {% endfor %}
@@ -53,6 +71,11 @@
                                 <label for="chb0"></label>
                             </div>
                         </td>
+                        {% if solution_exists %}
+                        <td>
+                            <button type="button" class="generate-test-btn btn btn-primary">Ген.</button>
+                        </td>
+                        {% endif %}
                         <td><button type="button" class="remove-test-btn">Удалить</button></td>
                     </tr>
                 {% endif %}
@@ -78,6 +101,10 @@
             <input onkeypress="return validateNumber(event)" type="number" id="memory_limit" name="memory_limit" value="{{ memory_limit_value }}" min="0" step="1" required>
         </div>
     </div>
-    <script>function validateNumber(event) {return (event.charCode === 8 || event.charCode === 0 || (event.charCode >= 48 && event.charCode <= 57));}</script>
+    <script>
+        function validateNumber(event) {
+            return (event.charCode === 8 || event.charCode === 0 || (event.charCode >= 48 && event.charCode <= 57));
+        }
+    </script>
     <button type="submit" class="btn btn-primary">{{ submit_text }}</button>
 </form>
