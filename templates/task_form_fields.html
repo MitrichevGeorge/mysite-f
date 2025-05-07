@@ -1,0 +1,83 @@
+<form method="POST" enctype="multipart/form-data" id="{{ form_id }}">
+    <div class="form-row">
+        <div class="form-group form-group--inline">
+            <label for="id">ID задачи{% if id_readonly %} (нельзя изменить){% endif %}:</label>
+            <input type="text" id="id" name="id" value="{{ id_value }}" {% if id_readonly %}readonly{% else %}pattern="[a-zA-Z0-9-]+" maxlength="50"{% endif %} required>
+        </div>
+        <div class="form-group form-group--inline">
+            <label for="title">Название задачи (до 100 символов):</label>
+            <input type="text" id="title" name="title" value="{{ title_value }}" maxlength="100" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description">Краткое описание (до 500 символов):</label>
+        <textarea id="description" name="description" maxlength="500" rows="4">{{ description_value }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="condition">Условие задачи (MD):</label>
+        <textarea id="condition" name="condition">{{ condition_value }}</textarea>
+    </div>
+    <div class="form-group">
+        <label>Тесты:</label>
+        <table id="test-table" class="test-table">
+            <thead>
+                <tr>
+                    <th>Ввод</th>
+                    <th>Вывод</th>
+                    <th class="hidden-column">Скрытый</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody id="test-table-body">
+                {% if tests %}
+                    {% for test in tests %}
+                    <tr>
+                        <td><textarea name="test_input[]" class="test-textarea" required>{{ test.input }}</textarea></td>
+                        <td><textarea name="test_output[]" class="test-textarea" required>{{ test.output }}</textarea></td>
+                        <td class="hidden-column">
+                            <div class="form-groupcheck">
+                                <input type="checkbox" name="test_hidden[]" id="chb{{ loop.index0 }}" style="display: none;" value="{{ loop.index0 }}" {% if test.hidden %}checked{% endif %}>
+                                <label for="chb{{ loop.index0 }}"></label>
+                            </div>
+                        </td>
+                        <td><button type="button" class="remove-test-btn">Удалить</button></td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td><textarea name="test_input[]" class="test-textarea" required></textarea></td>
+                        <td><textarea name="test_output[]" class="test-textarea" required></textarea></td>
+                        <td class="hidden-column">
+                            <div class="form-groupcheck">
+                                <input type="checkbox" name="test_hidden[]" id="chb0" style="display: none;" value="0">
+                                <label for="chb0"></label>
+                            </div>
+                        </td>
+                        <td><button type="button" class="remove-test-btn">Удалить</button></td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <button type="button" id="add-test-btn" class="btn btn-primary">Добавить тест</button>
+    </div>
+    <div class="form-group">
+        <label for="tests">Или загрузить архив с тестами (ZIP, опционально):</label>
+        <div class="file-upload">
+            <input type="file" id="tests" name="tests" accept=".zip" style="display: none;">
+            <label for="tests" class="custom-button">Обзор</label>
+            <span id="fileName">Не выбран файл</span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group form-group--inline">
+            <label for="time_limit">Ограничение по времени (мс):</label>
+            <input onkeypress="return validateNumber(event)" type="number" id="time_limit" name="time_limit" value="{{ time_limit_value }}" min="0" step="10" required>
+        </div>
+        <div class="form-group form-group--inline">
+            <label for="memory_limit">Ограничение по памяти (МБ):</label>
+            <input onkeypress="return validateNumber(event)" type="number" id="memory_limit" name="memory_limit" value="{{ memory_limit_value }}" min="0" step="1" required>
+        </div>
+    </div>
+    <script>function validateNumber(event) {return (event.charCode === 8 || event.charCode === 0 || (event.charCode >= 48 && event.charCode <= 57));}</script>
+    <button type="submit" class="btn btn-primary">{{ submit_text }}</button>
+</form>

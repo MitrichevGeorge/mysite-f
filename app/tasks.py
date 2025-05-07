@@ -32,6 +32,14 @@ def check_id_exists(task_id):
     """Check if a task with the given ID already exists."""
     return os.path.exists(os.path.join(TASKS_DIR, task_id))
 
+def generate_unique_task_id():
+    """Generate a unique task ID."""
+    base_id = "task"
+    counter = 1
+    while check_id_exists(f"{base_id}-{counter}"):
+        counter += 1
+    return f"{base_id}-{counter}"
+
 @tasks_bp.route('/task/<task_id>', methods=['GET', 'POST'])
 @login_required
 def task(task_id):
@@ -95,6 +103,8 @@ def create_task():
     if not current_user.is_creator:
         flash('У вас нет прав для создания задач.', 'error')
         return redirect(url_for('views.profile'))
+
+    suggested_id = generate_unique_task_id() if request.method == 'GET' else None
 
     if request.method == 'POST':
         task_id = request.form.get('id')
@@ -183,7 +193,7 @@ def create_task():
             flash(f'Ошибка при создании задачи: {str(e)}', 'error')
             return redirect(url_for('tasks.create_task'))
 
-    return render_template('create_task.html')
+    return render_template('create_task.html', suggested_id=suggested_id)
 
 @tasks_bp.route('/edit_task/<task_id>', methods=['GET', 'POST'])
 @login_required

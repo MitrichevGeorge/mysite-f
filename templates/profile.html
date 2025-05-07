@@ -1,5 +1,6 @@
 <!-- templates/profile.html -->
 {% extends "base.html" %}
+{% block title %}Контест - Профиль {{ current_user.username }}{% endblock %}
 {% block content %}
     <link rel="stylesheet" href="{{ url_for('static', filename='profile/profile_styles.css') }}">
     <script src="{{ url_for('static', filename='profile/profile_scripts.js') }}"></script>

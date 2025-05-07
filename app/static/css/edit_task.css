@@ -14,8 +14,8 @@
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
     --border-radius: 4px;
     --transition: all 0.2s;
-    --spinner-color: #007bff; /* Цвет стрелок по умолчанию */
-    --spinner-hover: #003087; /* Более контрастный цвет при наведении */
+    --spinner-color: #007bff;
+    --spinner-hover: #003087;
     --link-color: #007bff;
 }
 
@@ -27,8 +27,8 @@
     --table-header-bg: var(--table-header-bg-dark);
     --primary-color: #1d3a58;
     --primary-hover: #1d4a7a;
-    --spinner-color: #4a90e2; /* Цвет стрелок для темной темы */
-    --spinner-hover: #2a6db0; /* Более контрастный цвет при наведении */
+    --spinner-color: #4a90e2;
+    --spinner-hover: #2a6db0;
 }
 
 .light {
@@ -39,8 +39,8 @@
     --table-header-bg: var(--table-header-bg-light);
     --primary-color: #62aaf8;
     --primary-hover: #c8e1fc;
-    --spinner-color: #007bff; /* Цвет стрелок для светлой темы */
-    --spinner-hover: #003087; /* Более контрастный цвет при наведении */
+    --spinner-color: #007bff;
+    --spinner-hover: #003087;
 }
 
 .container {
@@ -57,6 +57,40 @@
 
 .form-group {
     margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group--inline {
+    flex: 1;
+    min-width: 250px;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.form-group--inline label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.form-group--inline input[type="text"],
+.form-group--inline input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 1rem;
+    transition: var(--transition);
+    box-sizing: border-box;
 }
 
 label {
@@ -79,6 +113,7 @@ textarea {
     color: var(--text);
     font-size: 1rem;
     transition: var(--transition);
+    box-sizing: border-box;
 }
 
 input:focus,
@@ -258,4 +293,14 @@ textarea:focus {
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     margin-left: 22px;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .form-group--inline {
+        max-width: 100%;
+    }
 }
