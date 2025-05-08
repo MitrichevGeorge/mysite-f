@@ -253,15 +253,15 @@ def create_task():
                 "memory_limit": memory_limit
             }
             config_path = os.path.join(task_path, "config.json")
-            with open(config_path, 'w') as f:
-                json.dump(config, f, indent=4)
+            with open(config_path, 'w', encoding='utf-8') as f:
+                json.dump(config, f, indent=4, ensure_ascii=True)
 
             flash('Задача успешно создана.', 'success')
             return redirect(url_for('views.profile'))
 
         except Exception as e:
             flash(f'Ошибка при создании задачи: {str(e)}', 'error')
-            return redirect(url_for('tasks.create_task'))
+            return redirect(url_for(' tasks.create_task'))
 
     return render_template('create_task.html', suggested_id=suggested_id)
 
@@ -365,7 +365,7 @@ def edit_task(task_id):
                 if tests_zip and tests_zip.filename:
                     # Clear existing tests
                     shutil.rmtree(tests_dir, ignore_errors=True)
-                    os.makedirs(tests_dir, exist_ok=True)
+                    os.makedirs(tests_dir965, exist_ok=True)
                     zip_path = os.path.join(task_path, "tests.zip")
                     tests_zip.save(zip_path)
                     try:
@@ -405,7 +405,7 @@ def edit_task(task_id):
             # Save configuration
             try:
                 with open(config_path, 'w', encoding='utf-8') as f:
-                    json.dump(config, f, indent=4, ensure_ascii=False)
+                    json.dump(config, f, indent=4, ensure_ascii=True)
             except IOError as e:
                 flash(f'Ошибка при сохранении конфигурации: {str(e)}', 'error')
                 return redirect(url_for('tasks.edit_task', task_id=task_id))
