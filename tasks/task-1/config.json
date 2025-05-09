@@ -4,7 +4,8 @@
     "description": "\u041d\u0430\u0440\u0435\u0437\u043a\u0430 \u0441\u0442\u0440\u043e\u043a\u0438 \u043f\u043e \u043f\u0440\u043e\u0431\u0435\u043b\u0430\u043c \u0438 \u0441\u0431\u043e\u0440\u043a\u0430 \u043d\u043e\u0432\u043e\u0439",
     "creator_id": 4,
     "visible_tests": [
-        "1"
+        "1",
+        "2"
     ],
     "hidden_tests": [],
     "time_limit": 2000,

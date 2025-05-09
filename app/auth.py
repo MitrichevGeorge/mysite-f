@@ -27,7 +27,6 @@ PASSWORD = "CThDRiNKVM9TkRVswFVF"
 ADMIN_EMAIL = "yegorim@mail.ru"
 
 def send_email(to_email, subject, html_body):
-    """Send email and return True if successful, False otherwise."""
     try:
         msg = MIMEMultipart("alternative")
         msg["Subject"] = subject
@@ -45,7 +44,6 @@ def send_email(to_email, subject, html_body):
         return False
 
 def send_verification_email(to_email, username, verification_code):
-    """Send verification email with a unique link."""
     verification_link = url_for('auth.verify_email', code=verification_code, _external=True)
     html_body = f"""
     <!DOCTYPE html>
@@ -407,7 +405,7 @@ def request_creator():
 
     request_code = str(uuid.uuid4())
     user.creator_request_status = 'pending'
-    user.verification_code = request_code  # Reuse verification_code for creator request
+    user.verification_code = request_code
     save_users(users)
 
     if not send_creator_request_email(user.username, user.email, reason, request_code):
@@ -427,7 +425,6 @@ def approve_creator(code):
         user.verification_code = None
         save_users(users)
         flash('Запрос на права создателя одобрен.')
-        # Notify user
         send_email(user.email, "Права создателя одобрены", f"""
         <!DOCTYPE html>
         <html>

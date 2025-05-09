@@ -40,6 +40,11 @@ def generate_unique_task_id():
         counter += 1
     return f"{base_id}-{counter}"
 
+def normalize_content(content):
+    """Normalize content by removing extra empty lines and trailing spaces."""
+    lines = [line.rstrip() for line in content.splitlines() if line.strip()]
+    return '\n'.join(lines)
+
 def run_solution_code(code_path, input_data, time_limit, memory_limit):
     """Run solution code with input data and return output."""
     try:
@@ -204,34 +209,41 @@ def create_task():
         try:
             os.makedirs(tests_dir, exist_ok=True)
 
-            # Save condition
             condition_path = os.path.join(task_path, "description.md")
+            normalized_condition = normalize_content(condition)
             with open(condition_path, 'w', encoding='utf-8') as f:
-                f.write(condition)
+                f.write(normalized_condition)
 
-            # Save solution file if provided
             if solution_file and solution_file.filename.endswith('.py'):
                 solution_path = os.path.join(task_path, "solution.py")
                 solution_file.save(solution_path)
 
-            # Handle tests
             if tests_zip:
                 zip_path = os.path.join(task_path, "tests.zip")
                 tests_zip.save(zip_path)
                 with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                     zip_ref.extractall(tests_dir)
                 os.remove(zip_path)
+                # Normalize test files extracted from ZIP
+                for file in os.listdir(tests_dir):
+                    if file.endswith('.txt'):
+                        file_path = os.path.join(tests_dir, file)
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            content = normalize_content(f.read())
+                        with open(file_path, 'w', encoding='utf-8') as f:
+                            f.write(content)
             elif test_inputs and test_outputs and len(test_inputs) == len(test_outputs):
                 for i, (input_content, output_content) in enumerate(zip(test_inputs, test_outputs), 1):
+                    normalized_input = normalize_content(input_content)
+                    normalized_output = normalize_content(output_content)
                     with open(os.path.join(tests_dir, f"input{i}.txt"), 'w', encoding='utf-8') as f_in:
-                        f_in.write(input_content)
+                        f_in.write(normalized_input)
                     with open(os.path.join(tests_dir, f"output{i}.txt"), 'w', encoding='utf-8') as f_out:
-                        f_out.write(output_content)
+                        f_out.write(normalized_output)
             else:
                 flash('Необходимо предоставить тесты.', 'error')
                 return redirect(url_for('tasks.create_task'))
 
-            # Configure tests
             visible_tests = []
             hidden_tests = []
             for i in range(1, len(test_inputs) + 1):
@@ -241,7 +253,6 @@ def create_task():
                 else:
                     visible_tests.append(test_num)
 
-            # Create configuration
             config = {
                 "id": task_id,
                 "title": title,
@@ -261,7 +272,7 @@ def create_task():
 
         except Exception as e:
             flash(f'Ошибка при создании задачи: {str(e)}', 'error')
-            return redirect(url_for(' tasks.create_task'))
+            return redirect(url_for('tasks.create_task'))
 
     return render_template('create_task.html', suggested_id=suggested_id)
 
@@ -291,7 +302,7 @@ def edit_task(task_id):
             return redirect(url_for('views.profile'))
 
         with open(condition_path, 'r', encoding='utf-8') as f:
-            condition_content = f.read()
+            condition_content = normalize_content(f.read())
 
         tests = []
         for file in sorted(os.listdir(tests_dir)):
@@ -301,9 +312,11 @@ def edit_task(task_id):
                 output_path = os.path.join(tests_dir, f"output{test_num}.txt")
                 if os.path.exists(output_path):
                     with open(input_path, 'r', encoding='utf-8') as f_in, open(output_path, 'r', encoding='utf-8') as f_out:
+                        input_content = normalize_content(f_in.read())
+                        output_content = normalize_content(f_out.read())
                         tests.append({
-                            "input": f_in.read(),
-                            "output": f_out.read(),
+                            "input": input_content,
+                            "output": output_content,
                             "hidden": test_num in config.get("hidden_tests", [])
                         })
 
@@ -321,7 +334,6 @@ def edit_task(task_id):
             tests_zip = request.files.get('tests')
             solution_file = request.files.get('solution')
 
-            # Validate required fields
             if not title or time_limit is None or memory_limit is None:
                 flash('Все обязательные поля (название, ограничения) должны быть заполнены.', 'error')
                 return redirect(url_for('tasks.edit_task', task_id=task_id))
@@ -330,20 +342,17 @@ def edit_task(task_id):
                 flash('Ограничения по времени и памяти должны быть положительными.', 'error')
                 return redirect(url_for('tasks.edit_task', task_id=task_id))
 
-            # Sanitize inputs
             title = sanitize_input(title, 100)
             description = sanitize_input(description, 500) if description else ""
 
-            # Update configuration
             config["title"] = title
             config["description"] = description
             config["time_limit"] = time_limit
             config["memory_limit"] = memory_limit
 
-            # Save condition
             try:
                 if condition:
-                    normalized_condition = '\n'.join(line for line in condition.splitlines() if line.strip() or not line)
+                    normalized_condition = normalize_content(condition)
                     with open(condition_path, 'w', encoding='utf-8') as f:
                         f.write(normalized_condition)
                 else:
@@ -353,42 +362,48 @@ def edit_task(task_id):
                 flash(f'Ошибка при сохранении условия задачи: {str(e)}', 'error')
                 return redirect(url_for('tasks.edit_task', task_id=task_id))
 
-            # Save solution file if provided
             if solution_file and solution_file.filename.endswith('.py'):
                 solution_file.save(solution_path)
             elif solution_file and solution_file.filename:
                 flash('Файл решения должен быть в формате .py', 'error')
                 return redirect(url_for('tasks.edit_task', task_id=task_id))
 
-            # Handle tests
             try:
                 if tests_zip and tests_zip.filename:
                     # Clear existing tests
                     shutil.rmtree(tests_dir, ignore_errors=True)
-                    os.makedirs(tests_dir965, exist_ok=True)
+                    os.makedirs(tests_dir, exist_ok=True)
                     zip_path = os.path.join(task_path, "tests.zip")
                     tests_zip.save(zip_path)
                     try:
                         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                             zip_ref.extractall(tests_dir)
                         os.remove(zip_path)
+                        # Normalize test files extracted from ZIP
+                        for file in os.listdir(tests_dir):
+                            if file.endswith('.txt'):
+                                file_path = os.path.join(tests_dir, file)
+                                with open(file_path, 'r', encoding='utf-8') as f:
+                                    content = normalize_content(f.read())
+                                with open(file_path, 'w', encoding='utf-8') as f:
+                                    f.write(content)
                     except zipfile.BadZipFile:
                         flash('Неверный формат ZIP-файла с тестами.', 'error')
                         return redirect(url_for('tasks.edit_task', task_id=task_id))
                 elif test_inputs and test_outputs and len(test_inputs) == len(test_outputs):
-                    # Clear existing tests
                     shutil.rmtree(tests_dir, ignore_errors=True)
                     os.makedirs(tests_dir, exist_ok=True)
                     for i, (input_content, output_content) in enumerate(zip(test_inputs, test_outputs), 1):
+                        normalized_input = normalize_content(input_content)
+                        normalized_output = normalize_content(output_content)
                         with open(os.path.join(tests_dir, f"input{i}.txt"), 'w', encoding='utf-8') as f_in:
-                            f_in.write(input_content.strip())
+                            f_in.write(normalized_input)
                         with open(os.path.join(tests_dir, f"output{i}.txt"), 'w', encoding='utf-8') as f_out:
-                            f_out.write(output_content.strip())
+                            f_out.write(normalized_output)
                 else:
                     flash('Необходимо предоставить тесты (через форму или ZIP-файл).', 'error')
                     return redirect(url_for('tasks.edit_task', task_id=task_id))
 
-                # Update test visibility
                 config["visible_tests"] = []
                 config["hidden_tests"] = []
                 test_count = len(test_inputs) if test_inputs else len([f for f in os.listdir(tests_dir) if f.startswith("input")])
@@ -402,7 +417,6 @@ def edit_task(task_id):
                 flash(f'Ошибка при сохранении тестов: {str(e)}', 'error')
                 return redirect(url_for('tasks.edit_task', task_id=task_id))
 
-            # Save configuration
             try:
                 with open(config_path, 'w', encoding='utf-8') as f:
                     json.dump(config, f, indent=4, ensure_ascii=True)

@@ -30,7 +30,6 @@ def run_tests(tests_dir, visible_tests, hidden_tests, time_limit, memory_limit):
                 text=True
             )
             
-            # Monitor memory and time
             ps_process = psutil.Process(process.pid)
             max_memory = 0
             timed_out = False
@@ -46,14 +45,12 @@ def run_tests(tests_dir, visible_tests, hidden_tests, time_limit, memory_limit):
                 memory = max_memory / (1024 * 1024)
                 timed_out = True
             
-            # Update max memory usage
             try:
                 memory_info = ps_process.memory_info()
                 max_memory = max(max_memory, memory_info.rss)
             except psutil.NoSuchProcess:
                 pass
             
-            # Process results
             stdout = stdout.strip() if stdout else ""
             stderr = stderr.strip() if stderr else ""
             

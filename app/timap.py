@@ -1,3 +1,6 @@
+
+# TEST OF IMAP
+
 import imaplib
 import email
 import smtplib
@@ -5,7 +8,6 @@ from email.header import decode_header
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# Параметры подключения
 IMAP_SERVER = "imap.mail.ru"
 SMTP_SERVER = "smtp.mail.ru"
 SMTP_PORT = 465  # Порт для SMTP с SSL
