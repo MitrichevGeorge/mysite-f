@@ -108,7 +108,8 @@ def task(task_id):
 
         if request.method == 'POST':
             user_code = request.form['code']
-            with open("D:\\user_code.py", 'w') as f:
+            user_code_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "user_code.py")
+            with open(user_code_path, 'w') as f:
                 f.write(user_code)
 
             result = run_tests(tests_dir, visible_tests, hidden_tests, time_limit, memory_limit)

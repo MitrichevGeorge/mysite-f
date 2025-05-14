@@ -9,7 +9,7 @@ def run_tests(tests_dir, visible_tests, hidden_tests, time_limit, memory_limit):
     """Run tests for a given task and return results."""
     results = []
     test_files = sorted([f for f in os.listdir(tests_dir) if f.startswith("input") and f.endswith(".txt")])
-    
+    user_code_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "user_code.py")
     for test_file in test_files:
         test_num = test_file.replace("input", "").replace(".txt", "")
         input_path = os.path.join(tests_dir, f"input{test_num}.txt")
@@ -23,7 +23,7 @@ def run_tests(tests_dir, visible_tests, hidden_tests, time_limit, memory_limit):
         try:
             start_time = time.time()
             process = subprocess.Popen(
-                ["python", "D:\\user_code.py"],
+                ["python", user_code_path],
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,

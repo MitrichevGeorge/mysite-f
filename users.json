@@ -1173,65 +1173,73 @@
                 "score": 100,
                 "ip_address": "127.0.0.1",
                 "task_id": "task2"
+            },
+            {
+                "task_id": "task1",
+                "timestamp": "2025-05-14 10:41:00",
+                "code": "dfbgdfz",
+                "results": [
+                    {
+                        "test_num": "1",
+                        "verdict": "RE",
+                        "full_verdict": "Runtime Error",
+                        "duration": 98.0,
+                        "memory": 0.0,
+                        "error_info": "Traceback (most recent call last):\n  File \"C:\\Users\\Georg\\mysite-f\\user_code.py\", line 1, in <module>\n    dfbgdfz\nNameError: name 'dfbgdfz' is not defined",
+                        "stdin": null,
+                        "stdout": null,
+                        "expected_stdout": null
+                    },
+                    {
+                        "test_num": "2",
+                        "verdict": "RE",
+                        "full_verdict": "Runtime Error",
+                        "duration": 64.82,
+                        "memory": 0.0,
+                        "error_info": "Traceback (most recent call last):\n  File \"C:\\Users\\Georg\\mysite-f\\user_code.py\", line 1, in <module>\n    dfbgdfz\nNameError: name 'dfbgdfz' is not defined",
+                        "stdin": null,
+                        "stdout": null,
+                        "expected_stdout": null
+                    },
+                    {
+                        "test_num": "3",
+                        "verdict": "RE",
+                        "full_verdict": "Runtime Error",
+                        "duration": 77.42,
+                        "memory": 0.0,
+                        "error_info": "Traceback (most recent call last):\n  File \"C:\\Users\\Georg\\mysite-f\\user_code.py\", line 1, in <module>\n    dfbgdfz\nNameError: name 'dfbgdfz' is not defined",
+                        "stdin": null,
+                        "stdout": null,
+                        "expected_stdout": null
+                    },
+                    {
+                        "test_num": "4",
+                        "verdict": "RE",
+                        "full_verdict": "Runtime Error",
+                        "duration": 80.64,
+                        "memory": 0.0,
+                        "error_info": "Traceback (most recent call last):\n  File \"C:\\Users\\Georg\\mysite-f\\user_code.py\", line 1, in <module>\n    dfbgdfz\nNameError: name 'dfbgdfz' is not defined",
+                        "stdin": null,
+                        "stdout": null,
+                        "expected_stdout": null
+                    },
+                    {
+                        "test_num": "5",
+                        "verdict": "RE",
+                        "full_verdict": "Runtime Error",
+                        "duration": 58.46,
+                        "memory": 0.0,
+                        "error_info": "Traceback (most recent call last):\n  File \"C:\\Users\\Georg\\mysite-f\\user_code.py\", line 1, in <module>\n    dfbgdfz\nNameError: name 'dfbgdfz' is not defined",
+                        "stdin": null,
+                        "stdout": null,
+                        "expected_stdout": null
+                    }
+                ],
+                "score": 0,
+                "ip_address": "127.0.0.1"
             }
         ],
         "login_history": [
-            {
-                "timestamp": "2025-05-06 11:45:11",
-                "url": "http://127.0.0.1:5000/api/submissions"
-            },
-            {
-                "timestamp": "2025-05-06 11:45:22",
-                "url": "http://127.0.0.1:5000/change-username"
-            },
-            {
-                "timestamp": "2025-05-06 11:45:28",
-                "url": "http://127.0.0.1:5000/change-password"
-            },
-            {
-                "timestamp": "2025-05-07 07:56:56",
-                "url": "http://127.0.0.1:5000/edit_task/task2"
-            },
-            {
-                "timestamp": "2025-05-07 07:57:28",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-05-07 07:57:28",
-                "url": "http://127.0.0.1:5000/api/submissions"
-            },
-            {
-                "timestamp": "2025-05-07 07:57:32",
-                "url": "http://127.0.0.1:5000/change-username"
-            },
-            {
-                "timestamp": "2025-05-07 07:58:16",
-                "url": "http://127.0.0.1:5000/change-username"
-            },
-            {
-                "timestamp": "2025-05-07 08:01:14",
-                "url": "http://127.0.0.1:5000/change-username"
-            },
-            {
-                "timestamp": "2025-05-07 08:05:57",
-                "url": "http://127.0.0.1:5000/change-username"
-            },
-            {
-                "timestamp": "2025-05-07 08:06:36",
-                "url": "http://127.0.0.1:5000/change-username"
-            },
-            {
-                "timestamp": "2025-05-07 08:06:36",
-                "url": "http://127.0.0.1:5000/change-username"
-            },
-            {
-                "timestamp": "2025-05-07 08:06:38",
-                "url": "http://127.0.0.1:5000/profile"
-            },
-            {
-                "timestamp": "2025-05-07 08:06:38",
-                "url": "http://127.0.0.1:5000/api/submissions"
-            },
             {
                 "timestamp": "2025-05-07 08:07:16",
                 "url": "http://127.0.0.1:5000/change-password"
@@ -1575,14 +1583,66 @@
             {
                 "timestamp": "2025-05-09 08:20:40",
                 "url": "http://127.0.0.1:5000/edit_task/task-1"
+            },
+            {
+                "timestamp": "2025-05-14 09:32:31",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-05-14 09:32:41",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-05-14 09:32:45",
+                "url": "http://127.0.0.1:5000/task/task-1"
+            },
+            {
+                "timestamp": "2025-05-14 09:33:02",
+                "url": "http://127.0.0.1:5000/task/task-1"
+            },
+            {
+                "timestamp": "2025-05-14 09:33:16",
+                "url": "http://127.0.0.1:5000/profile"
+            },
+            {
+                "timestamp": "2025-05-14 09:33:17",
+                "url": "http://127.0.0.1:5000/api/submissions"
+            },
+            {
+                "timestamp": "2025-05-14 09:33:42",
+                "url": "http://127.0.0.1:5000/"
+            },
+            {
+                "timestamp": "2025-05-14 09:33:45",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-05-14 09:33:50",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-05-14 09:37:57",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-05-14 09:38:02",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-05-14 09:38:07",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-05-14 09:41:28",
+                "url": "http://127.0.0.1:5000/task/task1"
+            },
+            {
+                "timestamp": "2025-05-14 10:40:59",
+                "url": "http://127.0.0.1:5000/task/task1"
             }
         ],
-        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAAAAAAAAAAAADYAAACjAAAAFQAAAKIAAABMAAAAPAAAABcAAAAAAAAACgAAABsAAABuAAAABAAAAAAAAAAZAAAAGwAAAB0AAAAAAAAAAAAAAAEAAAAHAAAAUwAAAAgAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "daily_requests": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAMAAAAaAAAAAAAAAAAAAAAAAAAADYAAACjAAAAFQAAAKIAAABMAAAAPAAAABcAAAAAAAAACgAAABsAAABuAAAABAAAAAAAAAAZAAAAGwAAAB0AAAAAAAAAAAAAAAEAAAAHAAAAUwAAAAgAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "tabs": [
-            {
-                "url": "http://127.0.0.1:5000/api/package/newer.css",
-                "name": "Contest"
-            },
             {
                 "url": "http://127.0.0.1:5000/api/package/newer_1.css",
                 "name": "Contest"
@@ -1657,6 +1717,10 @@
             },
             {
                 "url": "http://127.0.0.1:5000/generate_test_output/task-1",
+                "name": "Contest"
+            },
+            {
+                "url": "http://127.0.0.1:5000/task/task-1",
                 "name": "Contest"
             }
         ],
